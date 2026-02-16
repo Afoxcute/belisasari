@@ -1,4 +1,4 @@
-// export const dynamic = 'force-dynamic'; // Disabled for static export
+export const dynamic = 'force-dynamic';
 
 // pages/api/memecoins.ts
 import { promises as fs } from "fs";

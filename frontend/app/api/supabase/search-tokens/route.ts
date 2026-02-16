@@ -1,4 +1,4 @@
-// export const dynamic = 'force-dynamic'; // Disabled for static export
+export const dynamic = 'force-dynamic';
 
 import { IPFS_GATEWAY_URL, ITEMS_PER_PAGE } from "@/lib/constants";
 import { SearchTokenResponse } from "@/lib/types";

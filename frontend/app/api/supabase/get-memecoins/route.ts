@@ -1,4 +1,4 @@
-// export const dynamic = 'force-dynamic'; // Disabled for static export
+export const dynamic = 'force-dynamic';
 
 import { ITEMS_PER_PAGE } from "@/lib/constants";
 import { toZonedTime } from "date-fns-tz";

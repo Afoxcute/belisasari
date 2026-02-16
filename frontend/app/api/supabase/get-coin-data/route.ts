@@ -1,4 +1,4 @@
-// export const dynamic = 'force-dynamic'; // Disabled for static export
+export const dynamic = 'force-dynamic';
 
 import { toZonedTime } from "date-fns-tz";
 import { Price, TokenData } from "../../../../lib/types";
