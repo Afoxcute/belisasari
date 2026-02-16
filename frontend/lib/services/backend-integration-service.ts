@@ -2,7 +2,7 @@
  * Backend Integration Service
  * 
  * This service provides methods to interact with all backend services
- * including ADK workflow, pattern recognition, decision agent, and bitquery.
+ * including ADK workflow, pattern recognition, decision agent, and Jupiter token/price data.
  */
 
 export interface BackendServiceResponse {
@@ -21,6 +21,7 @@ export interface PatternRecognitionResponse extends BackendServiceResponse {
   output?: string;
 }
 
+/** Response from Jupiter (Token & Price Data) collection - still uses /api/bitquery. */
 export interface BitqueryResponse extends BackendServiceResponse {
   output?: string;
 }
@@ -81,7 +82,7 @@ export class BackendIntegrationService {
   }
 
   /**
-   * Start Bitquery Data Collection
+   * Start Jupiter Token & Price Data Collection (runs bitquery/index.mjs → tokens + prices)
    */
   static async startBitqueryCollection(): Promise<BitqueryResponse> {
     try {
@@ -97,7 +98,7 @@ export class BackendIntegrationService {
     } catch (error) {
       return {
         success: false,
-        message: 'Failed to start Bitquery data collection',
+        message: 'Failed to start Jupiter token & price data collection',
         error: error instanceof Error ? error.message : 'Unknown error',
         timestamp: new Date().toISOString()
       };

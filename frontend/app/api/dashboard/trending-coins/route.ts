@@ -20,12 +20,13 @@ export async function GET(request: NextRequest) {
     const twentyFourHoursAgo = new Date();
     twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
 
-    // Fetch tokens with recent price data
+    // Fetch tokens with recent price data (Jupiter + scraper; address = mint for Jupiter)
     const { data: tokens, error: tokensError } = await supabase
       .from('tokens')
       .select(`
         id,
         uri,
+        address,
         symbol,
         name,
         market_cap,
@@ -42,12 +43,13 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Fetch 24-hour price data for volume calculation
+    // Fetch 24-hour price data for volume and optional price_change_24h (Jupiter stores it)
     const { data: prices, error: pricesError } = await supabase
       .from('prices')
       .select(`
         token_uri,
         price_usd,
+        price_change_24h,
         timestamp
       `)
       .gte('timestamp', twentyFourHoursAgo.toISOString())
@@ -115,10 +117,13 @@ export async function GET(request: NextRequest) {
       // Calculate correlation score between volume and social activity
       const correlationScore = calculateCorrelation(tradingVolume24h, tiktokViews24h);
       
-      // Calculate price change
-      const priceChange24h = calculatePriceChange(tokenPrices);
-      
-      // Count total mentions
+      // Use stored price_change_24h from Jupiter when available; else derive from price history
+      const latestPriceRow = tokenPrices[0];
+      const priceChange24h =
+        latestPriceRow?.price_change_24h != null
+          ? Number(latestPriceRow.price_change_24h) * 100
+          : calculatePriceChange(tokenPrices);
+
       const totalMentions = tokenMentions.reduce((sum, m) => sum + (m.count || 1), 0);
 
       return {
@@ -132,8 +137,8 @@ export async function GET(request: NextRequest) {
         total_mentions: totalMentions,
         market_cap: token.market_cap,
         total_supply: token.total_supply,
-        address: undefined, // Will be populated after database migration
-        decimals: 9, // Default for Solana tokens
+        address: token.address ?? undefined,
+        decimals: 9,
         last_updated: token.last_updated || new Date().toISOString()
       };
     });

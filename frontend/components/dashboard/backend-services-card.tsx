@@ -141,8 +141,8 @@ export function BackendServicesCard({ className }: BackendServicesCardProps) {
     },
     {
       key: 'bitquery' as keyof ServiceStatus,
-      name: 'Bitquery',
-      description: 'Blockchain data collection',
+      name: 'Token & Price Data',
+      description: 'Jupiter Tokens V2 → tokens & prices',
       icon: <Database className="h-5 w-5" />,
       color: 'text-green-600'
     },

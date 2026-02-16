@@ -35,6 +35,9 @@ export async function GET(request: NextRequest) {
           name,
           symbol,
           uri,
+          address,
+          image_url,
+          market_cap,
           views,
           created_at,
           mentions,
@@ -42,7 +45,7 @@ export async function GET(request: NextRequest) {
         `
         )
         .eq("prices.is_latest", true)
-        .neq("mentions", 0)
+        .order("market_cap", { ascending: false })
         .order("created_at", { ascending: false })
         .range(start, start + ITEMS_PER_PAGE - 1);
 
@@ -72,14 +75,15 @@ export async function GET(request: NextRequest) {
       name: token.name,
       symbol: token.symbol,
       uri: token.uri,
-      image: null,
+      address: token.address ?? undefined,
+      image: token.image_url ?? null,
       created_at: toZonedTime(
         new Date(token.created_at),
         timeZone
       ).toISOString(),
-      latest_price_usd: token.prices?.[0]?.price_usd || 0,
-      latest_market_cap: (token.prices?.[0]?.price_usd || 0) * 1000000000,
-      latest_price_sol: token.prices?.[0]?.price_sol || 0,
+      latest_price_usd: token.prices?.[0]?.price_usd ?? 0,
+      latest_market_cap: token.market_cap ?? (token.prices?.[0]?.price_usd || 0) * 1000000000,
+      latest_price_sol: token.prices?.[0]?.price_sol ?? 0,
       views: token.views,
       mentions: token.mentions,
     }));

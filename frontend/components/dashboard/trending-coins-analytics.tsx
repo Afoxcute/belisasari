@@ -257,7 +257,7 @@ export default function TrendingCoinsAnalytics() {
                 To start seeing trending coins data:
               </p>
               <ul className="text-xs text-muted-foreground space-y-1">
-                <li>• Run the Bitquery data collection service</li>
+                <li>• Run the Token & Price Data (Jupiter) collection from Dashboard → Backend Services</li>
                 <li>• Start the TikTok scraper</li>
                 <li>• Ensure database tables are populated</li>
                 <li>• Check that all services are running</li>

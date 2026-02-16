@@ -13,13 +13,25 @@ global.Headers = Headers;
 
 dotenv.config();
 
-// Initialize Supabase client for immediate storage
+// Initialize Supabase client for immediate storage.
+// Prefer SERVICE_ROLE_KEY so writes work (RLS on tiktoks only allows SELECT for anon).
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+const supabaseKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.SUPABASE_ANON_SECRET ||
+  process.env.SUPABASE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing SUPABASE_URL or SUPABASE_KEY in environment variables');
+  console.error(
+    'Missing Supabase config. Set SUPABASE_URL and one of: SUPABASE_SERVICE_ROLE_KEY, SUPABASE_ANON_SECRET, or SUPABASE_KEY'
+  );
   process.exit(1);
+}
+
+if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  console.warn(
+    'Tip: Set SUPABASE_SERVICE_ROLE_KEY in .env so the scraper can write to tiktoks (RLS blocks anon key from INSERT).'
+  );
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -87,7 +99,10 @@ async function storeTikTokDataImmediately(tiktokData) {
       .select();
 
     if (tiktokError) {
-      console.error('Error storing TikTok:', tiktokError);
+      if (tiktokError.code === '42501') {
+        console.error('TikTok storage blocked by RLS. Set SUPABASE_SERVICE_ROLE_KEY in .env (see Supabase Dashboard → Settings → API).');
+      }
+      console.error('Error storing TikTok:', tiktokError.message || tiktokError);
       return null;
     }
 
@@ -491,9 +506,12 @@ const saveCombinedResults = (results) => {
 };
 
 const main = async () => {
-  const searchTerms = ["memecoin", "pumpfun", "solana", "crypto", "meme", "bags", "bonk"];
-
-  const hashtagTerms = ["memecoin", "solana", "crypto", "pumpfun", "meme", "bags", "bonk"];
+  // Full Solana meme token keyword list (see meme-keywords.mjs).
+  const { MEME_KEYWORDS, MEME_KEYWORDS_COUNT } = await import("./meme-keywords.mjs");
+  const limit = process.env.MEME_KEYWORDS_LIMIT ? parseInt(process.env.MEME_KEYWORDS_LIMIT, 10) : undefined;
+  const searchTerms = limit ? MEME_KEYWORDS.slice(0, limit) : MEME_KEYWORDS;
+  const hashtagTerms = limit ? MEME_KEYWORDS.slice(0, limit) : MEME_KEYWORDS;
+  console.log(`\n📋 Using ${searchTerms.length} meme keywords for search and hashtag scraping${limit ? ` (limit ${limit})` : ""}.\n`);
 
   const selectedProfile = "Profile 3";
   logger.info(`Using Chrome profile: ${selectedProfile}`);
@@ -569,6 +587,8 @@ const main = async () => {
               if (video.comments && video.comments.tickers) {
                 await storeTokenMentionsImmediately(storedTikTok.id, video.comments);
               }
+            } else {
+              totalErrors++;
             }
           } catch (error) {
             totalErrors++;
@@ -610,6 +630,8 @@ const main = async () => {
               if (video.comments && video.comments.tickers) {
                 await storeTokenMentionsImmediately(storedTikTok.id, video.comments);
               }
+            } else {
+              totalErrors++;
             }
           } catch (error) {
             totalErrors++;
@@ -635,6 +657,8 @@ const main = async () => {
       if (totalStored > 0) {
         console.log("\n🎉 TikTok data has been successfully stored in Supabase database!");
         console.log("You can now view this data in your frontend dashboard.");
+      } else if (totalErrors > 0) {
+        console.log("\n⚠️ No videos were stored. Add SUPABASE_SERVICE_ROLE_KEY to .env (Supabase → Settings → API) so the scraper can write to the tiktoks table (RLS blocks the anon key).");
       }
     }
 

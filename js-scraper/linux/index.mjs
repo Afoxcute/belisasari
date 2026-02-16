@@ -367,9 +367,11 @@ const supabase = createClient(
 );
 
 const main = async () => {
-  const searchTerms = ["memecoin", "solana", "crypto", "pumpfun", 'trading', "degen", 'crypto%20signals'];
-
-  const hashtagTerms = [];
+  const { MEME_KEYWORDS } = await import("../meme-keywords.mjs");
+  const limit = process.env.MEME_KEYWORDS_LIMIT ? parseInt(process.env.MEME_KEYWORDS_LIMIT, 10) : undefined;
+  const searchTerms = limit ? MEME_KEYWORDS.slice(0, limit) : MEME_KEYWORDS;
+  const hashtagTerms = limit ? MEME_KEYWORDS.slice(0, limit) : MEME_KEYWORDS;
+  console.log(`\n📋 Using ${searchTerms.length} meme keywords for search and hashtag scraping${limit ? ` (limit ${limit})` : ""}.\n`);
 
   const selectedProfile = "Profile 2";
   logger.info(`Using Chrome profile: ${selectedProfile}`);

@@ -7,7 +7,8 @@
     "test-market-data": "node scripts/market-data.mjs",
     "prices": "node scripts/prices.mjs",
     "full-collection": "node index.mjs",
-    "memecoins": "node scripts/memecoins.mjs"
+    "memecoins": "node scripts/memecoins.mjs",
+    "search": "node scripts/search-tokens.mjs"
   },
   "keywords": [],
   "author": "",

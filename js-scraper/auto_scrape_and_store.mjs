@@ -12,13 +12,20 @@ global.Headers = Headers;
 
 dotenv.config();
 
-// Initialize Supabase client for immediate storage
+// Prefer SERVICE_ROLE_KEY so writes work (RLS on tiktoks only allows SELECT for anon)
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_ANON_SECRET;
+const supabaseKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.SUPABASE_ANON_SECRET ||
+  process.env.SUPABASE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing SUPABASE_URL or SUPABASE_ANON_SECRET in environment variables');
+  console.error('Missing Supabase config. Set SUPABASE_URL and one of: SUPABASE_SERVICE_ROLE_KEY, SUPABASE_ANON_SECRET, or SUPABASE_KEY');
   process.exit(1);
+}
+
+if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  console.warn('Tip: Set SUPABASE_SERVICE_ROLE_KEY in .env so the scraper can write to tiktoks (RLS blocks anon key from INSERT).');
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -86,7 +93,10 @@ async function storeTikTokDataImmediately(tiktokData) {
       .select();
 
     if (tiktokError) {
-      console.error('Error storing TikTok:', tiktokError);
+      if (tiktokError.code === '42501') {
+        console.error('TikTok storage blocked by RLS. Set SUPABASE_SERVICE_ROLE_KEY in .env (Supabase Dashboard → Settings → API).');
+      }
+      console.error('Error storing TikTok:', tiktokError.message || tiktokError);
       return null;
     }
 
@@ -407,9 +417,11 @@ const saveCombinedResults = (results) => {
 };
 
 const main = async () => {
-  const searchTerms = ["memecoin", "pumpfun", "solana", "crypto", "meme", "bags", "bonk"];
-
-  const hashtagTerms = ["memecoin", "solana", "crypto", "pumpfun", "meme", "bags", "bonk"];
+  const { MEME_KEYWORDS, MEME_KEYWORDS_COUNT } = await import("./meme-keywords.mjs");
+  const limit = process.env.MEME_KEYWORDS_LIMIT ? parseInt(process.env.MEME_KEYWORDS_LIMIT, 10) : undefined;
+  const searchTerms = limit ? MEME_KEYWORDS.slice(0, limit) : MEME_KEYWORDS;
+  const hashtagTerms = limit ? MEME_KEYWORDS.slice(0, limit) : MEME_KEYWORDS;
+  console.log(`\n📋 Using ${searchTerms.length} meme keywords for search and hashtag scraping${limit ? ` (limit ${limit})` : ""}.\n`);
 
   const selectedProfile = "Profile 3";
   logger.info(`Using Chrome profile: ${selectedProfile}`);
@@ -428,6 +440,7 @@ const main = async () => {
 
     const allResults = [];
     let totalStored = 0;
+    let totalErrors = 0;
     let totalMentions = 0;
 
     console.log("\n🚀 Starting automated scraping and storage...\n");
@@ -452,19 +465,20 @@ const main = async () => {
             const storedTikTok = await storeTikTokDataImmediately(video);
             if (storedTikTok) {
               totalStored++;
-              
-              // Store token mentions if available
               if (video.comments && video.comments.tickers) {
                 await storeTokenMentionsImmediately(storedTikTok.id, video.comments);
                 totalMentions++;
               }
+            } else {
+              totalErrors++;
             }
           } catch (error) {
+            totalErrors++;
             console.error('Error processing video:', error);
           }
         }
         
-        console.log(`✅ Successfully processed and stored ${results.length} videos for '${search}'`);
+        console.log(`✅ Processed '${search}': ${results.length} videos (${totalStored} stored, ${totalErrors} failures so far)`);
       }
       await new Promise((resolve) => setTimeout(resolve, 5000));
     }
@@ -491,19 +505,20 @@ const main = async () => {
             const storedTikTok = await storeTikTokDataImmediately(video);
             if (storedTikTok) {
               totalStored++;
-              
-              // Store token mentions if available
               if (video.comments && video.comments.tickers) {
                 await storeTokenMentionsImmediately(storedTikTok.id, video.comments);
                 totalMentions++;
               }
+            } else {
+              totalErrors++;
             }
           } catch (error) {
+            totalErrors++;
             console.error('Error processing video:', error);
           }
         }
         
-        console.log(`✅ Successfully processed and stored ${results.length} videos for '#${hashtag}'`);
+        console.log(`✅ Processed '#${hashtag}': ${results.length} videos (${totalStored} stored, ${totalErrors} failures so far)`);
       }
       await new Promise((resolve) => setTimeout(resolve, 5000));
     }
@@ -518,8 +533,12 @@ const main = async () => {
 
     console.log("\n🎉 SCRAPING AND STORAGE COMPLETE!");
     console.log(`📊 Total videos stored in Supabase: ${totalStored}`);
+    console.log(`❌ Storage failures: ${totalErrors}`);
     console.log(`🔗 Total mentions processed: ${totalMentions}`);
     console.log(`📁 Total search results: ${allResults.length}`);
+    if (totalStored === 0 && totalErrors > 0) {
+      console.log("\n⚠️ No videos were stored. Add SUPABASE_SERVICE_ROLE_KEY to .env (Supabase → Settings → API) so the scraper can write to the tiktoks table (RLS blocks the anon key).");
+    }
     
     console.log("\nPress Enter to close browser...");
     await new Promise((resolve) => process.stdin.once("data", resolve));

@@ -234,9 +234,11 @@ const saveCombinedResults = (results) => {
 };
 
 const main = async () => {
-    const searchTerms = ["memecoin", "solana", "crypto", "pumpfun"];
-
-    const hashtagTerms = ["memecoin", "solana", "crypto", "pumpfun"];
+    const { MEME_KEYWORDS } = await import("../meme-keywords.mjs");
+    const limit = process.env.MEME_KEYWORDS_LIMIT ? parseInt(process.env.MEME_KEYWORDS_LIMIT, 10) : undefined;
+    const searchTerms = limit ? MEME_KEYWORDS.slice(0, limit) : MEME_KEYWORDS;
+    const hashtagTerms = limit ? MEME_KEYWORDS.slice(0, limit) : MEME_KEYWORDS;
+    console.log(`\n📋 Using ${searchTerms.length} meme keywords for search and hashtag scraping${limit ? ` (limit ${limit})` : ""}.\n`);
 
     const selectedProfile = "Profile 3";
     logger.info(`Using Chrome profile: ${selectedProfile}`);

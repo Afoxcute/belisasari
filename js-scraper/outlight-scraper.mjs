@@ -13,12 +13,19 @@ global.Headers = Headers;
 
 dotenv.config();
 
-// Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+// Initialize Supabase client. Support same env vars as other scrapers; trim to avoid "Invalid API key" from stray newlines.
+const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
+const supabaseKey = (
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.SUPABASE_ANON_SECRET ||
+  process.env.SUPABASE_KEY ||
+  ''
+).trim();
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing SUPABASE_URL or SUPABASE_KEY in environment variables');
+  console.error(
+    'Missing Supabase config. Set SUPABASE_URL and one of: SUPABASE_SERVICE_ROLE_KEY, SUPABASE_ANON_SECRET, or SUPABASE_KEY (in .env, no extra spaces/newlines).'
+  );
   process.exit(1);
 }
 
@@ -288,7 +295,14 @@ class OutlightScraper {
       console.log(`✅ Added channel: @${channelData.username} (${channelData.display_name})`);
       return data;
     } catch (error) {
-      console.error(`Error storing channel ${channelData.username}:`, error);
+      const msg = error?.message || String(error);
+      if (msg.includes('Invalid API key')) {
+        console.error(
+          `Error storing channel ${channelData.username}: Invalid Supabase API key. Check .env: use SUPABASE_ANON_SECRET or SUPABASE_SERVICE_ROLE_KEY from Supabase Dashboard → Settings → API. Ensure no extra spaces/newlines when pasting.`
+        );
+      } else {
+        console.error(`Error storing channel ${channelData.username}:`, error);
+      }
       return null;
     }
   }

@@ -60,16 +60,28 @@ function buildPriceRows(jupTokens, timestamp = new Date().toISOString()) {
  * @param {Array} jupTokens - Jupiter Tokens V2 mint objects
  * @param {string} [timestamp] - ISO timestamp for this run
  */
-export async function pushPricesFromJup(jupTokens, timestamp = new Date().toISOString()) {
+/** Use service role key for writes so RLS is bypassed; anon key cannot insert/update prices. */
+function getSupabaseClient() {
   const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_ANON_SECRET;
-
-  if (!supabaseUrl || !supabaseKey) {
-    console.error("Missing SUPABASE_URL or SUPABASE_ANON_SECRET");
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const anonKey = process.env.SUPABASE_ANON_SECRET;
+  if (!supabaseUrl) {
+    console.error("Missing SUPABASE_URL");
     process.exit(1);
   }
+  const key = serviceKey || anonKey;
+  if (!key) {
+    console.error("Missing SUPABASE_SERVICE_ROLE_KEY or SUPABASE_ANON_SECRET. For writes, set SUPABASE_SERVICE_ROLE_KEY (bypasses RLS).");
+    process.exit(1);
+  }
+  if (!serviceKey) {
+    console.warn("Using SUPABASE_ANON_SECRET; if you get RLS errors, set SUPABASE_SERVICE_ROLE_KEY for this script.");
+  }
+  return createClient(supabaseUrl, key);
+}
 
-  const supabase = createClient(supabaseUrl, supabaseKey);
+export async function pushPricesFromJup(jupTokens, timestamp = new Date().toISOString()) {
+  const supabase = getSupabaseClient();
   const priceRows = buildPriceRows(jupTokens, timestamp);
   if (priceRows.length === 0) {
     console.log("No price rows to push.");

@@ -6,7 +6,7 @@ import path from 'path';
 
 export async function POST(request: NextRequest): Promise<Response> {
   try {
-    console.log('📊 Starting Bitquery Data Collection...');
+    console.log('📊 Starting Jupiter (Token & Price) Data Collection...');
     
     // Path to the bitquery directory
     const bitqueryPath = path.join(process.cwd(), '..', 'bitquery');
@@ -23,27 +23,27 @@ export async function POST(request: NextRequest): Promise<Response> {
       child.stdout.on('data', (data) => {
         const message = data.toString();
         output += message;
-        console.log('Bitquery:', message.trim());
+        console.log('Jupiter:', message.trim());
       });
 
       child.stderr.on('data', (data) => {
         const message = data.toString();
         errorOutput += message;
-        console.error('Bitquery Error:', message.trim());
+        console.error('Jupiter Error:', message.trim());
       });
 
       child.on('close', (code) => {
         if (code === 0) {
           resolve(NextResponse.json({
             success: true,
-            message: 'Bitquery data collection completed successfully',
+            message: 'Jupiter token & price data collection completed successfully',
             output: output,
             timestamp: new Date().toISOString()
           }));
         } else {
           resolve(NextResponse.json({
             success: false,
-            message: 'Bitquery data collection failed',
+            message: 'Jupiter data collection failed',
             error: errorOutput,
             code: code,
             timestamp: new Date().toISOString()
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest): Promise<Response> {
       child.on('error', (error) => {
         resolve(NextResponse.json({
           success: false,
-          message: 'Failed to start Bitquery data collection',
+          message: 'Failed to start Jupiter data collection',
           error: error.message,
           timestamp: new Date().toISOString()
         }, { status: 500 }));
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest): Promise<Response> {
     });
 
   } catch (error) {
-    console.error('Bitquery API Error:', error);
+    console.error('Jupiter API Error:', error);
     return NextResponse.json({
       success: false,
       message: 'Internal server error',
@@ -74,9 +74,9 @@ export async function POST(request: NextRequest): Promise<Response> {
 
 export async function GET(): Promise<Response> {
   return NextResponse.json({
-    message: 'Bitquery API - Use POST to start data collection',
+    message: 'Token & Price Data (Jupiter Tokens V2) - Use POST to start collection',
     endpoints: {
-      'POST /api/bitquery': 'Start Bitquery data collection'
+      'POST /api/bitquery': 'Start Jupiter token & price data collection (tokens + prices)'
     }
   });
 }

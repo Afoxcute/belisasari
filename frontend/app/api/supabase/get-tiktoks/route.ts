@@ -3,11 +3,22 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
+const SUPABASE_FETCH_TIMEOUT_MS = 30_000;
+
+/** Custom fetch with longer timeout to avoid "fetch failed" on slow networks. */
+function customFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), SUPABASE_FETCH_TIMEOUT_MS);
+  return fetch(input, {
+    ...init,
+    signal: init?.signal ?? controller.signal,
+  }).finally(() => clearTimeout(timeoutId));
+}
 
 export async function GET(request: NextRequest) {
   try {
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_ANON_SECRET;
+    const supabaseUrl = (process.env.SUPABASE_URL || "").trim();
+    const supabaseKey = (process.env.SUPABASE_ANON_SECRET || "").trim();
 
     console.log('🔍 TikTok API called - checking credentials...');
     console.log('SUPABASE_URL:', supabaseUrl ? '✅ Set' : '❌ Missing');
@@ -21,7 +32,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabase = createClient(supabaseUrl, supabaseKey, {
+      global: { fetch: customFetch },
+    });
     console.log('✅ Supabase client created');
 
     // Get query parameters
@@ -49,8 +62,16 @@ export async function GET(request: NextRequest) {
 
     if (error) {
       console.error("❌ Supabase error:", error);
+      const isNetworkError = /fetch failed|ECONNREFUSED|ETIMEDOUT|ENOTFOUND|network/i.test(String(error.message));
+      const hint = isNetworkError
+        ? " Check SUPABASE_URL (e.g. https://xxx.supabase.co), network, firewall, and VPN."
+        : "";
       return NextResponse.json(
-        { error: "Failed to fetch TikTok data", details: error.message },
+        {
+          error: "Failed to fetch TikTok data",
+          details: error.message,
+          hint: hint || undefined,
+        },
         { status: 500 }
       );
     }
@@ -70,14 +91,22 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error("❌ Error fetching TikTok data:", error);
-    // Return empty data structure on error to prevent frontend crashes
-    return NextResponse.json({
-      data: [],
-      count: 0,
-      limit: parseInt(request.nextUrl.searchParams.get("limit") || "50"),
-      offset: parseInt(request.nextUrl.searchParams.get("offset") || "0"),
-      error: "Internal server error",
-      details: error instanceof Error ? error.message : "Unknown error occurred"
-    }, { status: 500 });
+    const message = error instanceof Error ? error.message : "Unknown error occurred";
+    const isNetworkError = /fetch failed|ECONNREFUSED|ETIMEDOUT|ENOTFOUND|network/i.test(String(message));
+    const hint = isNetworkError
+      ? " Check SUPABASE_URL in .env.local, network/firewall, and that Supabase project is reachable."
+      : undefined;
+    return NextResponse.json(
+      {
+        data: [],
+        count: 0,
+        limit: parseInt(request.nextUrl.searchParams.get("limit") || "50"),
+        offset: parseInt(request.nextUrl.searchParams.get("offset") || "0"),
+        error: "Internal server error",
+        details: message,
+        hint,
+      },
+      { status: 500 }
+    );
   }
 }

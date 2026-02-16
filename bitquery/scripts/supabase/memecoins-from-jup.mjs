@@ -21,6 +21,14 @@ dotenv.config({ path: join(__dirname, "../../../js-scraper/.env") });
 
 const sanitize = (str) => (str != null && typeof str === "string" ? str.replace(/\u0000/g, "") : str);
 
+/** Coerce to integer for BIGINT column; Jupiter returns float (e.g. totalSupply). */
+function toBigIntSafe(value) {
+  if (value == null) return null;
+  const n = Number(value);
+  if (!Number.isFinite(n)) return null;
+  return Math.floor(n);
+}
+
 /**
  * Map Jupiter token object to Supabase tokens table row.
  * @param {Object} jupToken - Jupiter Tokens V2 mint object
@@ -37,7 +45,7 @@ function jupToTokenRow(jupToken) {
     address: sanitize(jupToken.id) ?? null,
     create_tx: null, // Jupiter does not provide
     market_cap: jupToken.mcap != null ? Number(jupToken.mcap) : null,
-    total_supply: jupToken.totalSupply != null ? Number(jupToken.totalSupply) : null,
+    total_supply: toBigIntSafe(jupToken.totalSupply),
     decimals: jupToken.decimals ?? 9,
     created_at: jupToken.firstPool?.createdAt ?? jupToken.updatedAt ?? new Date().toISOString(),
     updated_at: jupToken.updatedAt ?? new Date().toISOString(),
@@ -62,16 +70,28 @@ function jupToTokenRow(jupToken) {
  * Push Jupiter token list to Supabase tokens table (upsert by uri).
  * @param {Array} jupTokens - Array of Jupiter Tokens V2 mint objects
  */
-export async function pushMemecoinsFromJup(jupTokens) {
+/** Use service role key for writes so RLS is bypassed; anon key cannot insert/update tokens. */
+function getSupabaseClient() {
   const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_ANON_SECRET;
-
-  if (!supabaseUrl || !supabaseKey) {
-    console.error("Missing SUPABASE_URL or SUPABASE_ANON_SECRET");
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const anonKey = process.env.SUPABASE_ANON_SECRET;
+  if (!supabaseUrl) {
+    console.error("Missing SUPABASE_URL");
     process.exit(1);
   }
+  const key = serviceKey || anonKey;
+  if (!key) {
+    console.error("Missing SUPABASE_SERVICE_ROLE_KEY or SUPABASE_ANON_SECRET. For writes (tokens/prices), set SUPABASE_SERVICE_ROLE_KEY (bypasses RLS).");
+    process.exit(1);
+  }
+  if (!serviceKey) {
+    console.warn("Using SUPABASE_ANON_SECRET; if you get RLS errors, set SUPABASE_SERVICE_ROLE_KEY for this script.");
+  }
+  return createClient(supabaseUrl, key);
+}
 
-  const supabase = createClient(supabaseUrl, supabaseKey);
+export async function pushMemecoinsFromJup(jupTokens) {
+  const supabase = getSupabaseClient();
   const rows = [];
   for (const t of jupTokens) {
     const row = jupToTokenRow(t);
