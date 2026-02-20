@@ -74,7 +74,7 @@ export function BackendServicesCard({ className }: BackendServicesCardProps) {
           response = await BackendIntegrationService.startPatternRecognition();
           break;
         case 'bitquery':
-          response = await BackendIntegrationService.startBitqueryCollection();
+          response = await BackendIntegrationService.startJupiterPriceSync();
           break;
         case 'decisionAgent':
           response = await BackendIntegrationService.startDecisionAgent();
@@ -141,8 +141,8 @@ export function BackendServicesCard({ className }: BackendServicesCardProps) {
     },
     {
       key: 'bitquery' as keyof ServiceStatus,
-      name: 'Token & Price Data',
-      description: 'Jupiter Tokens V2 → tokens & prices',
+      name: 'Jupiter Token & Price Data',
+      description: 'Jupiter quotes → tokens & prices',
       icon: <Database className="h-5 w-5" />,
       color: 'text-green-600'
     },

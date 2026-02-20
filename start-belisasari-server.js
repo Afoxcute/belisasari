@@ -2,7 +2,7 @@
 
 /**
  * Belisasari Platform Master Startup Script for Ubuntu Server Deployment
- * Runs all services: Frontend, ElizaOS Agents, Bitquery, JS-Scraper services
+ * Runs all services: Frontend, ElizaOS Agents, JS-Scraper services
  */
 
 const { spawn, exec } = require('child_process');
@@ -48,16 +48,6 @@ class BelisasariServerOrchestrator {
         cwd: path.join(__dirname, 'elizaos-agents'),
         port: null,
         color: colors.magenta,
-        dependencies: [],
-        env: this.getEnvVars()
-      },
-      bitquery: {
-        name: 'Bitquery Service',
-        command: 'node',
-        args: ['index.mjs'],
-        cwd: path.join(__dirname, 'bitquery'),
-        port: null,
-        color: colors.blue,
         dependencies: [],
         env: this.getEnvVars()
       },
@@ -154,7 +144,7 @@ class BelisasariServerOrchestrator {
   async installDependencies() {
     this.log(null, 'Installing dependencies for all services...', 'info');
     
-    const services = ['frontend', 'elizaos-agents', 'bitquery', 'js-scraper'];
+    const services = ['frontend', 'elizaos-agents', 'js-scraper'];
     
     for (const service of services) {
       const servicePath = path.join(__dirname, service);
@@ -292,8 +282,7 @@ class BelisasariServerOrchestrator {
 
     // Start services in order
     const serviceOrder = [
-      'bitquery',
-      'tiktokScraper', 
+      'tiktokScraper',
       'telegramScraper',
       'outlightScraper',
       'elizaosAgents',

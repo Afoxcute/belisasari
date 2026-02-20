@@ -10,7 +10,7 @@ const path = require('path');
 console.log('🧪 Testing Iris Platform Configuration...\n');
 
 // Check if we're in the right directory
-const requiredDirs = ['frontend', 'elizaos-agents', 'js-scraper', 'bitquery'];
+const requiredDirs = ['frontend', 'elizaos-agents', 'js-scraper'];
 const missingDirs = requiredDirs.filter(dir => !fs.existsSync(dir));
 
 if (missingDirs.length > 0) {

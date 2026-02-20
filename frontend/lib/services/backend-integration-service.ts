@@ -8,6 +8,7 @@
 export interface BackendServiceResponse {
   success: boolean;
   message: string;
+  output?: string;
   data?: any;
   error?: string;
   timestamp: string;
@@ -18,11 +19,6 @@ export interface ADKWorkflowResponse extends BackendServiceResponse {
 }
 
 export interface PatternRecognitionResponse extends BackendServiceResponse {
-  output?: string;
-}
-
-/** Response from Jupiter (Token & Price Data) collection - still uses /api/bitquery. */
-export interface BitqueryResponse extends BackendServiceResponse {
   output?: string;
 }
 
@@ -82,23 +78,35 @@ export class BackendIntegrationService {
   }
 
   /**
-   * Start Jupiter Token & Price Data Collection (runs bitquery/index.mjs → tokens + prices)
+   * Jupiter price sync: fetch prices via Jupiter quote API and store in Supabase.
    */
-  static async startBitqueryCollection(): Promise<BitqueryResponse> {
+  static async startJupiterPriceSync(): Promise<BackendServiceResponse> {
     try {
-      const response = await fetch(`${this.baseUrl}/bitquery`, {
+      const response = await fetch(`${this.baseUrl}/jupiter/sync-prices`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
       });
-
       const data = await response.json();
-      return data;
+      if (!response.ok) {
+        return {
+          success: false,
+          message: data.error || 'Jupiter price sync failed',
+          error: data.error,
+          timestamp: new Date().toISOString()
+        };
+      }
+      return {
+        success: true,
+        message: data.message || `Updated ${data.updated ?? 0} tokens`,
+        output: data.message,
+        data: data,
+        timestamp: new Date().toISOString()
+      };
     } catch (error) {
       return {
         success: false,
-        message: 'Failed to start Jupiter token & price data collection',
+        message: 'Failed to run Jupiter price sync',
         error: error instanceof Error ? error.message : 'Unknown error',
         timestamp: new Date().toISOString()
       };
@@ -211,7 +219,7 @@ export class BackendIntegrationService {
   static async startAllServices(): Promise<{
     adkWorkflow: ADKWorkflowResponse;
     patternRecognition: PatternRecognitionResponse;
-    bitquery: BitqueryResponse;
+    bitquery: BackendServiceResponse; // Jupiter price sync
     decisionAgent: DecisionAgentResponse;
   }> {
     console.log('🚀 Starting all backend services...');
@@ -219,7 +227,7 @@ export class BackendIntegrationService {
     const [adkWorkflow, patternRecognition, bitquery, decisionAgent] = await Promise.all([
       this.startADKWorkflow(),
       this.startPatternRecognition(),
-      this.startBitqueryCollection(),
+      this.startJupiterPriceSync(),
       this.startDecisionAgent()
     ]);
 
@@ -241,17 +249,18 @@ export class BackendIntegrationService {
     decisionAgent: boolean;
   }> {
     try {
-      const [adkResponse, patternResponse, bitqueryResponse, decisionResponse] = await Promise.all([
+      const quoteUrl = `${this.baseUrl}/jupiter/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&amount=1000000`;
+      const [adkResponse, patternResponse, jupiterResponse, decisionResponse] = await Promise.all([
         fetch(`${this.baseUrl}/adk-workflow`),
         fetch(`${this.baseUrl}/pattern-recognition`),
-        fetch(`${this.baseUrl}/bitquery`),
+        fetch(quoteUrl),
         fetch(`${this.baseUrl}/decision-agent`)
       ]);
 
       return {
         adkWorkflow: adkResponse.ok,
         patternRecognition: patternResponse.ok,
-        bitquery: bitqueryResponse.ok,
+        bitquery: jupiterResponse.ok,
         decisionAgent: decisionResponse.ok
       };
     } catch (error) {

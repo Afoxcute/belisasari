@@ -7,6 +7,10 @@ import { TokenData } from "@/lib/types";
 import Image from "next/image";
 import { useEnvironmentStore } from "@/components/context";
 import { IPFS_GATEWAY_URL } from "@/lib/constants";
+import { SOL_MINT } from "@/lib/trading-constants";
+import { useTheme } from "next-themes";
+
+const BIRDEYE_WIDGET_BASE = "https://birdeye.so/tv-widget";
 
 export default function Ticker({ params }: { params: { id: string } }) {
   const [coinData, setCoinData] = useState<TokenData | null>(null);
@@ -14,6 +18,9 @@ export default function Ticker({ params }: { params: { id: string } }) {
   const [imageFetched, setImageFetched] = useState(false);
   const [isUpdatingPrice, setIsUpdatingPrice] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     // Mark that we're on the client side
@@ -144,8 +151,30 @@ export default function Ticker({ params }: { params: { id: string } }) {
     );
   }
 
+  const theme = mounted && resolvedTheme === "light" ? "light" : "dark";
+  const showBirdeye =
+    coinData?.address &&
+    coinData.address !== SOL_MINT &&
+    coinData.address.length >= 32;
+  const birdeyeSrc = showBirdeye
+    ? `${BIRDEYE_WIDGET_BASE}/${coinData.address}/${SOL_MINT}?chain=solana&theme=${theme}&chartType=Candle&chartInterval=1D&chartLeftToolbar=show&viewMode=base%2Fquote`
+    : "";
+
   return (
     <div className="w-full xl:w-[1250px] mx-auto mt-12 px-4">
+      {showBirdeye && (
+        <div className="mb-8 rounded-xl border bg-card overflow-hidden">
+          <div className="px-4 py-2 border-b bg-muted/50 text-sm font-medium text-muted-foreground">
+            {coinData.symbol} / SOL — Chart by Birdeye
+          </div>
+          <iframe
+            title={`${coinData.symbol} price chart`}
+            src={birdeyeSrc}
+            className="w-full h-[480px] border-0"
+            allowFullScreen
+          />
+        </div>
+      )}
       <TimeSeriesChart tokenData={coinData} />
       <Tweets
         symbol={coinData.symbol}

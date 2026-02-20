@@ -1,6 +1,5 @@
 // Iris ElizaOS Trading Agent - Main Entry Point
 import { createIrisTradingAgent, IrisTradingFunctions } from './iris-trading-agent.js';
-import BitqueryIntegration from './integrations/bitquery-integration.js';
 import SupabaseIntegration from './integrations/supabase-integration.js';
 import dotenv from 'dotenv';
 
@@ -11,7 +10,6 @@ class IrisAgentOrchestrator {
   constructor() {
     this.agent = null;
     this.tradingFunctions = null;
-    this.bitquery = new BitqueryIntegration();
     this.supabase = new SupabaseIntegration();
     this.isRunning = false;
   }
@@ -26,7 +24,6 @@ class IrisAgentOrchestrator {
       this.tradingFunctions = new IrisTradingFunctions(this.agent);
 
       console.log('✅ Iris Trading Agent initialized');
-      console.log('✅ Bitquery integration ready');
       console.log('✅ Supabase integration ready');
       console.log('✅ All systems operational\n');
 
@@ -46,10 +43,23 @@ class IrisAgentOrchestrator {
     try {
       console.log('🔍 Running Iris analysis cycle...\n');
 
-      // 1. Fetch trending memecoins from Bitquery
-      console.log('📊 Fetching trending memecoins...');
-      const memecoins = await this.bitquery.fetchTrendingMemecoins();
-      console.log(`   Found ${memecoins.length} trending memecoins`);
+      // 1. Memecoin data from Jupiter trending tokens
+      let memecoins = [];
+      try {
+        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+        const res = await fetch(`${frontendUrl}/api/jupiter/tokens/list?list=trending`);
+        if (res.ok) {
+          const list = await res.json();
+          memecoins = (Array.isArray(list) ? list : []).map((t) => ({
+            symbol: t.symbol ?? '?',
+            name: t.name ?? 'Unknown',
+            address: t.address
+          }));
+          console.log(`   Loaded ${memecoins.length} trending tokens from Jupiter`);
+        }
+      } catch (e) {
+        console.warn('   Could not fetch Jupiter trending list:', e.message);
+      }
 
       // 2. Analyze TikTok trends
       console.log('📱 Analyzing TikTok trends...');

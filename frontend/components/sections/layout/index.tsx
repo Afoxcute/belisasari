@@ -131,6 +131,14 @@ export default function Layout({
           <Button
             variant="ghost"
             className="hover:bg-transparent hover:border-[1px] hover:border-white transform transition hover:scale-105"
+            onClick={() => router.push("/portfolio")}
+          >
+            <p className="sen text-sm sm:text-md font-bold">Portfolio</p>
+          </Button>
+
+          <Button
+            variant="ghost"
+            className="hover:bg-transparent hover:border-[1px] hover:border-white transform transition hover:scale-105"
             onClick={() => router.push("/discover")}
           >
             <p className="sen text-sm sm:text-md font-bold">Discover</p>
@@ -230,19 +238,23 @@ export default function Layout({
         <Button
           variant="ghost"
           className="hover:bg-transparent hover:border-[1px] hover:border-white transform transition hover:scale-105"
-          onClick={() => {
-            router.push("/trending-coins");
-          }}
+          onClick={() => router.push("/trending-coins")}
         >
           <p className="sen text-sm sm:text-md font-bold">🚀 Trending Coins</p>
         </Button>
 
         <Button
           variant="ghost"
+          className="hover:bg-transparent hover:border-[1px] hover:border-white transform transition hover:scale-105"
+          onClick={() => router.push("/portfolio")}
+        >
+          <p className="sen text-sm sm:text-md font-bold">Portfolio</p>
+        </Button>
+
+        <Button
+          variant="ghost"
           className="hidden lg:flex hover:bg-transparent hover:border-[1px] hover:border-white transform transition hover:scale-105"
-          onClick={() => {
-            window.open("https://x.com/belisasari", "_blank");
-          }}
+          onClick={() => window.open("https://x.com/belisasari", "_blank")}
         >
           <p className="sen text-sm sm:text-md font-bold">Follow on</p>
           <Image

@@ -34,7 +34,6 @@
   "workspaces": [
     "frontend",
     "js-scraper",
-    "bitquery",
     "twitter",
     "scraper"
   ],

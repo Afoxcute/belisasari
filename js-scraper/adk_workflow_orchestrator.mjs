@@ -127,7 +127,7 @@ class IrisWorkflowOrchestrator {
         name: 'market_data_fetcher',
         model: 'gpt-3.5-turbo',
         instruction: `You are a blockchain data specialist. Your role is to:
-        - Fetch real-time token data from Pump.fun and Bitquery
+        - Fetch real-time token data from Pump.fun
         - Collect price data, market cap, and trading volume
         - Update token metadata and market information
         - Monitor for new token launches and significant price movements
@@ -1183,31 +1183,37 @@ class PatternAnalysisTool {
   }
 }
 
-// Market Data Tool
+// Market Data Tool - uses frontend Jupiter sync-prices API
 class MarketDataTool {
   constructor(supabase) {
     this.supabase = supabase;
   }
 
   async execute(input) {
+    const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+    const url = `${baseUrl}/api/jupiter/sync-prices`;
     try {
-      console.log('📊 Fetching market data...');
-      
-      // Import and run the bitquery data collection
-      const { fetchAndPushMemecoins } = await import('../bitquery/scripts/memecoins.mjs');
-      const { fetchAndPushPrices } = await import('../bitquery/scripts/prices.mjs');
-      const { fetchMarketData, updateTokenMarketData } = await import('../bitquery/scripts/market-data.mjs');
-
-      await fetchAndPushMemecoins();
-      await fetchAndPushPrices();
-      await fetchMarketData();
-
+      console.log('📊 Syncing token prices via Jupiter...');
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+        signal: AbortSignal.timeout(120000)
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        console.error('❌ Jupiter sync-prices failed:', res.status, data);
+        return { success: false, error: data?.message || res.statusText, ...data };
+      }
+      console.log('✅ Jupiter price sync completed:', data?.message || data?.updated);
       return {
         success: true,
-        message: 'Market data collection completed successfully'
+        message: data.message || 'Jupiter price sync completed',
+        updated: data.updated,
+        errors: data.errors
       };
     } catch (error) {
-      console.error('Market data error:', error);
+      console.error('❌ Jupiter sync error:', error.message);
       return { success: false, error: error.message };
     }
   }

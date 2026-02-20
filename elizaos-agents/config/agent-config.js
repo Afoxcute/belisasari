@@ -46,15 +46,6 @@ export const agentConfig = {
       refreshInterval: 30000, // 30 seconds
       hashtags: ['#solana', '#pump', '#memecoin', '#pumpfun', '#meme']
     },
-    bitquery: {
-      enabled: true,
-      refreshInterval: 60000, // 1 minute
-      endpoints: {
-        memecoins: 'https://streaming.bitquery.io/eap',
-        prices: 'https://streaming.bitquery.io/eap',
-        marketData: 'https://streaming.bitquery.io/eap'
-      }
-    },
     social: {
       twitter: {
         enabled: true,

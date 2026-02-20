@@ -12,7 +12,6 @@ const requiredEnvVars = [
   'OPENAI_API_KEY',
   'SUPABASE_URL', 
   'SUPABASE_ANON_KEY',
-  'BITQUERY_API_KEY',
   'ACCESS_TOKEN'
 ];
 
@@ -91,7 +90,6 @@ import path from 'path';
 const requiredFiles = [
   'iris-trading-agent.js',
   'config/agent-config.js',
-  'integrations/bitquery-integration.js',
   'integrations/supabase-integration.js',
   'index.js',
   'README.md'
@@ -131,34 +129,6 @@ if (process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
   }
 } else {
   console.log('   ⏭️ Supabase connection: Skipped (no env vars)');
-}
-
-// Test Bitquery integration (if env vars are set)
-if (process.env.BITQUERY_API_KEY && process.env.ACCESS_TOKEN) {
-  try {
-    const response = await fetch('https://streaming.bitquery.io/eap', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-API-KEY': process.env.BITQUERY_API_KEY,
-        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`
-      },
-      body: JSON.stringify({
-        query: '{ Solana { DEXTrades(limit: 1) { Trade { Buy { PriceInUSD } } } } }',
-        variables: '{}'
-      })
-    });
-    
-    if (response.ok) {
-      console.log('   ✅ Bitquery API: Working');
-    } else {
-      console.log('   ⚠️ Bitquery API: Error -', response.status);
-    }
-  } catch (error) {
-    console.log('   ❌ Bitquery API: Failed -', error.message);
-  }
-} else {
-  console.log('   ⏭️ Bitquery API: Skipped (no env vars)');
 }
 
 // Test Twitter integration (if env vars are set)

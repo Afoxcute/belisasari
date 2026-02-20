@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import type { ITokenSearchResult } from "@/lib/types/jupiter";
 import type { TokenListCategory } from "@/hooks/use-token-search-trading";
 import Image from "next/image";
+import Link from "next/link";
+import { LineChart } from "lucide-react";
 import { useTokenSearchTrading } from "@/hooks/use-token-search-trading";
 import { useEffect, useState } from "react";
 
@@ -93,35 +95,47 @@ export function TokenSearchDialog(props: {
           )}
           {!isLoading &&
             searchResults.slice(0, 80).map((t) => (
-              <button
+              <div
                 key={t.address}
-                type="button"
-                className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-muted text-left"
-                onClick={() => handleSelect(t)}
+                className="flex items-center gap-2 group"
               >
-                {t.logoURI ? (
-                  <Image
-                    src={t.logoURI}
-                    alt=""
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full bg-muted" />
-                )}
-                <div className="min-w-0 flex-1">
-                  <p className="font-medium flex items-center gap-1">
-                    {t.symbol}
-                    {t.verified && (
-                      <span className="text-xs text-muted-foreground">✓</span>
-                    )}
-                  </p>
-                  <p className="text-xs text-muted-foreground truncate max-w-[200px]">
-                    {t.name}
-                  </p>
-                </div>
-              </button>
+                <button
+                  type="button"
+                  className="flex-1 flex items-center gap-3 p-2 rounded-lg hover:bg-muted text-left min-w-0"
+                  onClick={() => handleSelect(t)}
+                >
+                  {t.logoURI ? (
+                    <Image
+                      src={t.logoURI}
+                      alt=""
+                      width={32}
+                      height={32}
+                      className="rounded-full shrink-0"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-muted shrink-0" />
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <p className="font-medium flex items-center gap-1">
+                      {t.symbol}
+                      {t.verified && (
+                        <span className="text-xs text-muted-foreground">✓</span>
+                      )}
+                    </p>
+                    <p className="text-xs text-muted-foreground truncate max-w-[200px]">
+                      {t.name}
+                    </p>
+                  </div>
+                </button>
+                <Link
+                  href={`/trading/token/${t.address}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="p-2 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground shrink-0"
+                  title="View chart"
+                >
+                  <LineChart className="h-4 w-4" />
+                </Link>
+              </div>
             ))}
         </div>
       </DialogContent>

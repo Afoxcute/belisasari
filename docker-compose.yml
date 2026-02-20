@@ -15,7 +15,6 @@ services:
     env_file:
       - .env
     depends_on:
-      - bitquery
       - elizaos-agents
     restart: unless-stopped
     networks:
@@ -30,38 +29,7 @@ services:
       - NODE_ENV=production
     env_file:
       - .env
-    depends_on:
-      - bitquery
     restart: unless-stopped
-    networks:
-      - belisasari-network
-
-  # Bitquery Service (Scheduled - runs every 24 hours)
-  bitquery:
-    build:
-      context: ./bitquery
-      dockerfile: Dockerfile.scheduled
-    environment:
-      - NODE_ENV=production
-    env_file:
-      - .env
-    volumes:
-      - bitquery_logs:/var/log
-    restart: unless-stopped
-    networks:
-      - belisasari-network
-
-  # Bitquery Manual Service (for immediate runs)
-  bitquery-manual:
-    build:
-      context: ./bitquery
-      dockerfile: Dockerfile
-    environment:
-      - NODE_ENV=production
-    env_file:
-      - .env
-    profiles:
-      - manual
     networks:
       - belisasari-network
 
@@ -123,7 +91,6 @@ services:
 volumes:
   redis_data:
   postgres_data:
-  bitquery_logs:
   js_scraper_logs:
 
 networks:

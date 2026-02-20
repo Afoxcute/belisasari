@@ -36,7 +36,8 @@ export async function GET(request: NextRequest) {
         id,
         name,
         symbol,
-        uri
+        uri,
+        address
       `
       )
       .or(`symbol.ilike.%${searchTerm}%,name.ilike.%${searchTerm}%`)
@@ -58,6 +59,7 @@ export async function GET(request: NextRequest) {
         name: token.name,
         symbol: token.symbol,
         uri: token.uri,
+        address: token.address ?? undefined,
         image: "",
       };
     });

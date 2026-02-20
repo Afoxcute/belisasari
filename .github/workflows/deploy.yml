@@ -54,17 +54,6 @@ jobs:
           cache-from: type=registry,ref=${{ env.DOCKER_USERNAME }}/belisasari-elizaos-agents:buildcache
           cache-to: type=registry,ref=${{ env.DOCKER_USERNAME }}/belisasari-elizaos-agents:buildcache,mode=max
 
-      - name: Build and push Bitquery Service image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./bitquery
-          file: ./bitquery/Dockerfile
-          push: true
-          tags: |
-            ${{ env.DOCKER_USERNAME }}/belisasari-bitquery:latest
-          cache-from: type=registry,ref=${{ env.DOCKER_USERNAME }}/belisasari-bitquery:buildcache
-          cache-to: type=registry,ref=${{ env.DOCKER_USERNAME }}/belisasari-bitquery:buildcache,mode=max
-
       - name: Build and push JS Scraper Scheduled image
         uses: docker/build-push-action@v4
         with:
@@ -119,7 +108,7 @@ jobs:
               
               # Show environment variables that are configured (masked)
               echo "Current environment configuration:"
-              grep -E "^(SUPABASE_|OPENAI_|SOLANA_|BITQUERY_|CONSUMER_|ZORO_|TELEGRAM_|DB_|NODE_ENV|PORT|HOST)" /home/ubuntu/belisasari/.env | sed 's/=.*/=***/' || echo "No environment variables found"
+              grep -E "^(SUPABASE_|OPENAI_|SOLANA_|CONSUMER_|ZORO_|TELEGRAM_|DB_|NODE_ENV|PORT|HOST)" /home/ubuntu/belisasari/.env | sed 's/=.*/=***/' || echo "No environment variables found"
               
             else
               echo "⚠️ No .env file found at /home/ubuntu/belisasari/.env"
@@ -143,10 +132,6 @@ jobs:
               echo "SOLANA_PUBLIC_KEY=your_public_key_here"
               echo "SOLANA_RPC_URL=https://api.mainnet-beta.solana.com"
               echo "SOLANA_CLUSTER=mainnet-beta"
-              echo ""
-              echo "# Bitquery Configuration"
-              echo "BITQUERY_API_KEY=your_bitquery_api_key_here"
-              echo "ACCESS_TOKEN=your_bitquery_access_token_here"
               echo ""
               echo "# Twitter Configuration"
               echo "CONSUMER_KEY=your_twitter_consumer_key_here"
@@ -333,7 +318,7 @@ jobs:
             
             # Show environment configuration (masked)
             echo "=== Environment Configuration ==="
-            sudo docker exec belisasari-frontend grep -E "^(SUPABASE_|OPENAI_|SOLANA_|BITQUERY_|CONSUMER_|ZORO_|TELEGRAM_|DB_|NODE_ENV|PORT|HOST)" /app/.env | sed 's/=.*/=***/' || echo "No environment config found"
+            sudo docker exec belisasari-frontend grep -E "^(SUPABASE_|OPENAI_|SOLANA_|CONSUMER_|ZORO_|TELEGRAM_|DB_|NODE_ENV|PORT|HOST)" /app/.env | sed 's/=.*/=***/' || echo "No environment config found"
             
             # Final health checks
             echo "=== Final Health Checks ==="
