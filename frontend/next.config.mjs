@@ -79,6 +79,31 @@ const nextConfig = {
         hostname: "gateway.pinata.cloud",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "token.jup.ag",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "static.jup.ag",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "api.jup.ag",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "ipfs.io",
+        port: "",
+      },
     ],
   },
 };

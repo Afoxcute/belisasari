@@ -123,6 +123,14 @@ export default function Layout({
           <Button
             variant="ghost"
             className="hover:bg-transparent hover:border-[1px] hover:border-white transform transition hover:scale-105"
+            onClick={() => router.push("/trading")}
+          >
+            <p className="sen text-sm sm:text-md font-bold">Trading (Jupiter)</p>
+          </Button>
+
+          <Button
+            variant="ghost"
+            className="hover:bg-transparent hover:border-[1px] hover:border-white transform transition hover:scale-105"
             onClick={() => router.push("/discover")}
           >
             <p className="sen text-sm sm:text-md font-bold">Discover</p>

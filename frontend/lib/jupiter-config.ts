@@ -1,0 +1,5 @@
+export const JUPITER_CONFIG = {
+  DEFAULT_SLIPPAGE_BPS: 50,
+  PLATFORM_FEE_BPS: 0,
+  FEE_WALLET: "8jTiTDW9ZbMHvAD9SZWvhPfRx5gUgK7HACMdgbFp2tUz",
+} as const;
