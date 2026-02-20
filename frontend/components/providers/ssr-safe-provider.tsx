@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { EnvironmentStoreProvider } from '@/components/context';
 import SolanaWalletProvider from './wallet-provider';
@@ -7,17 +8,21 @@ import { ThemeProvider } from './theme-provider';
 import Layout from '@/components/sections/layout';
 import { Toaster } from '@/components/ui/toaster';
 
+const PrivyClientProvider = dynamic(
+  () =>
+    import('@/components/provider/PrivyClientProvider').then((m) => ({
+      default: m.PrivyClientProvider,
+    })),
+  { ssr: false }
+);
+
 export default function SSRSafeProvider({ children }: { children: React.ReactNode }) {
   const [isClient, setIsClient] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    // Add a small delay to ensure all components are ready
-    const timer = setTimeout(() => {
-      setIsMounted(true);
-    }, 100);
-    
+    const timer = setTimeout(() => setIsMounted(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -39,12 +44,14 @@ export default function SSRSafeProvider({ children }: { children: React.ReactNod
       enableSystem={false}
       disableTransitionOnChange
     >
-      <EnvironmentStoreProvider>
-        <SolanaWalletProvider>
-          <Layout>{children}</Layout>
-          <Toaster />
-        </SolanaWalletProvider>
-      </EnvironmentStoreProvider>
+      <PrivyClientProvider>
+        <EnvironmentStoreProvider>
+          <SolanaWalletProvider>
+            <Layout>{children}</Layout>
+            <Toaster />
+          </SolanaWalletProvider>
+        </EnvironmentStoreProvider>
+      </PrivyClientProvider>
     </ThemeProvider>
   );
 }

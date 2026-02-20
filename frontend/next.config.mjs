@@ -1,7 +1,24 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["@noble/curves", "@noble/hashes"],
+  webpack: (config, { isServer }) => {
+    // Fix @noble/curves re-exports: ensure resolution uses correct utils (esm/utils.js not abstract/utils.js)
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      // Force single copy of noble packages (from workspace root when in frontend)
+      "@noble/curves": path.resolve(__dirname, "../node_modules/@noble/curves"),
+      "@noble/hashes": path.resolve(__dirname, "../node_modules/@noble/hashes"),
+    };
+    return config;
+  },
   experimental: {
     esmExternals: "loose",
+    serverComponentsExternalPackages: ["@privy-io/react-auth", "viem"],
   },
   output: 'standalone',
   eslint: {
