@@ -83,7 +83,7 @@ TWITTER_API_SECRET=your_app_secret
 TWITTER_ACCESS_TOKEN=your_access_token
 TWITTER_ACCESS_TOKEN_SECRET=your_access_token_secret
 
-# OpenAI (AI chat, portfolio/NFT insights)
+# OpenAI (AI t, portfolio/NFT insights)
 OPENAI_API_KEY=sk-your_openai_key
 ```
 
