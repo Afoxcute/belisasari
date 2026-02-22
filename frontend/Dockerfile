@@ -26,6 +26,12 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Placeholder env for Next.js "collect page data" (API routes instantiate Supabase at import).
+# Real values come from mounted .env at runtime.
+ENV SUPABASE_URL=https://placeholder.supabase.co
+ENV SUPABASE_ANON_SECRET=placeholder
+ENV SUPABASE_ANON_KEY=placeholder
+
 RUN yarn build
 
 # Production image, copy all the files and run next
