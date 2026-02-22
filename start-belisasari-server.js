@@ -9,6 +9,11 @@ const { spawn, exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
+// Load frontend/.env.local so Twitter and other keys are available to all services (e.g. ElizaOS)
+const frontendEnvLocal = path.join(__dirname, 'frontend', '.env.local');
+if (fs.existsSync(frontendEnvLocal)) {
+  require('dotenv').config({ path: frontendEnvLocal, override: true });
+}
 
 // Colors for console output
 const colors = {

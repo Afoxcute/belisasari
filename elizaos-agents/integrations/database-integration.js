@@ -11,11 +11,11 @@ export class DatabaseIntegration {
     this.initialize();
   }
 
-  // Initialize Supabase client
+  // Initialize Supabase client (SUPABASE_ANON_SECRET or SUPABASE_ANON_KEY, same as frontend)
   initialize() {
     try {
       const supabaseUrl = process.env.SUPABASE_URL;
-      const supabaseKey = process.env.SUPABASE_ANON_SECRET;
+      const supabaseKey = process.env.SUPABASE_ANON_SECRET || process.env.SUPABASE_ANON_KEY;
 
       if (!supabaseUrl || !supabaseKey) {
         console.log('⚠️ Supabase credentials not configured');

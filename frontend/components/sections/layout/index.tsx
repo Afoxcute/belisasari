@@ -157,7 +157,7 @@ export default function Layout({
           <Button
             variant="ghost"
             className="hidden lg:flex hover:bg-transparent hover:border-[1px] hover:border-white transform transition hover:scale-105"
-            onClick={() => window.open("https://x.com/belisasari", "_blank")}
+            onClick={() => window.open("https://x.com/wojat118721", "_blank")}
           >
             <p className="sen text-sm sm:text-md font-bold">Follow on</p>
             <Image src="/x.png" alt="logo" width={20} height={20} className="rounded-full" />
@@ -272,7 +272,7 @@ export default function Layout({
         <Button
           variant="ghost"
           className="hidden lg:flex hover:bg-transparent hover:border-[1px] hover:border-white transform transition hover:scale-105"
-          onClick={() => window.open("https://x.com/belisasari", "_blank")}
+          onClick={() => window.open("https://x.com/wojat118721", "_blank")}
         >
           <p className="sen text-sm sm:text-md font-bold">Follow on</p>
           <Image

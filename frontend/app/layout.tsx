@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "player",
-    site: "https://x.com/belisasari",
+    site: "https://x.com/wojat118721",
     title: "Belisasari | World's Best Memecoin Hunter",
     images: ["/belisasari.png"],
     description:
