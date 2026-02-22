@@ -319,10 +319,11 @@ export async function main() {
     console.log(`   Agents: ${Object.keys(status.agents).length} active`);
     
     console.log('\n🎉 Belisasari Phase 2 implementation complete!');
-    // Keep container running: start continuous automation (campaign every 5 min)
-    const intervalMs = parseInt(process.env.ELIZAOS_CAMPAIGN_INTERVAL_MS, 10) || 300000;
-    console.log(`\n🔄 Starting continuous automation (interval: ${intervalMs / 1000}s)...`);
-    await orchestrator.startAutomation(intervalMs);
+    console.log('\nNext steps:');
+    console.log('1. Configure platform credentials in .env file');
+    console.log('2. Start continuous automation with: orchestrator.startAutomation()');
+    console.log('3. Monitor performance with: orchestrator.getSystemStatus()');
+    console.log('4. Run custom campaigns with: orchestrator.runSocialMediaCampaign(data)');
     
   } catch (error) {
     console.error('❌ Fatal error in Belisasari Phase 2:', error);
