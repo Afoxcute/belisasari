@@ -62,14 +62,9 @@ function buildPriceRows(jupTokens, timestamp = new Date().toISOString()) {
  */
 /** Use service role key for writes so RLS is bypassed; anon key cannot insert/update prices. */
 function getSupabaseClient() {
-  const supabaseUrl = (process.env.SUPABASE_URL || "").trim();
-  const serviceKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
-  const anonKey = (
-    process.env.SUPABASE_ANON_SECRET ||
-    process.env.SUPABASE_ANON_KEY ||
-    process.env.SUPABASE_KEY ||
-    ""
-  ).trim();
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const anonKey = process.env.SUPABASE_ANON_SECRET || process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY;
   if (!supabaseUrl) {
     console.error("Missing SUPABASE_URL");
     process.exit(1);
