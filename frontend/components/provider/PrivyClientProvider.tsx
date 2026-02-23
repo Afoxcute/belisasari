@@ -8,16 +8,18 @@ import { AppAuthStubProvider } from './PrivyAppAuthContext';
 
 function PrivyAuthBridge({ children }: { children: React.ReactNode }) {
   const { ready, authenticated, user, logout } = usePrivy();
-  const { login } = useLogin();
+  const { login: privyLogin } = useLogin();
   const value = useMemo(
     () => ({
       ready,
       authenticated: authenticated ?? false,
       user: user ?? null,
-      login: login ?? (async () => {}),
+      login: (opts?: unknown) => {
+        privyLogin(opts as Parameters<typeof privyLogin>[0] | undefined);
+      },
       logout: logout ?? (async () => {}),
     }),
-    [ready, authenticated, user, login, logout]
+    [ready, authenticated, user, privyLogin, logout]
   );
   return (
     <AppAuthContextProvider value={value}>
