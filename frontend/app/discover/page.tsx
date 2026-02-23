@@ -2,9 +2,9 @@
 
 import { Button } from '@/components/ui/button';
 import { FollowButton } from '@/components/social/FollowButton';
+import { useAppAuth } from '@/components/provider/PrivyAppAuthContext';
 import { useCurrentWallet } from '@/hooks/use-current-wallet';
 import { useGetProfiles } from '@/hooks/use-get-profiles';
-import { usePrivy } from '@privy-io/react-auth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
