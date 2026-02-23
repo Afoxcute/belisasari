@@ -4,6 +4,9 @@ import "@solana/wallet-adapter-react-ui/styles.css";
 import "./globals.css";
 import SSRSafeProvider from "@/components/providers/ssr-safe-provider";
 
+// Skip static prerender to avoid "Element type is invalid... got: undefined" during build (client-only providers/trees).
+export const dynamic = "force-dynamic";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
