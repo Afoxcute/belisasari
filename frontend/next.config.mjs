@@ -5,7 +5,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false, // Avoid double-mount portal cleanup causing removeChild/appendChild DOM errors
   transpilePackages: ["@noble/curves", "@noble/hashes"],
   webpack: (config, { isServer }) => {
     // Fix @noble/curves re-exports: ensure resolution uses correct utils (esm/utils.js not abstract/utils.js)

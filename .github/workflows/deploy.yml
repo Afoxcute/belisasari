@@ -124,7 +124,7 @@ jobs:
               
               # Show environment variables that are configured (masked)
               echo "Current environment configuration:"
-              grep -E "^(SUPABASE_|OPENAI_|SOLANA_|CONSUMER_|ZORO_|TELEGRAM_|DB_|NODE_ENV|PORT|HOST)" /home/ubuntu/belisasari/.env | sed 's/=.*/=***/' || echo "No environment variables found"
+              grep -E "^(SUPABASE_|OPENAI_|SOLANA_|CONSUMER_|ZORO_|TELEGRAM_|DB_|NODE_ENV|PORT|HOST|NEXT_PUBLIC_PRIVY_APP_ID)" /home/ubuntu/belisasari/.env | sed 's/=.*/=***/' || echo "No environment variables found"
               
             else
               echo "⚠️ No .env file found at /home/ubuntu/belisasari/.env"
@@ -142,6 +142,9 @@ jobs:
               echo ""
               echo "# OpenAI Configuration"
               echo "OPENAI_API_KEY=your_openai_api_key_here"
+              echo ""
+              echo "# Frontend (public; set in server .env for runtime, or in GitHub Secrets for build)"
+              echo "NEXT_PUBLIC_PRIVY_APP_ID=your_privy_app_id_here"
               echo ""
               echo "# Solana Configuration"
               echo "SOLANA_PRIVATE_KEY=your_base58_private_key_here"
@@ -350,7 +353,7 @@ jobs:
             
             # Show environment configuration (masked)
             echo "=== Environment Configuration ==="
-            sudo docker exec belisasari-frontend grep -E "^(SUPABASE_|OPENAI_|SOLANA_|CONSUMER_|ZORO_|TELEGRAM_|DB_|NODE_ENV|PORT|HOST)" /app/.env | sed 's/=.*/=***/' || echo "No environment config found"
+            sudo docker exec belisasari-frontend grep -E "^(SUPABASE_|OPENAI_|SOLANA_|CONSUMER_|ZORO_|TELEGRAM_|DB_|NODE_ENV|PORT|HOST|NEXT_PUBLIC_PRIVY_APP_ID)" /app/.env | sed 's/=.*/=***/' || echo "No environment config found"
             
             # Final health checks
             echo "=== Final Health Checks ==="

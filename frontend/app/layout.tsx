@@ -77,15 +77,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased select-none`}
-        suppressHydrationWarning
       >
-        {/* Single stable root to avoid removeChild/appendChild DOM errors with portals (Privy, wallet modal) */}
-        <div id="__next" translate="no" className="min-h-screen">
-          <ClientLayout>{children}</ClientLayout>
-        </div>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

@@ -1,12 +1,12 @@
 'use client';
 
 import { useGetProfiles } from '@/hooks/use-get-profiles';
-import { useAppAuth } from '@/components/provider/PrivyAppAuthContext';
+import { usePrivy } from '@privy-io/react-auth';
 import { useEffect, useState } from 'react';
 
 export function useCurrentWallet() {
   const [walletAddress, setWalletAddress] = useState('');
-  const { user, authenticated, ready } = useAppAuth();
+  const { user, authenticated, ready } = usePrivy();
   const { profiles, loading } = useGetProfiles({
     walletAddress: walletAddress || '',
   });

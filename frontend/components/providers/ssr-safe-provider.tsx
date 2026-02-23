@@ -28,7 +28,7 @@ export default function SSRSafeProvider({ children }: { children: React.ReactNod
 
   if (!isClient || !isMounted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background" translate="no">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <img src="/belisasari.png" alt="Belisasari" className="w-16 h-16 mx-auto mb-4 rounded-full" />
           <div className="w-8 h-8 border-2 border-iris-primary/20 border-t-iris-primary rounded-full animate-spin mx-auto mb-4" />
