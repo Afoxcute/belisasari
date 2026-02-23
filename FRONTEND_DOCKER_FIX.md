@@ -2,7 +2,7 @@
 
 ## 🔧 Issue Fixed
 
-### **Problem:**
+### **Prem:**
 Docker build was failing with the error:
 ```
 error Your lockfile needs to be updated, but yarn was run with `--frozen-lockfile`.
