@@ -4,6 +4,7 @@ import { useCurrentWallet } from '@/hooks/use-current-wallet';
 import { useCreateProfileTapestry } from '@/hooks/use-create-profile-tapestry';
 import { useGetIdentities } from '@/hooks/use-get-identities';
 import type { IProfileList } from '@/lib/types/profile';
+import { useAppAuth } from '@/components/provider/PrivyAppAuthContext';
 import { User } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
