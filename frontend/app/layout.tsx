@@ -77,11 +77,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased select-none`}
+        suppressHydrationWarning
       >
-        <ClientLayout>{children}</ClientLayout>
+        <div id="__belisasari_root">
+          <ClientLayout>{children}</ClientLayout>
+        </div>
       </body>
     </html>
   );
