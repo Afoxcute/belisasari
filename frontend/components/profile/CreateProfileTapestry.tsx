@@ -4,7 +4,6 @@ import { useCurrentWallet } from '@/hooks/use-current-wallet';
 import { useCreateProfileTapestry } from '@/hooks/use-create-profile-tapestry';
 import { useGetIdentities } from '@/hooks/use-get-identities';
 import type { IProfileList } from '@/lib/types/profile';
-import { usePrivy } from '@privy-io/react-auth';
 import { User } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -19,7 +18,7 @@ interface CreateProfileTapestryProps {
 
 export function CreateProfileTapestry({ onClose, onSuccess }: CreateProfileTapestryProps) {
   const { walletAddress, loadingMainUsername } = useCurrentWallet();
-  const { logout } = usePrivy();
+  const { logout } = useAppAuth();
   const [username, setUsername] = useState('');
   const [selectProfile, setSelectProfile] = useState<IProfileList | null>(null);
 

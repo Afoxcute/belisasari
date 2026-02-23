@@ -5,7 +5,7 @@ import { useContents } from '@/hooks/use-contents';
 import { useCreatePost } from '@/hooks/use-create-post';
 import { useCurrentWallet } from '@/hooks/use-current-wallet';
 import { useGetProfiles } from '@/hooks/use-get-profiles';
-import { usePrivy } from '@privy-io/react-auth';
+import { useAppAuth } from '@/components/provider/PrivyAppAuthContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -13,7 +13,7 @@ import { Send, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export default function FeedPageClient() {
-  const { ready, authenticated, login } = usePrivy();
+  const { ready, authenticated, login } = useAppAuth();
   const { walletAddress } = useCurrentWallet();
   const { profiles } = useGetProfiles({ walletAddress: walletAddress || '' });
   const myProfileId = profiles?.[0]?.profile?.id ?? null;

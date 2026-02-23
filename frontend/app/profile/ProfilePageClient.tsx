@@ -1,6 +1,6 @@
 "use client";
 
-import { useLogin, usePrivy } from "@privy-io/react-auth";
+import { useAppAuth } from "@/components/provider/PrivyAppAuthContext";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useCurrentWallet } from "@/hooks/use-current-wallet";
@@ -17,7 +17,7 @@ import { EditProfileDialog } from "@/components/profile/EditProfileDialog";
 import { ImportConnectionsSection } from "@/components/profile/ImportConnectionsSection";
 
 export default function ProfilePageClient() {
-  const { ready, authenticated, login } = usePrivy();
+  const { ready, authenticated, login } = useAppAuth();
   const { walletAddress, mainUsername, loadingMainUsername } = useCurrentWallet();
   const { profiles, loading } = useGetProfiles({
     walletAddress: walletAddress || "",

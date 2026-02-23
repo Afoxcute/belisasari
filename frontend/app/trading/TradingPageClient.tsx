@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { usePrivy } from "@privy-io/react-auth";
+import { useAppAuth } from "@/components/provider/PrivyAppAuthContext";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ const SwapCard = dynamic(
 );
 
 export default function TradingPageClient() {
-  const { ready, authenticated, login } = usePrivy();
+  const { ready, authenticated, login } = useAppAuth();
 
   if (!ready) {
     return (

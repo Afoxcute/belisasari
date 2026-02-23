@@ -2,7 +2,7 @@
 
 import { useCurrentWallet } from "@/hooks/use-current-wallet";
 import { useZerionPortfolio } from "@/hooks/use-zerion-portfolio";
-import { useLogin } from "@privy-io/react-auth";
+import { useAppAuth } from "@/components/provider/PrivyAppAuthContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -55,7 +55,7 @@ function formatDate(iso: string): string {
 
 export default function PortfolioPage() {
   const { walletAddress, walletIsConnected } = useCurrentWallet();
-  const { login } = useLogin();
+  const { login } = useAppAuth();
   const { portfolio, chart, positions, transactions, loading, error, refetch } =
     useZerionPortfolio(walletAddress);
   const { post: postTweet, posting: twitterPosting } = useTwitterPost();

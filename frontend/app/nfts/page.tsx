@@ -2,7 +2,7 @@
 
 import { useCurrentWallet } from "@/hooks/use-current-wallet";
 import { useHeliusNfts } from "@/hooks/use-helius-nfts";
-import { useLogin } from "@privy-io/react-auth";
+import { useAppAuth } from "@/components/provider/PrivyAppAuthContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -57,7 +57,7 @@ function collectionKey(asset: HeliusDASAsset): string {
 
 export default function NftsPage() {
   const { walletAddress, walletIsConnected } = useCurrentWallet();
-  const { login } = useLogin();
+  const { login } = useAppAuth();
   const { nfts, transactions, total, loading, loadingTx, error, refetch } =
     useHeliusNfts(walletAddress);
   const [selectedNft, setSelectedNft] = useState<HeliusDASAsset | null>(null);
