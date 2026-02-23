@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useMemo } from 'react';
 import { PrivyProvider, useLogin, usePrivy } from '@privy-io/react-auth';
 import { toSolanaWalletConnectors } from '@privy-io/react-auth/solana';
 import { AppAuthContextProvider } from './PrivyAppAuthContext';
@@ -8,7 +9,7 @@ import { AppAuthStubProvider } from './PrivyAppAuthContext';
 function PrivyAuthBridge({ children }: { children: React.ReactNode }) {
   const { ready, authenticated, user, logout } = usePrivy();
   const { login } = useLogin();
-  const value = React.useMemo(
+  const value = useMemo(
     () => ({
       ready,
       authenticated: authenticated ?? false,
