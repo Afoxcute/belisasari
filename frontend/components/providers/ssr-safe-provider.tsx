@@ -1,40 +1,12 @@
 'use client';
 
-import React, { Component, type ErrorInfo, type ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { EnvironmentStoreProvider } from '@/components/context';
 import SolanaWalletProvider from './wallet-provider';
 import { ThemeProvider } from './theme-provider';
 import { PrivyClientProvider } from '@/components/provider/PrivyClientProvider';
-import { AppAuthStubProvider } from '@/components/provider/PrivyAppAuthContext';
 import Layout from '@/components/sections/layout';
 import { Toaster } from '@/components/ui/toaster';
-
-/** Catches "Element type is invalid" and similar so the app still shows a fallback instead of crashing. */
-class RootErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error?: Error }> {
-  state = { hasError: false as boolean, error: undefined as Error | undefined };
-
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('[RootErrorBoundary]', error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="min-h-screen flex items-center justify-center bg-background p-4">
-          <div className="text-center max-w-md">
-            <p className="text-muted-foreground mb-2">Something went wrong loading the app.</p>
-            <p className="text-sm text-muted-foreground/80">{this.state.error?.message}</p>
-          </div>
-        </div>
-      );
-    }
-    return this.props.children;
-  }
-}
 
 function LoadingFallback() {
   return (
@@ -45,22 +17,6 @@ function LoadingFallback() {
         <p className="text-muted-foreground">Loading Belisasari...</p>
       </div>
     </div>
-  );
-}
-
-function AppTree({ children }: { children: React.ReactNode }) {
-  const hasPrivyId = typeof process.env.NEXT_PUBLIC_PRIVY_APP_ID === 'string' &&
-    process.env.NEXT_PUBLIC_PRIVY_APP_ID.trim().length > 0;
-  const AuthWrapper = hasPrivyId ? PrivyClientProvider : AppAuthStubProvider;
-  return (
-    <AuthWrapper>
-      <EnvironmentStoreProvider>
-        <SolanaWalletProvider>
-          <Layout>{children}</Layout>
-          <Toaster />
-        </SolanaWalletProvider>
-      </EnvironmentStoreProvider>
-    </AuthWrapper>
   );
 }
 
@@ -88,15 +44,29 @@ export default function SSRSafeProvider({ children }: { children: React.ReactNod
   }
 
   return (
-    <RootErrorBoundary>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="dark"
-        enableSystem={false}
-        disableTransitionOnChange
-      >
-        <AppTree>{children}</AppTree>
-      </ThemeProvider>
-    </RootErrorBoundary>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem={false}
+      disableTransitionOnChange
+    >
+      {PrivyClientProvider ? (
+        <PrivyClientProvider>
+          <EnvironmentStoreProvider>
+            <SolanaWalletProvider>
+              <Layout>{children}</Layout>
+              <Toaster />
+            </SolanaWalletProvider>
+          </EnvironmentStoreProvider>
+        </PrivyClientProvider>
+      ) : (
+        <EnvironmentStoreProvider>
+          <SolanaWalletProvider>
+            <Layout>{children}</Layout>
+            <Toaster />
+          </SolanaWalletProvider>
+        </EnvironmentStoreProvider>
+      )}
+    </ThemeProvider>
   );
 }

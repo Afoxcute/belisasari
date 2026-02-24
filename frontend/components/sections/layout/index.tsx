@@ -2,7 +2,7 @@
 
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import { useAppAuth } from "@/components/provider/PrivyAppAuthContext";
+import { useLogin, usePrivy } from "@privy-io/react-auth";
 import { Check, ChevronDown, LogOut, User } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -43,7 +43,8 @@ export default function Layout({
     return () => document.removeEventListener("mousedown", onOutside);
   }, []);
 
-  const { ready, authenticated, logout, login } = useAppAuth();
+  const { ready, authenticated, logout } = usePrivy();
+  const { login } = useLogin();
   const { walletAddress: privyWallet, mainUsername } = useCurrentWallet();
 
   useEffect(() => {
