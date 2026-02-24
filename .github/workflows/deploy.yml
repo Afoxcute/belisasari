@@ -113,7 +113,7 @@ jobs:
             echo "Checking Belisasari platform environment configuration..."
             
             # Get EC2 public IP for reference
-            PUBLIC_IP=54.147.248.14
+            PUBLIC_IP=54.209.8.178
             echo "EC2 Public IP: $PUBLIC_IP"
             
             # Check if .env file exists on server
@@ -401,7 +401,7 @@ jobs:
             
             echo ""
             echo "=== Belisasari Platform Deployment Verification Complete ==="
-            PUBLIC_IP=54.147.248.14
+            PUBLIC_IP=54.209.8.178
             echo "🌐 Frontend accessible at: http://${PUBLIC_IP}:3000"
             echo "🤖 ElizaOS Agents accessible at: http://${PUBLIC_IP}:3001"
             echo "📊 Bitquery Service accessible at: http://${PUBLIC_IP}:3002"
