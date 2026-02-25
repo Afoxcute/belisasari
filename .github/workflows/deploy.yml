@@ -113,7 +113,7 @@ jobs:
             echo "Checking Belisasari platform environment configuration..."
             
             # Get EC2 public IP for reference
-            PUBLIC_IP=18.234.82.66
+            PUBLIC_IP=100.26.31.111
             echo "EC2 Public IP: $PUBLIC_IP"
             
             # Check if .env file exists on server
