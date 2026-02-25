@@ -15,9 +15,12 @@ export default function SolanaWalletProvider({
 }: {
   children: React.ReactNode;
 }) {
-  // Set up the Solana network connection
-  const endpoint = React.useMemo(() => clusterApiUrl("devnet"), []); // or your preferred network
-  // Initialize wallet adapters
+  const endpoint = React.useMemo(
+    () =>
+      process.env.NEXT_PUBLIC_RPC_URL ||
+      clusterApiUrl("mainnet-beta"),
+    []
+  );
   const wallets = React.useMemo(
     () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
     []
@@ -25,7 +28,7 @@ export default function SolanaWalletProvider({
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
+      <WalletProvider wallets={wallets} autoConnect={false}>
         <WalletModalProvider>{children}</WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>

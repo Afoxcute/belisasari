@@ -18,7 +18,7 @@
   "dependencies": {
     "@noble/curves": "1.9.7",
     "@noble/hashes": "1.8.0",
-    "@privy-io/react-auth": "^2.25.0",
+    "@privy-io/react-auth": "^2.13.0",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-progress": "^1.1.7",

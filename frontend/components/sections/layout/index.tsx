@@ -1,8 +1,6 @@
 "use client";
 
-import { useWallet } from "@solana/wallet-adapter-react";
-import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import { useLogin, usePrivy } from "@privy-io/react-auth";
+import { useAppAuth } from "@/components/provider/PrivyAppAuthContext";
 import { Check, ChevronDown, LogOut, User } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -21,8 +19,6 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { setVisible } = useWalletModal();
-  const { disconnect, connected, publicKey } = useWallet();
   const walletAddress = useEnvironmentStore((s) => s.walletAddress);
   const setAddress = useEnvironmentStore((s) => s.setAddress);
   const setPaid = useEnvironmentStore((s) => s.setPaid);
@@ -43,8 +39,7 @@ export default function Layout({
     return () => document.removeEventListener("mousedown", onOutside);
   }, []);
 
-  const { ready, authenticated, logout } = usePrivy();
-  const { login } = useLogin();
+  const { ready, authenticated, logout, login } = useAppAuth();
   const { walletAddress: privyWallet, mainUsername } = useCurrentWallet();
 
   useEffect(() => {
@@ -60,7 +55,7 @@ export default function Layout({
 
   useEffect(() => {
     if (!isClient) return;
-    const addr = privyWallet || (connected && publicKey ? publicKey.toString() : "") || walletAddress;
+    const addr = privyWallet || walletAddress;
     if (addr) {
       fetch(`/api/supabase/get-sub?address=${addr}`)
         .then((res) => res.json())
@@ -71,10 +66,10 @@ export default function Layout({
         setBalances(balances.sol.toString(), balances.token.toString());
       });
     }
-  }, [walletAddress, privyWallet, connected, publicKey, isClient, setPaid, setBalances]);
+  }, [walletAddress, privyWallet, isClient, setPaid, setBalances]);
 
   const displayUsername = profileUsername ?? mainUsername;
-  const displayWallet = privyWallet || (connected ? publicKey?.toString() ?? "" : "") || walletAddress;
+  const displayWallet = privyWallet || walletAddress;
 
   const handleCopy = (address: string) => {
     navigator.clipboard.writeText(address);
@@ -212,19 +207,20 @@ export default function Layout({
           ) : (
             <Button
               className="bg-iris-primary hover:bg-iris-primary/80 transform transition hover:scale-105"
+              disabled={!ready || (ready && authenticated)}
               onClick={() => {
                 if (ready && !authenticated) {
-                  login({ loginMethods: ["wallet"], walletChainType: "solana-only" });
-                } else if (!connected) {
-                  setVisible(true);
-                } else {
-                  disconnect();
+                  login({
+                    loginMethods: ["wallet"],
+                    walletChainType: "solana-only",
+                    disableSignup: false,
+                  });
                 }
               }}
             >
               <Image src="/solana.png" width={25} height={25} className="rounded-full" alt="wallet" />
               <p className="sen text-sm sm:text-md font-bold">
-                {ready && !authenticated ? "Log in" : !connected ? "Connect Wallet" : shortenAddress(publicKey?.toString() ?? "")}
+                {!ready ? "Loading…" : authenticated && displayWallet ? shortenAddress(displayWallet) : "Log in"}
               </p>
             </Button>
           )}
@@ -286,9 +282,15 @@ export default function Layout({
 
         <Button
           className="bg-iris-primary hover:bg-iris-primary/80 transform transition hover:scale-105"
+          disabled={!ready || (ready && authenticated)}
           onClick={() => {
-            if (!connected) setVisible(true);
-            else disconnect();
+            if (ready && !authenticated) {
+              login({
+                loginMethods: ["wallet"],
+                walletChainType: "solana-only",
+                disableSignup: false,
+              });
+            }
           }}
         >
           <Image
@@ -296,12 +298,10 @@ export default function Layout({
             width={25}
             height={25}
             className="rounded-full"
-            alt="phantom"
+            alt="wallet"
           />
           <p className="sen text-sm sm:text-md font-bold">
-            {!connected
-              ? "Connect Wallet"
-              : shortenAddress(publicKey?.toString() ?? "")}
+            {!ready ? "Loading…" : authenticated && displayWallet ? shortenAddress(displayWallet) : "Log in"}
           </p>
         </Button>
       </div>

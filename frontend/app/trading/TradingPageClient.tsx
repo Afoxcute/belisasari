@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useCurrentWallet } from "@/hooks/use-current-wallet";
 import { useAppAuth } from "@/components/provider/PrivyAppAuthContext";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -11,28 +12,30 @@ const SwapCard = dynamic(
 );
 
 export default function TradingPageClient() {
+  const { walletIsConnected } = useCurrentWallet();
   const { ready, authenticated, login } = useAppAuth();
 
-  if (!ready) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="w-10 h-10 border-2 border-iris-primary/30 border-t-iris-primary rounded-full animate-spin" />
-      </div>
-    );
-  }
-
-  if (!authenticated) {
+  if (!walletIsConnected) {
     return (
       <div className="container max-w-lg mx-auto py-12 px-4 text-center">
         <h1 className="text-2xl font-bold mb-2 text-iris-primary">Trading (Jupiter)</h1>
         <p className="text-muted-foreground mb-4">
-          Token swap with DEX aggregation and slippage protection. Connect your wallet to trade.
+          Token swap with DEX aggregation and slippage protection. Connect your wallet (e.g. Phantom) via Privy to trade.
         </p>
         <Button
           className="bg-iris-primary hover:bg-iris-primary/80"
-          onClick={() => login({ loginMethods: ["wallet"], walletChainType: "solana-only" })}
+          disabled={!ready || (ready && authenticated)}
+          onClick={() => {
+            if (ready && !authenticated) {
+              login({
+                loginMethods: ["wallet"],
+                walletChainType: "solana-only",
+                disableSignup: false,
+              });
+            }
+          }}
         >
-          Connect wallet
+          Log in
         </Button>
         <p className="mt-6 text-sm text-muted-foreground">
           <Link href="/" className="underline hover:text-foreground">Back to home</Link>

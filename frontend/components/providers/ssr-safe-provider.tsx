@@ -5,17 +5,23 @@ import { EnvironmentStoreProvider } from '@/components/context';
 import SolanaWalletProvider from './wallet-provider';
 import { ThemeProvider } from './theme-provider';
 import { PrivyClientProvider } from '@/components/provider/PrivyClientProvider';
+import { AppAuthPrivyProvider } from '@/components/provider/PrivyAppAuthContext';
 import Layout from '@/components/sections/layout';
 import { Toaster } from '@/components/ui/toaster';
+import ErrorBoundary from '@/components/dashboard/error-boundary';
 
-function LoadingFallback() {
+function AppTree({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-muted-foreground">Loading Belisasari...</p>
-      </div>
-    </div>
+    <EnvironmentStoreProvider>
+      <SolanaWalletProvider>
+        <PrivyClientProvider>
+          <AppAuthPrivyProvider>
+            <Layout>{children}</Layout>
+            <Toaster />
+          </AppAuthPrivyProvider>
+        </PrivyClientProvider>
+      </SolanaWalletProvider>
+    </EnvironmentStoreProvider>
   );
 }
 
@@ -37,24 +43,23 @@ export default function SSRSafeProvider({ children }: { children: React.ReactNod
   }, [isClient]);
 
   if (!isClient || !ready) {
-    return <LoadingFallback />;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+      </div>
+    );
   }
 
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem={false}
-      disableTransitionOnChange
-    >
-      <PrivyClientProvider>
-        <EnvironmentStoreProvider>
-          <SolanaWalletProvider>
-            <Layout>{children}</Layout>
-            <Toaster />
-          </SolanaWalletProvider>
-        </EnvironmentStoreProvider>
-      </PrivyClientProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        enableSystem={false}
+        disableTransitionOnChange
+      >
+        <AppTree>{children}</AppTree>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }

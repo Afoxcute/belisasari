@@ -55,7 +55,7 @@ function formatDate(iso: string): string {
 
 export default function PortfolioPage() {
   const { walletAddress, walletIsConnected } = useCurrentWallet();
-  const { login } = useAppAuth();
+  const { ready, authenticated, login } = useAppAuth();
   const { portfolio, chart, positions, transactions, loading, error, refetch } =
     useZerionPortfolio(walletAddress);
   const { post: postTweet, posting: twitterPosting } = useTwitterPost();
@@ -107,7 +107,7 @@ export default function PortfolioPage() {
           <CardContent>
             <Button
               className="bg-iris-primary hover:bg-iris-primary/90"
-              onClick={() => login({ loginMethods: ["wallet"], walletChainType: "solana-only" })}
+              onClick={() => ready && !authenticated && login({ loginMethods: ["wallet"], walletChainType: "solana-only" })}
             >
               <Image src="/solana.png" width={20} height={20} className="rounded-full mr-2" alt="Solana" />
               Connect wallet
