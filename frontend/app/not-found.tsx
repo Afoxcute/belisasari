@@ -14,7 +14,7 @@ export default function Custom404() {
       <p className="sen ">
         Click&nbsp;
         <span
-          className="underline text-iris-primary font-semibold cursor-pointer hover:scale-105 transform transition"
+          className="underline text-text-main font-semibold cursor-pointer hover:scale-105 transform transition"
           onClick={() => {
             router.push("/");
           }}

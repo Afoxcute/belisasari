@@ -92,7 +92,7 @@ function ChartContent({
   // Don't render chart until we're on the client side
   if (!isClient) {
     return (
-      <CardContent className="p-0 sm:p-6 bg-[#111118]">
+      <CardContent className="p-0 sm:p-6 bg-card-bg">
         <div className="h-[300px] sm:h-[400px] w-full flex items-center justify-center">
           <p className="text-[#6B7280]">Loading chart...</p>
         </div>
@@ -208,7 +208,7 @@ function ChartContent({
               content={({ active, payload, label }) => {
                 if (active && payload && payload.length) {
                   return (
-                    <div className="border border-white/10 bg-[#1A1A24] rounded-xl shadow-xl p-3 text-white">
+                    <div className="border border-border-light bg-[#1A1A24] rounded-xl shadow-xl p-3 text-text-main">
                       <p className="font-bold text-[13px] mb-2">{formatDateTime(label)}</p>
                       {payload.map((entry, index) => (
                         <p key={index} className="m-0 text-[12px] flex items-center justify-between gap-4">
@@ -314,7 +314,7 @@ export default function TimeSeriesChartWithPaywall({
       <Card className="w-full max-w-[100vw] overflow-hidden sen">
         <CardContent className="p-6 text-center">
           <div className="space-y-2">
-            <p className="text-muted-foreground">Loading token data...</p>
+            <p className="text-text-secondary">Loading token data...</p>
             <div className="flex items-center justify-center space-x-2">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
@@ -332,8 +332,8 @@ export default function TimeSeriesChartWithPaywall({
       <Card className="w-full max-w-[100vw] overflow-hidden sen">
         <CardContent className="p-6 text-center">
           <div className="space-y-2">
-            <p className="text-muted-foreground">No chart data available</p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-text-secondary">No chart data available</p>
+            <p className="text-xs text-text-secondary">
               {tokenData.symbol ? `No price data for ${tokenData.symbol}` : 'Token data is incomplete'}
             </p>
           </div>
@@ -348,8 +348,8 @@ export default function TimeSeriesChartWithPaywall({
       <Card className="w-full max-w-[100vw] overflow-hidden sen">
         <CardContent className="p-6 text-center">
           <div className="space-y-2">
-            <p className="text-muted-foreground">Incomplete token data</p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-text-secondary">Incomplete token data</p>
+            <p className="text-xs text-text-secondary">
               Missing required information to display chart
             </p>
           </div>
@@ -363,7 +363,7 @@ export default function TimeSeriesChartWithPaywall({
       <Card className="w-full max-w-[100vw] overflow-hidden sen">
         <CardContent className="p-6 text-center">
           <div className="space-y-2">
-            <p className="text-muted-foreground">Loading chart...</p>
+            <p className="text-text-secondary">Loading chart...</p>
             <div className="flex items-center justify-center space-x-2">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
@@ -373,8 +373,8 @@ export default function TimeSeriesChartWithPaywall({
         </CardContent>
       </Card>
     }>
-    <Card className="w-full max-w-[100vw] overflow-hidden bg-[#111118] border border-white/10 rounded-2xl shadow-xl mt-8">
-      <CardHeader className="space-y-4 p-4 sm:p-6 border-b border-white/5">
+    <Card className="w-full max-w-[100vw] overflow-hidden bg-card-bg border border-border-light rounded-2xl shadow-xl mt-8">
+      <CardHeader className="space-y-4 p-4 sm:p-6 border-b border-border-light">
         {/* Token Header */}
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center">
@@ -386,10 +386,10 @@ export default function TimeSeriesChartWithPaywall({
                 e.currentTarget.src = '/placeholder-token.png';
               }}
             />
-            <CardTitle className="text-lg sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+            <CardTitle className="text-lg sm:text-2xl font-bold text-text-main tracking-tight flex items-center gap-2">
               {tokenData.symbol.toLocaleUpperCase()}
               <span
-                className="text-[#6B7280] text-sm font-medium cursor-pointer hover:text-white transition-colors uppercase tracking-wider bg-white/5 px-2 py-0.5 rounded-md"
+                className="text-[#6B7280] text-sm font-medium cursor-pointer hover:text-text-main transition-colors uppercase tracking-wider bg-foreground/5 px-2 py-0.5 rounded-md"
                 onClick={() => {
                   setUsdOrSolToggle(!usdOrSolToggle);
                 }}
@@ -402,7 +402,7 @@ export default function TimeSeriesChartWithPaywall({
             {tokenData.address && (
             <Button
               variant="ghost"
-              className="hidden sm:flex hover:bg-white/5 text-[#6B7280] hover:text-white font-mono text-[13px]"
+              className="hidden sm:flex hover:bg-foreground/5 text-[#6B7280] hover:text-text-main font-mono text-[13px]"
               onClick={() =>
                 window.open(
                   `https://solscan.io/token/${tokenData.address}`,
@@ -433,7 +433,7 @@ export default function TimeSeriesChartWithPaywall({
 
         {/* Price Display */}
         <div className="flex items-end flex-wrap gap-3">
-          <p className="font-bold text-3xl sm:text-5xl text-white tracking-tight">
+          <p className="font-bold text-3xl sm:text-5xl text-text-main tracking-tight">
             ${usdOrSolToggle
               ? (tokenData.latest_price_usd || 0).toFixed(6)
               : (tokenData.latest_price_sol || 0).toFixed(6)}
@@ -453,7 +453,7 @@ export default function TimeSeriesChartWithPaywall({
 
         {/* Controls */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-4">
-          <div className="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/5">
+          <div className="flex items-center space-x-3 bg-foreground/5 p-3 rounded-xl border border-border-light">
             <Switch
               checked={showPrice}
               onCheckedChange={setShowPrice}
@@ -467,13 +467,13 @@ export default function TimeSeriesChartWithPaywall({
             />
             <Label
               htmlFor="price-toggle"
-              className="text-[13px] text-white font-medium"
+              className="text-[13px] text-text-main font-medium"
             >
               Price Trajectory
             </Label>
           </div>
 
-          <div className="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/5">
+          <div className="flex items-center space-x-3 bg-foreground/5 p-3 rounded-xl border border-border-light">
             <Switch
               checked={showPopularity}
               onCheckedChange={setShowPopularity}
@@ -483,7 +483,7 @@ export default function TimeSeriesChartWithPaywall({
             <div className="w-3 h-3 rounded-full bg-[#A855F7]" />
             <Label
               htmlFor="popularity-toggle"
-              className="text-[13px] text-white font-medium"
+              className="text-[13px] text-text-main font-medium"
             >
               Social Virality
             </Label>

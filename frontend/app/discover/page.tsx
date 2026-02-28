@@ -44,7 +44,7 @@ export default function DiscoverPage() {
 
   if (!ready) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center">
+      <div className="min-h-screen bg-background-main flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-10 h-10 text-[#00D4FF] animate-spin mx-auto mb-4" />
           <p className="text-[#6B7280]">Loading...</p>
@@ -55,12 +55,12 @@ export default function DiscoverPage() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] pt-20 px-4">
-        <div className="container max-w-md mx-auto text-center bg-[#111118] border border-white/10 rounded-2xl p-8 shadow-xl">
+      <div className="min-h-screen bg-background-main pt-20 px-4">
+        <div className="container max-w-md mx-auto text-center bg-card-bg border border-border-light rounded-2xl p-8 shadow-xl">
           <div className="w-16 h-16 rounded-full bg-[#00D4FF]/10 flex items-center justify-center mx-auto mb-6">
             <Users className="h-8 w-8 text-[#00D4FF]" />
           </div>
-          <h1 className="text-2xl font-bold mb-3 text-white">Discover</h1>
+          <h1 className="text-2xl font-bold mb-3 text-text-main">Discover</h1>
           <p className="text-[#6B7280] mb-8 leading-relaxed">
             Log in to search for other users and communities on the network.
           </p>
@@ -70,8 +70,8 @@ export default function DiscoverPage() {
           >
             Connect Wallet
           </Button>
-          <div className="mt-8 pt-6 border-t border-white/10">
-            <Link href="/" className="text-[#6B7280] hover:text-white flex items-center justify-center gap-2 text-sm transition-colors">
+          <div className="mt-8 pt-6 border-t border-border-light">
+            <Link href="/" className="text-[#6B7280] hover:text-text-main flex items-center justify-center gap-2 text-sm transition-colors">
               <ArrowLeft className="w-4 h-4" />
               Back to home
             </Link>
@@ -82,24 +82,24 @@ export default function DiscoverPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] py-8 px-4 text-white">
+    <div className="min-h-screen bg-background-main py-8 px-4 text-text-main">
       <div className="container max-w-[800px] mx-auto space-y-6">
         
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-[2px] h-6 bg-[#00D4FF]"></div>
-            <h1 className="text-2xl font-bold tracking-tight text-white">
+            <h1 className="text-2xl font-bold tracking-tight text-text-main">
               Discover
             </h1>
           </div>
-          <Button asChild variant="outline" size="sm" className="bg-white/5 border-white/10 text-white hover:bg-white/10 h-9">
+          <Button asChild variant="outline" size="sm" className="bg-foreground/5 border-border-light text-text-main hover:bg-foreground/10 h-9">
             <Link href="/feed">View Feed</Link>
           </Button>
         </div>
 
         {/* Search Bar Container */}
-        <div className="rounded-2xl border border-white/10 bg-[#111118] p-6">
+        <div className="rounded-2xl border border-border-light bg-card-bg p-6">
           <form onSubmit={handleSearch} className="flex gap-3 relative">
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#6B7280]" />
@@ -108,7 +108,7 @@ export default function DiscoverPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search by username..."
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 h-12 text-[15px] focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] placeholder:text-[#6B7280] transition-all"
+                className="w-full bg-foreground/5 border border-border-light rounded-xl pl-11 pr-4 h-12 text-[15px] focus:outline-none focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF] placeholder:text-[#6B7280] transition-all"
               />
             </div>
             <Button 
@@ -123,7 +123,7 @@ export default function DiscoverPage() {
 
         {/* Results Container */}
         {hasSearched && (
-          <div className="rounded-2xl border border-white/10 bg-[#111118] overflow-hidden">
+          <div className="rounded-2xl border border-border-light bg-card-bg overflow-hidden">
             {loading ? (
               <div className="flex flex-col items-center justify-center p-12 text-[#6B7280]">
                 <Loader2 className="w-8 h-8 text-[#00D4FF] animate-spin mb-4" />
@@ -143,7 +143,7 @@ export default function DiscoverPage() {
                           className="rounded-full object-cover border-2 border-transparent group-hover:border-[#00D4FF]/30 transition-colors" 
                         />
                       ) : (
-                        <div className="w-[52px] h-[52px] rounded-full bg-[#1A1A24] border border-white/10 flex items-center justify-center">
+                        <div className="w-[52px] h-[52px] rounded-full bg-[#1A1A24] border border-border-light flex items-center justify-center">
                           <User className="h-6 w-6 text-[#6B7280]" />
                         </div>
                       )}
@@ -151,7 +151,7 @@ export default function DiscoverPage() {
                     
                     <div className="min-w-0 flex-1">
                       <Link href={`/profile`} className="block hover:underline decoration-[#00D4FF] decoration-2 underline-offset-2">
-                        <p className="font-bold text-[16px] text-white tracking-tight">@{item.profile.username}</p>
+                        <p className="font-bold text-[16px] text-text-main tracking-tight">@{item.profile.username}</p>
                       </Link>
                       {item.profile.bio && (
                         <p className="text-[14px] text-[#6B7280] mt-1 truncate max-w-[80%]">{item.profile.bio}</p>
@@ -160,12 +160,12 @@ export default function DiscoverPage() {
                       {item.socialCounts && (
                         <div className="flex items-center gap-3 mt-2 text-[12px]">
                           <div className="flex gap-1 items-center">
-                            <span className="font-bold text-white/90">{item.socialCounts.followers}</span>
+                            <span className="font-bold text-text-main/90">{item.socialCounts.followers}</span>
                             <span className="text-[#6B7280] uppercase tracking-wider text-[10px]">Followers</span>
                           </div>
-                          <div className="w-1 h-1 rounded-full bg-white/20"></div>
+                          <div className="w-1 h-1 rounded-full bg-foreground/20"></div>
                           <div className="flex gap-1 items-center">
-                            <span className="font-bold text-white/90">{item.socialCounts.following}</span>
+                            <span className="font-bold text-text-main/90">{item.socialCounts.following}</span>
                             <span className="text-[#6B7280] uppercase tracking-wider text-[10px]">Following</span>
                           </div>
                         </div>
@@ -184,10 +184,10 @@ export default function DiscoverPage() {
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center p-12 text-center">
-                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-foreground/5 flex items-center justify-center mb-4">
                   <Search className="h-8 w-8 text-[#6B7280]" />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2">No Profiles Found</h3>
+                <h3 className="text-lg font-bold text-text-main mb-2">No Profiles Found</h3>
                 <p className="text-[#6B7280] max-w-sm">
                   We couldn't find anyone matching "{query}". Try searching with a different username.
                 </p>
@@ -198,7 +198,7 @@ export default function DiscoverPage() {
 
         {/* Footer Nav */}
         <div className="pt-6 flex justify-center">
-          <Link href="/" className="text-[#6B7280] hover:text-white flex items-center gap-2 text-sm transition-colors">
+          <Link href="/" className="text-[#6B7280] hover:text-text-main flex items-center gap-2 text-sm transition-colors">
             <ArrowLeft className="w-4 h-4" />
             Back to home
           </Link>

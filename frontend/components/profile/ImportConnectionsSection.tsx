@@ -23,7 +23,7 @@ export function ImportConnectionsSection({ walletAddress }: ImportConnectionsSec
   });
 
   return (
-    <div className="mt-8 rounded-xl border bg-card overflow-hidden">
+    <div className="mt-8 rounded-xl border bg-card-bg overflow-hidden">
       <Button
         variant="ghost"
         className="w-full justify-between rounded-none px-4 py-3 h-auto hover:bg-muted/50"
@@ -37,14 +37,14 @@ export function ImportConnectionsSection({ walletAddress }: ImportConnectionsSec
       {open && (
         <div className="border-t px-4 py-3">
           {loading ? (
-            <p className="text-sm text-muted-foreground">Loading...</p>
+            <p className="text-sm text-text-secondary">Loading...</p>
           ) : list.length === 0 ? (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-text-secondary">
               No other Tapestry profiles linked to this wallet. When you use other apps with Tapestry, they will appear here.
             </p>
           ) : (
             <>
-              <p className="text-sm text-muted-foreground mb-2">
+              <p className="text-sm text-text-secondary mb-2">
                 Profiles from other apps (same wallet):
               </p>
               <ul className="space-y-2">
@@ -69,7 +69,7 @@ export function ImportConnectionsSection({ walletAddress }: ImportConnectionsSec
                     <div className="min-w-0">
                       <p className="font-medium truncate">@{entry.profile.username}</p>
                       {entry.profile.bio && (
-                        <p className="text-xs text-muted-foreground truncate">{entry.profile.bio}</p>
+                        <p className="text-xs text-text-secondary truncate">{entry.profile.bio}</p>
                       )}
                     </div>
                   </li>

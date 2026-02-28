@@ -27,7 +27,7 @@ export function CreateProfileContainer({ onProfileCreated }: CreateProfileContai
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="sm:max-w-md bg-[#111118] border-white/10 text-white shadow-2xl">
+      <DialogContent className="sm:max-w-md bg-card-bg border-border-light text-text-main shadow-2xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">Create your profile</DialogTitle>
           <DialogDescription className="text-[#6B7280]">

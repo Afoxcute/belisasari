@@ -260,7 +260,7 @@ export function VoiceIntegration({
   if (!isEnabled) {
     return (
       <Card className={`p-4 ${className}`}>
-        <div className="text-center text-muted-foreground">
+        <div className="text-center text-text-secondary">
           <MicOff className="h-8 w-8 mx-auto mb-2" />
           <p>Voice integration is disabled</p>
         </div>
@@ -271,7 +271,7 @@ export function VoiceIntegration({
   if (!voiceState.isSupported) {
     return (
       <Card className={`p-4 ${className}`}>
-        <div className="text-center text-muted-foreground">
+        <div className="text-center text-text-secondary">
           <XCircle className="h-8 w-8 mx-auto mb-2 text-red-500" />
           <p className="font-medium">Voice Not Supported</p>
           <p className="text-sm mt-1">Your browser doesn't support voice features</p>
@@ -346,19 +346,19 @@ export function VoiceIntegration({
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-1 mb-1">
-              <Mic className="h-4 w-4 text-muted-foreground" />
+              <Mic className="h-4 w-4 text-text-secondary" />
               <span className="text-sm font-medium">Last Command</span>
             </div>
-            <p className="text-xs text-muted-foreground truncate">
+            <p className="text-xs text-text-secondary truncate">
               {voiceState.lastCommand || "None"}
             </p>
           </div>
           <div className="text-center">
             <div className="flex items-center justify-center space-x-1 mb-1">
-              <Volume2 className="h-4 w-4 text-muted-foreground" />
+              <Volume2 className="h-4 w-4 text-text-secondary" />
               <span className="text-sm font-medium">Last Response</span>
             </div>
-            <p className="text-xs text-muted-foreground truncate">
+            <p className="text-xs text-text-secondary truncate">
               {voiceState.lastResponse ? "Spoken" : "None"}
             </p>
           </div>
@@ -366,7 +366,7 @@ export function VoiceIntegration({
 
         {/* Quick Commands */}
         <div className="space-y-2">
-          <p className="text-sm font-medium text-muted-foreground">Quick Commands</p>
+          <p className="text-sm font-medium text-text-secondary">Quick Commands</p>
           <div className="grid grid-cols-2 gap-2">
             <Button
               variant="outline"
@@ -406,12 +406,12 @@ export function VoiceIntegration({
         {/* Voice Settings */}
         <div className="pt-2 border-t">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Voice Settings</span>
+            <span className="text-sm text-text-secondary">Voice Settings</span>
             <Button variant="ghost" size="sm">
               <Settings className="h-4 w-4" />
             </Button>
           </div>
-          <div className="mt-2 text-xs text-muted-foreground">
+          <div className="mt-2 text-xs text-text-secondary">
             <p>• Click microphone to start listening</p>
             <p>• Say "trending", "analysis", or "portfolio"</p>
             <p>• Voice responses are automatically spoken</p>

@@ -237,19 +237,19 @@ export default function TelegramChannels({ className }: TelegramChannelsProps) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">{data.summary.totalChannels}</div>
-              <div className="text-sm text-muted-foreground">Total Channels</div>
+              <div className="text-sm text-text-secondary">Total Channels</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">{data.summary.enabledChannels}</div>
-              <div className="text-sm text-muted-foreground">Enabled</div>
+              <div className="text-sm text-text-secondary">Enabled</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-orange-600">{data.summary.totalMessages.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Total Messages</div>
+              <div className="text-sm text-text-secondary">Total Messages</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-600">{data.summary.recentMessages.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Recent (24h)</div>
+              <div className="text-sm text-text-secondary">Recent (24h)</div>
             </div>
           </div>
         )}
@@ -257,7 +257,7 @@ export default function TelegramChannels({ className }: TelegramChannelsProps) {
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-text-secondary" />
             <Input
               placeholder="Search channels..."
               value={searchTerm}
@@ -280,7 +280,7 @@ export default function TelegramChannels({ className }: TelegramChannelsProps) {
         {/* Channels List */}
         <div className="space-y-3">
           {filteredChannels.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
+            <div className="text-center py-8 text-text-secondary">
               <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
               <p>No active channels found</p>
               {searchTerm ? (
@@ -302,7 +302,7 @@ export default function TelegramChannels({ className }: TelegramChannelsProps) {
                         @{channel.username}
                       </h3>
                       {channel.display_name && (
-                        <span className="text-muted-foreground text-sm truncate">
+                        <span className="text-text-secondary text-sm truncate">
                           ({channel.display_name})
                         </span>
                       )}
@@ -321,7 +321,7 @@ export default function TelegramChannels({ className }: TelegramChannelsProps) {
                       </Badge>
                     </div>
                     
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-text-secondary">
                       <div className="flex items-center gap-1">
                         <MessageSquare className="h-3 w-3" />
                         {channel.stats.totalMessages.toLocaleString()} messages
@@ -345,7 +345,7 @@ export default function TelegramChannels({ className }: TelegramChannelsProps) {
                     </div>
 
                     {channel.stats.lastMessagePreview && (
-                      <div className="mt-2 text-xs text-muted-foreground bg-muted/50 p-2 rounded">
+                      <div className="mt-2 text-xs text-text-secondary bg-muted/50 p-2 rounded">
                         <strong>Last message:</strong> {channel.stats.lastMessagePreview}
                       </div>
                     )}
@@ -372,7 +372,7 @@ export default function TelegramChannels({ className }: TelegramChannelsProps) {
 
         {/* Last Updated */}
         {data && (
-          <div className="text-xs text-muted-foreground text-center pt-4 border-t">
+          <div className="text-xs text-text-secondary text-center pt-4 border-t">
             Last updated: {new Date(data.lastUpdated).toLocaleString()}
           </div>
         )}

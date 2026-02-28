@@ -155,7 +155,7 @@ export default function HeroTable() {
     <>
       <div className="flex items-center gap-3 mb-6 relative">
         <div className="w-[2px] h-6 bg-[#00D4FF]"></div>
-        <h2 className="text-[18px] font-semibold text-white">Top Mentioned Tokens</h2>
+        <h2 className="text-[18px] font-semibold text-text-main">Top Mentioned Tokens</h2>
       </div>
 
       {leaderboard.length === 0 ? (
@@ -165,14 +165,14 @@ export default function HeroTable() {
           </div>
         </div>
       ) : (
-        <div className="w-full bg-[#111118] border border-white/10 rounded-xl relative overflow-hidden">
+        <div className="w-full bg-card-bg border border-border-light rounded-xl relative overflow-hidden">
           {/* Top cyan gradient accent */}
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#00D4FF]/40 to-transparent"></div>
           
           <div className="w-full overflow-x-auto">
             <table className="w-full text-left whitespace-nowrap border-collapse">
               <thead>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-border-light">
                   <th className="px-6 py-4 text-[11px] uppercase tracking-[0.08em] text-[#6B7280] font-medium w-16">Rank</th>
                   <th className="px-6 py-4 text-[11px] uppercase tracking-[0.08em] text-[#6B7280] font-medium">Token</th>
                   <th className="px-6 py-4 text-[11px] uppercase tracking-[0.08em] text-[#6B7280] font-medium text-right">Mentions</th>
@@ -203,7 +203,7 @@ export default function HeroTable() {
                         <td className="px-6 py-0">
                           <div className="flex items-center gap-2">
                             {tokens.length > 1 ? (
-                              <div className="text-[#6B7280] hover:text-white transition-colors">
+                              <div className="text-[#6B7280] hover:text-text-main transition-colors">
                                 {expandedGroups.has(symbol) ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                               </div>
                             ) : (
@@ -217,16 +217,16 @@ export default function HeroTable() {
                           {imagesFetched ? (
                             <img src={rep.image || "/solana.png"} alt={symbol} className="w-8 h-8 rounded-full object-cover" />
                           ) : (
-                            <div className="w-8 h-8 rounded-full bg-white/10 animate-pulse" />
+                            <div className="w-8 h-8 rounded-full bg-foreground/10 animate-pulse" />
                           )}
                           <div className="flex flex-col justify-center">
-                            <span className="text-[15px] font-bold text-white leading-tight">{symbol}</span>
+                            <span className="text-[15px] font-bold text-text-main leading-tight">{symbol}</span>
                             <span className="text-[12px] text-[#6B7280] leading-tight">${symbol.toLowerCase()} {tokens.length > 1 && `(${tokens.length})`}</span>
                           </div>
                         </td>
 
                         <td className="px-6 py-0 text-right">
-                          <span className="text-[15px] font-bold text-white">{totalMentions.toLocaleString()}</span>
+                          <span className="text-[15px] font-bold text-text-main">{totalMentions.toLocaleString()}</span>
                         </td>
 
                         <td className="px-6 py-0 text-right">
@@ -247,13 +247,13 @@ export default function HeroTable() {
 
                         <td className="px-6 py-0 text-right">
                           <div className="flex items-center justify-end gap-1.5">
-                            <div className="w-[18px] h-[18px] flex items-center justify-center rounded-sm bg-[#111118]">
+                            <div className="w-[18px] h-[18px] flex items-center justify-center rounded-sm bg-card-bg">
                               <svg viewBox="0 0 24 24" fill="#FF0050" className="w-[14px] h-[14px]"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
                             </div>
-                            <div className="w-[18px] h-[18px] flex items-center justify-center rounded-sm bg-[#111118]">
+                            <div className="w-[18px] h-[18px] flex items-center justify-center rounded-sm bg-card-bg">
                               <svg viewBox="0 0 24 24" fill="#229ED9" className="w-[14px] h-[14px]"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.06-.2-1.58-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z"/></svg>
                             </div>
-                            <div className="w-[18px] h-[18px] flex items-center justify-center rounded-sm bg-[#111118]">
+                            <div className="w-[18px] h-[18px] flex items-center justify-center rounded-sm bg-card-bg">
                               <svg viewBox="0 0 24 24" fill="white" className="w-[14px] h-[14px]"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                             </div>
                           </div>
@@ -277,12 +277,12 @@ export default function HeroTable() {
                                 {imagesFetched ? (
                                   <img src={token.image || "/solana.png"} alt={token.symbol} className="w-6 h-6 rounded-full object-cover" />
                                 ) : (
-                                  <div className="w-6 h-6 rounded-full bg-white/10 animate-pulse" />
+                                  <div className="w-6 h-6 rounded-full bg-foreground/10 animate-pulse" />
                                 )}
                                 <span className="text-[13px] text-[#6B7280] font-medium leading-tight">{token.symbol}</span>
                               </td>
                               <td className="px-6 py-0 text-right">
-                                <span className="text-[14px] font-bold text-white">{(token.mentions || 0).toLocaleString()}</span>
+                                <span className="text-[14px] font-bold text-text-main">{(token.mentions || 0).toLocaleString()}</span>
                               </td>
                               <td className="px-6 py-0 text-right">
                                 <div className="flex items-center justify-end gap-3 opacity-60">

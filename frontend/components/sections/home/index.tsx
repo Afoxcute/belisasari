@@ -15,10 +15,10 @@ export default function Home() {
     <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
       {/* Hero Section */}
       <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-        <p className="meme-title tracking-widest font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-iris-primary mt-4 sm:mt-6 md:mt-12 lg:mt-16">
+        <p className="meme-title tracking-widest font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-text-main mt-4 sm:mt-6 md:mt-12 lg:mt-16">
           Belisasari — The Ultimate TikTok & Telegram Memecoin Hunter
         </p>
-        <p className="meme-subtitle text-muted-foreground font-semibold mt-2 sm:mt-4 text-center text-xs sm:text-sm md:text-base lg:text-lg max-w-4xl mx-auto">
+        <p className="meme-subtitle text-text-secondary font-semibold mt-2 sm:mt-4 text-center text-xs sm:text-sm md:text-base lg:text-lg max-w-4xl mx-auto">
           Realtime tiktok & telegram analytics for memecoins. <br className="hidden sm:block" />
           <span className="sm:hidden"> </span>Hunt the next moonshot 🚀
         </p>

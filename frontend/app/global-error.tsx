@@ -17,7 +17,7 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-background-main">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -30,11 +30,11 @@ export default function GlobalError({
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-sm text-text-secondary mb-4">
               Error: {error.message}
             </p>
             {error.digest && (
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-text-secondary">
                 Error ID: {error.digest}
               </p>
             )}

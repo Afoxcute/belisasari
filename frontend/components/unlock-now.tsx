@@ -16,7 +16,7 @@ export default function UnlockNow({ text }: { text: string }) {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <p className="sen text-muted-foreground font-semibold mt-6 mb-4 text-center">
+      <p className="sen text-text-secondary font-semibold mt-6 mb-4 text-center">
         {text}
         <div className="flex  justify-center items-center">
           <p>at 499,999&nbsp;</p>
@@ -32,7 +32,7 @@ export default function UnlockNow({ text }: { text: string }) {
         </div>
       </p>
       <Button
-        className="flex bg-iris-primary hover:bg-iris-primary/80 transform transition hover:scale-105"
+        className="flex bg-primary hover:bg-primary/80 transform transition hover:scale-105"
         onClick={async () => {
           if (walletAddress == "") {
             toast({

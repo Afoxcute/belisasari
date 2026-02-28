@@ -93,13 +93,13 @@ export default function PortfolioPage() {
 
   if (!walletIsConnected) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] pt-12">
+      <div className="min-h-screen bg-background-main pt-12">
         <div className="container mx-auto p-6 max-w-2xl text-center">
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-8 shadow-lg">
+          <div className="bg-card-bg border border-border-light rounded-xl p-8 shadow-lg">
             <div className="w-12 h-12 bg-[#00D4FF]/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <Wallet className="h-6 w-6 text-[#00D4FF]" />
             </div>
-            <h1 className="text-[24px] font-bold text-white mb-2">Portfolio Tracking (Zerion)</h1>
+            <h1 className="text-[24px] font-bold text-text-main mb-2">Portfolio Tracking (Zerion)</h1>
             <p className="text-[#6B7280] text-[15px] mb-8">
               Connect your wallet to view performance charts, token balances, DeFi positions, and transaction history.
             </p>
@@ -117,14 +117,14 @@ export default function PortfolioPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] py-8 text-white">
+    <div className="min-h-screen bg-background-main py-8 text-text-main">
       <div className="container mx-auto px-6 space-y-8 max-w-[1200px]">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border-light pb-6">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <div className="w-[2px] h-6 bg-[#00D4FF]"></div>
-              <h1 className="text-[24px] font-bold text-white tracking-tight flex items-center gap-2">
+              <h1 className="text-[24px] font-bold text-text-main tracking-tight flex items-center gap-2">
                 Portfolio Insight
               </h1>
             </div>
@@ -136,7 +136,7 @@ export default function PortfolioPage() {
             <Button
               variant="outline"
               size="sm"
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 h-9"
+              className="bg-transparent border-border-light text-text-main hover:bg-foreground/5 h-9"
               onClick={() =>
                 postTweet(
                   "Just checked my Solana portfolio on Belisasari (Zerion). #Belisasari #Solana #Portfolio"
@@ -150,7 +150,7 @@ export default function PortfolioPage() {
             <Button 
               variant="outline" 
               size="sm" 
-              className="bg-transparent border-white/10 text-[#00D4FF] hover:bg-[#00D4FF]/10 hover:text-[#00D4FF] h-9"
+              className="bg-transparent border-border-light text-[#00D4FF] hover:bg-[#00D4FF]/10 hover:text-[#00D4FF] h-9"
               onClick={() => refetch()} 
               disabled={loading}
             >
@@ -170,7 +170,7 @@ export default function PortfolioPage() {
                   href="https://dashboard.zerion.io"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline text-white font-semibold"
+                  className="underline text-text-main font-semibold"
                 >
                   dashboard.zerion.io
                 </a>
@@ -181,16 +181,16 @@ export default function PortfolioPage() {
 
         {/* Portfolio Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-5 hover:border-white/20 transition-all">
+          <div className="bg-card-bg border border-border-light rounded-xl p-5 hover:border-border-light transition-all">
             <p className="text-[13px] text-[#6B7280] uppercase tracking-wider font-semibold mb-2">Total Value</p>
             {loading && !portfolio ? (
               <Loader2 className="h-6 w-6 animate-spin text-[#00D4FF]" />
             ) : (
-              <h2 className="text-[32px] font-bold text-white tracking-tight">{formatUsd(totalValue)}</h2>
+              <h2 className="text-[32px] font-bold text-text-main tracking-tight">{formatUsd(totalValue)}</h2>
             )}
           </div>
           
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-5 hover:border-white/20 transition-all">
+          <div className="bg-card-bg border border-border-light rounded-xl p-5 hover:border-border-light transition-all">
             <p className="text-[13px] text-[#6B7280] uppercase tracking-wider font-semibold mb-2">24h Change</p>
             {loading && !portfolio ? (
               <Loader2 className="h-6 w-6 animate-spin text-[#00D4FF]" />
@@ -205,12 +205,12 @@ export default function PortfolioPage() {
             )}
           </div>
 
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-5 hover:border-white/20 transition-all">
+          <div className="bg-card-bg border border-border-light rounded-xl p-5 hover:border-border-light transition-all">
             <p className="text-[13px] text-[#6B7280] uppercase tracking-wider font-semibold mb-2">Active Positions</p>
             {loading && !positions ? (
               <Loader2 className="h-6 w-6 animate-spin text-[#00D4FF]" />
             ) : (
-              <h2 className="text-[32px] font-bold text-white">{positionList.length}</h2>
+              <h2 className="text-[32px] font-bold text-text-main">{positionList.length}</h2>
             )}
           </div>
         </div>
@@ -220,9 +220,9 @@ export default function PortfolioPage() {
           <div className="lg:col-span-2 space-y-6">
             
             {/* Performance chart */}
-            <div className="bg-[#111118] border border-white/10 rounded-xl overflow-hidden">
-              <div className="p-5 border-b border-white/10">
-                <h2 className="text-[18px] font-semibold text-white flex items-center gap-2">
+            <div className="bg-card-bg border border-border-light rounded-xl overflow-hidden">
+              <div className="p-5 border-b border-border-light">
+                <h2 className="text-[18px] font-semibold text-text-main flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-[#00D4FF]" />
                   Wallet Performance (24h)
                 </h2>
@@ -233,7 +233,7 @@ export default function PortfolioPage() {
                     <Loader2 className="h-10 w-10 animate-spin text-[#00D4FF]" />
                   </div>
                 ) : chartData.length === 0 ? (
-                  <div className="h-[280px] flex items-center justify-center bg-white/5 rounded-xl border border-dashed border-white/10">
+                  <div className="h-[280px] flex items-center justify-center bg-foreground/5 rounded-xl border border-dashed border-border-light">
                     <p className="text-[#6B7280] text-[14px]">No chart data yet. Zerion may need a moment to sync your wallet.</p>
                   </div>
                 ) : (
@@ -269,13 +269,13 @@ export default function PortfolioPage() {
             </div>
 
             {/* Token balances */}
-            <div className="bg-[#111118] border border-white/10 rounded-xl overflow-hidden">
-              <div className="p-5 border-b border-white/10 flex items-center justify-between">
-                <h2 className="text-[18px] font-semibold text-white flex items-center gap-2">
+            <div className="bg-card-bg border border-border-light rounded-xl overflow-hidden">
+              <div className="p-5 border-b border-border-light flex items-center justify-between">
+                <h2 className="text-[18px] font-semibold text-text-main flex items-center gap-2">
                   <Coins className="h-5 w-5 text-[#00D4FF]" />
                   Token Balances
                 </h2>
-                <Badge className="bg-white/10 text-white hover:bg-white/20 border-none px-3 py-1 text-[12px]">{walletPositions.length} Assets</Badge>
+                <Badge className="bg-foreground/10 text-text-main hover:bg-foreground/20 border-none px-3 py-1 text-[12px]">{walletPositions.length} Assets</Badge>
               </div>
               <div className="p-0">
                 {loading && positionList.length === 0 ? (
@@ -300,19 +300,19 @@ export default function PortfolioPage() {
                         >
                           <div className="flex items-center gap-4 min-w-0">
                             {icon ? (
-                              <img src={icon} alt={symbol} className="h-9 w-9 rounded-full shrink-0 border border-white/10" />
+                              <img src={icon} alt={symbol} className="h-9 w-9 rounded-full shrink-0 border border-border-light" />
                             ) : (
-                              <div className="h-9 w-9 rounded-full bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                              <div className="h-9 w-9 rounded-full bg-foreground/5 flex items-center justify-center shrink-0 border border-border-light">
                                 <Coins className="h-4 w-4 text-[#6B7280]" />
                               </div>
                             )}
                             <div className="min-w-0">
-                              <p className="font-bold text-[15px] text-white truncate">{symbol}</p>
+                              <p className="font-bold text-[15px] text-text-main truncate">{symbol}</p>
                               {name && <p className="text-[12px] text-[#6B7280] truncate">{name}</p>}
                             </div>
                           </div>
                           <div className="text-right shrink-0">
-                            <p className="font-bold text-[15px] text-white">{formatUsd(value)}</p>
+                            <p className="font-bold text-[15px] text-text-main">{formatUsd(value)}</p>
                             <p className="text-[12px] text-[#6B7280]">{Number(qty).toLocaleString(undefined, { maximumFractionDigits: 4 })} {symbol}</p>
                           </div>
                         </div>
@@ -324,9 +324,9 @@ export default function PortfolioPage() {
             </div>
 
             {/* DeFi protocol positions */}
-            <div className="bg-[#111118] border border-white/10 rounded-xl overflow-hidden">
-              <div className="p-5 border-b border-white/10">
-                <h2 className="text-[18px] font-semibold text-white flex items-center gap-2">
+            <div className="bg-card-bg border border-border-light rounded-xl overflow-hidden">
+              <div className="p-5 border-b border-border-light">
+                <h2 className="text-[18px] font-semibold text-text-main flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-[#00D4FF]" />
                   DeFi Protocol Positions
                 </h2>
@@ -341,9 +341,9 @@ export default function PortfolioPage() {
                       { key: "locked", label: "Locked", value: distribution.locked ?? 0 },
                       { key: "borrowed", label: "Borrowed", value: distribution.borrowed ?? 0 },
                     ].map(({ key, label, value }) => (
-                      <div key={key} className="rounded-xl border border-white/10 bg-white/[0.02] p-3 text-center">
+                      <div key={key} className="rounded-xl border border-border-light bg-white/[0.02] p-3 text-center">
                         <p className="text-[11px] uppercase tracking-wider text-[#6B7280] font-semibold mb-1">{label}</p>
-                        <p className="font-bold text-[14px] text-white">{formatUsd(value)}</p>
+                        <p className="font-bold text-[14px] text-text-main">{formatUsd(value)}</p>
                       </div>
                     ))}
                   </div>
@@ -359,10 +359,10 @@ export default function PortfolioPage() {
                       return (
                         <div
                           key={pos.id}
-                          className="flex items-center justify-between py-3 px-4 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition-colors"
+                          className="flex items-center justify-between py-3 px-4 rounded-xl bg-white/[0.03] border border-border-light hover:bg-white/[0.05] transition-colors"
                         >
                           <div>
-                            <p className="font-bold text-[14px] text-white">{info?.symbol ?? pos.id}</p>
+                            <p className="font-bold text-[14px] text-text-main">{info?.symbol ?? pos.id}</p>
                             <p className="text-[12px] text-[#6B7280] uppercase mt-0.5">{protocol}</p>
                           </div>
                           <p className="font-bold text-[15px] text-[#00D4FF]">{formatUsd(value)}</p>
@@ -371,7 +371,7 @@ export default function PortfolioPage() {
                     })}
                   </div>
                 ) : (
-                  <div className="py-8 text-center bg-white/[0.02] rounded-xl border border-dashed border-white/10">
+                  <div className="py-8 text-center bg-white/[0.02] rounded-xl border border-dashed border-border-light">
                     <p className="text-[#6B7280] text-[14px]">No active DeFi protocol positions detected.</p>
                   </div>
                 )}
@@ -383,10 +383,10 @@ export default function PortfolioPage() {
           <div className="space-y-6">
             
             {/* AI Insight */}
-            <div className="bg-[#111118] border border-[#A855F7]/30 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(168,85,247,0.05)] relative">
+            <div className="bg-card-bg border border-[#A855F7]/30 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(168,85,247,0.05)] relative">
               <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#A855F7]/50 to-transparent"></div>
-              <div className="p-5 border-b border-white/10 bg-gradient-to-b from-[#A855F7]/5 to-transparent">
-                <h2 className="text-[16px] font-semibold text-white flex items-center gap-2">
+              <div className="p-5 border-b border-border-light bg-gradient-to-b from-[#A855F7]/5 to-transparent">
+                <h2 className="text-[16px] font-semibold text-text-main flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-[#A855F7]" />
                   AI Intelligence
                 </h2>
@@ -415,18 +415,18 @@ export default function PortfolioPage() {
                 )}
                 
                 {aiInsight && (
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10 relative">
+                  <div className="p-4 rounded-lg bg-foreground/5 border border-border-light relative">
                     <div className="absolute -left-px top-4 bottom-4 w-[2px] bg-[#A855F7]"></div>
-                    <p className="text-[14px] text-white/90 leading-relaxed font-medium">{aiInsight}</p>
+                    <p className="text-[14px] text-text-main/90 leading-relaxed font-medium">{aiInsight}</p>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Transaction History */}
-            <div className="bg-[#111118] border border-white/10 rounded-xl overflow-hidden">
-              <div className="p-5 border-b border-white/10">
-                <h2 className="text-[16px] font-semibold text-white flex items-center gap-2">
+            <div className="bg-card-bg border border-border-light rounded-xl overflow-hidden">
+              <div className="p-5 border-b border-border-light">
+                <h2 className="text-[16px] font-semibold text-text-main flex items-center gap-2">
                   <History className="h-4 w-4 text-[#00D4FF]" />
                   Transaction History
                 </h2>
@@ -455,11 +455,11 @@ export default function PortfolioPage() {
                           className="py-3 px-5 hover:bg-white/[0.02] transition-colors group flex items-start justify-between gap-3"
                         >
                           <div className="min-w-0">
-                            <p className="font-semibold text-[14px] text-white capitalize mb-1">{String(op).replace(/_/g, " ")}</p>
+                            <p className="font-semibold text-[14px] text-text-main capitalize mb-1">{String(op).replace(/_/g, " ")}</p>
                             <div className="flex items-center gap-2 text-[11px] text-[#6B7280]">
                               <span>{minedAt ? formatDate(minedAt) : tx.id.slice(0, 10)}</span>
                               {status && (
-                                <Badge variant="outline" className={`h-4 text-[9px] uppercase px-1.5 border-none font-bold ${isSuccess ? 'bg-[#00FF88]/10 text-[#00FF88]' : 'bg-white/10 text-white'}`}>
+                                <Badge variant="outline" className={`h-4 text-[9px] uppercase px-1.5 border-none font-bold ${isSuccess ? 'bg-[#00FF88]/10 text-[#00FF88]' : 'bg-foreground/10 text-text-main'}`}>
                                   {status}
                                 </Badge>
                               )}
@@ -471,7 +471,7 @@ export default function PortfolioPage() {
                               href={`https://solscan.io/tx/${hash}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-[#6B7280] hover:bg-white/10 hover:text-white shrink-0 transition-all opacity-50 group-hover:opacity-100 mt-1"
+                              className="w-8 h-8 rounded-full bg-foreground/5 flex items-center justify-center text-[#6B7280] hover:bg-foreground/10 hover:text-text-main shrink-0 transition-all opacity-50 group-hover:opacity-100 mt-1"
                               title="View on Solscan"
                             >
                               <ExternalLink className="h-3.5 w-3.5" />

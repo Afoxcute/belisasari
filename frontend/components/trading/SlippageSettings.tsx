@@ -33,7 +33,7 @@ export function SlippageSettings({
 
   return (
     <div className="flex flex-col gap-3">
-      <Label className="text-white text-[13px] font-semibold tracking-wide uppercase">
+      <Label className="text-text-main text-[13px] font-semibold tracking-wide uppercase">
         Max Slippage
       </Label>
       <Select
@@ -42,15 +42,15 @@ export function SlippageSettings({
           onSlippageChange(v === "auto" ? "auto" : Number(v))
         }
       >
-        <SelectTrigger className="w-full bg-white/5 border border-white/10 rounded-xl h-11 text-[14px] text-white focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF]">
+        <SelectTrigger className="w-full bg-foreground/5 border border-border-light rounded-xl h-11 text-[14px] text-text-main focus:ring-1 focus:ring-[#00D4FF] focus:border-[#00D4FF]">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent className="bg-[#1A1A24] border border-white/10 rounded-xl shadow-2xl text-white">
+        <SelectContent className="bg-[#1A1A24] border border-border-light rounded-xl shadow-2xl text-text-main">
           {SLIPPAGE_OPTIONS.map((o) => (
             <SelectItem 
               key={String(o.value)} 
               value={String(o.value)}
-              className="hover:bg-white/5 focus:bg-white/10 focus:text-white cursor-pointer rounded-lg mx-1 my-0.5"
+              className="hover:bg-foreground/5 focus:bg-foreground/10 focus:text-text-main cursor-pointer rounded-lg mx-1 my-0.5"
             >
               {o.label}
             </SelectItem>

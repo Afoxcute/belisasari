@@ -82,6 +82,7 @@ export default function Layout({
   const navLinks = [
     { label: "🚀 Trending Coins", href: "/trending-coins" },
     { label: "Feed", href: "/feed" },
+    { label: "Dashboard", href: "/dashboard" },
     { label: "Trading (Jupiter)", href: "/trading" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "NFTs", href: "/nfts" },
@@ -103,7 +104,7 @@ export default function Layout({
             height={40}
             className="rounded-full"
           />
-          <p className="font-bold text-lg sm:text-2xl crypto-futuristic tracking-widest text-iris-primary hidden sm:block">
+          <p className="font-bold text-lg sm:text-2xl crypto-futuristic tracking-widest text-text-main hidden sm:block">
             Belisasari
           </p>
         </div>
@@ -119,7 +120,7 @@ export default function Layout({
             <Button
               key={link.href}
               variant="ghost"
-              className="text-white/70 hover:text-[#00D4FF] hover:bg-[#00D4FF]/10 transition-all font-semibold text-sm h-9 px-3"
+              className="text-text-main/70 hover:text-[#00D4FF] hover:bg-[#00D4FF]/10 transition-all font-semibold text-sm h-9 px-3"
               onClick={() => router.push(link.href)}
             >
               <span className="sen">{link.label}</span>
@@ -128,7 +129,7 @@ export default function Layout({
 
           <Button
             variant="ghost"
-            className="text-white/70 hover:text-[#00D4FF] hover:bg-[#00D4FF]/10 transition-all font-semibold text-sm h-9 px-3 group"
+            className="text-text-main/70 hover:text-[#00D4FF] hover:bg-[#00D4FF]/10 transition-all font-semibold text-sm h-9 px-3 group"
             onClick={() => window.open("https://x.com/wojat118721", "_blank")}
           >
             <span className="sen mr-2 hidden 2xl:inline">Follow on</span>
@@ -142,17 +143,17 @@ export default function Layout({
                 <div className="relative" ref={authDropdownRef}>
                   <CreateProfileContainer onProfileCreated={setProfileUsername} />
                   <Button
-                    className="bg-iris-primary hover:bg-iris-primary/80 text-background font-bold h-9 px-4 rounded-lg transform transition hover:scale-[1.02]"
+                    className="bg-primary hover:bg-primary/80 text-background font-bold h-9 px-4 rounded-lg transform transition hover:scale-[1.02]"
                     onClick={() => setAuthOpen(!authOpen)}
                   >
                     <span className="truncate max-w-[120px] sen">{displayUsername}</span>
                     <ChevronDown className="h-4 w-4 ml-1" />
                   </Button>
                   {authOpen && (
-                    <div className="absolute right-0 mt-2 w-48 rounded-xl border border-white/10 bg-[#111118] shadow-xl z-50 py-1">
+                    <div className="absolute right-0 mt-2 w-48 rounded-xl border border-border-light bg-background-main shadow-xl z-50 py-1">
                       <button
                         type="button"
-                        className="flex w-full items-center px-4 py-2 text-sm text-white/80 hover:bg-white/5 transition-colors"
+                        className="flex w-full items-center px-4 py-2 text-sm text-text-main/80 hover:bg-foreground/5 transition-colors"
                         onClick={() => { router.push("/profile"); setAuthOpen(false); }}
                       >
                         <User className="h-4 w-4 mr-2 text-[#00D4FF]" /> My profile
@@ -165,10 +166,10 @@ export default function Layout({
                         {copied ? <Check className="h-4 w-4 mr-2 text-green-400" /> : <LogOut className="h-4 w-4 mr-2 opacity-0" />}
                         {displayWallet ? shortenAddress(displayWallet) : "Copy address"}
                       </button>
-                      <div className="h-[1px] bg-white/10 my-1 px-2" />
+                      <div className="h-[1px] bg-border my-1 px-2" />
                       <button
                         type="button"
-                        className="flex w-full items-center px-4 py-2 text-sm text-[#FF3B3B] hover:bg-white/5 transition-colors"
+                        className="flex w-full items-center px-4 py-2 text-sm text-[#FF3B3B] hover:bg-foreground/5 transition-colors"
                         onClick={() => { logout(); setAddress(""); setAuthOpen(false); }}
                       >
                         <LogOut className="h-4 w-4 mr-2" /> Log out
@@ -179,14 +180,14 @@ export default function Layout({
               ) : (
                 <>
                   <CreateProfileContainer onProfileCreated={setProfileUsername} />
-                  <Button className="bg-iris-primary/50 text-background font-bold h-9 px-4 rounded-lg cursor-not-allowed" disabled>
+                  <Button className="bg-primary/50 text-background font-bold h-9 px-4 rounded-lg cursor-not-allowed" disabled>
                     <span className="sen">Create profile…</span>
                   </Button>
                 </>
               )
             ) : (
               <Button
-                className="bg-iris-primary hover:bg-iris-primary/80 text-background font-bold h-9 px-4 rounded-lg group transform transition hover:scale-[1.02]"
+                className="bg-primary hover:bg-primary/80 text-background font-bold h-9 px-4 rounded-lg group transform transition hover:scale-[1.02]"
                 disabled={!ready || (ready && authenticated)}
                 onClick={() => {
                   if (ready && !authenticated) {
@@ -214,7 +215,7 @@ export default function Layout({
           {!authenticated ? (
             <Button
               size="sm"
-              className="bg-iris-primary hover:bg-iris-primary/80 text-background font-bold h-9 px-4"
+              className="bg-primary hover:bg-primary/80 text-background font-bold h-9 px-4"
               disabled={!ready}
               onClick={() => {
                 if (ready && !authenticated) {
@@ -232,7 +233,7 @@ export default function Layout({
             displayUsername ? (
               <Button
                 size="sm"
-                className="bg-[#111118] border border-white/10 hover:bg-white/5 text-white font-bold h-9 px-3"
+                className="bg-background-main border border-border-light hover:bg-foreground/5 text-text-main font-bold h-9 px-3"
                 onClick={() => router.push("/profile")}
               >
                 <User className="h-4 w-4 text-[#00D4FF]" />
@@ -243,7 +244,7 @@ export default function Layout({
           <Button
             variant="ghost"
             size="icon"
-            className="text-white hover:bg-white/10"
+            className="text-text-main hover:bg-foreground/10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -253,7 +254,7 @@ export default function Layout({
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="xl:hidden absolute top-full left-0 right-0 bg-[#0A0A0F]/95 backdrop-blur-xl border-b border-white/10 z-50 p-4 shadow-2xl flex flex-col max-h-[calc(100vh-80px)] overflow-y-auto">
+        <div className="xl:hidden absolute top-full left-0 right-0 bg-background-main/95 backdrop-blur-xl border-b border-border-light z-50 p-4 shadow-2xl flex flex-col max-h-[calc(100vh-80px)] overflow-y-auto">
           <div className="mb-4">
             <CommandMenu />
           </div>
@@ -262,7 +263,7 @@ export default function Layout({
               <Button
                 key={link.href}
                 variant="ghost"
-                className="justify-start text-white/80 hover:text-white hover:bg-white/10 text-lg h-12 px-4 rounded-xl font-medium"
+                className="justify-start text-text-main/80 hover:text-text-main hover:bg-foreground/10 text-lg h-12 px-4 rounded-xl font-medium"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   router.push(link.href);
@@ -272,7 +273,7 @@ export default function Layout({
               </Button>
             ))}
             
-            <div className="h-[1px] bg-white/10 my-2 mx-4" />
+            <div className="h-[1px] bg-border my-2 mx-4" />
             
             <Button
               variant="ghost"

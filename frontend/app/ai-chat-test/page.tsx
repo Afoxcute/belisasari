@@ -139,7 +139,7 @@ export default function AIChatTestPage() {
             
             <div className="h-64 overflow-y-auto border rounded-md p-3 bg-gray-50">
               {messages.length === 0 ? (
-                <p className="text-gray-500 text-sm">No messages yet...</p>
+                <p className="text-text-secondary text-sm">No messages yet...</p>
               ) : (
                 messages.map((message, index) => (
                   <div key={index} className="mb-2 text-sm">

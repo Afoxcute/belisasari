@@ -108,9 +108,9 @@ export default function ScraperStatus() {
   if (loading) {
     return (
       <div className="w-full max-w-[1200px] mx-auto mb-8 sm:mb-12 lg:mb-16">
-        <div className="flex items-center gap-4 bg-[#111118] border border-white/10 rounded-lg px-4 py-3 w-max">
+        <div className="flex items-center gap-4 bg-card-bg border border-border-light rounded-lg px-4 py-3 w-max">
           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#00D4FF]"></div>
-          <span className="text-sm text-gray-500">Checking system status...</span>
+          <span className="text-sm text-text-secondary">Checking system status...</span>
         </div>
       </div>
     );
@@ -118,25 +118,25 @@ export default function ScraperStatus() {
 
   return (
     <div className="w-full max-w-[1200px] mx-auto mb-8 sm:mb-12 lg:mb-16 overflow-x-auto">
-      <div className="flex items-center gap-4 bg-[#111118] border border-white/10 rounded-lg px-4 py-3 w-max whitespace-nowrap">
+      <div className="flex items-center gap-4 bg-card-bg border border-border-light rounded-lg px-4 py-3 w-max whitespace-nowrap">
         {/* Status Indicator */}
-        <div className="flex items-center gap-2 pr-4 border-r border-white/10">
+        <div className="flex items-center gap-2 pr-4 border-r border-border-light">
           <div className={`w-2 h-2 rounded-full ${status.isRunning ? 'bg-[#00FF88] shadow-[0_0_6px_#00FF88] animate-pulse' : 'bg-gray-500'}`} />
-          <span className={`text-sm font-medium ${status.isRunning ? 'text-[#00FF88]' : 'text-gray-500'}`}>
+          <span className={`text-sm font-medium ${status.isRunning ? 'text-[#00FF88]' : 'text-text-secondary'}`}>
             System Status: {status.isRunning ? 'Live' : 'Idle'}
           </span>
         </div>
 
         {/* Last Sync */}
-        <div className="flex items-center gap-2 pr-4 border-r border-white/10">
+        <div className="flex items-center gap-2 pr-4 border-r border-border-light">
           <span className="text-sm text-[#6B7280]">Last Sync:</span>
-          <span className="text-sm text-white">{status.lastRun ? formatTimeAgo(status.lastRun) : 'Never'}</span>
+          <span className="text-sm text-text-main">{status.lastRun ? formatTimeAgo(status.lastRun) : 'Never'}</span>
         </div>
 
         {/* Total Data Points */}
         <div className="flex items-center gap-2">
           <span className="text-sm text-[#6B7280]">Total Data Points:</span>
-          <span className="text-sm text-white font-medium">
+          <span className="text-sm text-text-main font-medium">
             {status.totalVideos >= 1000000 
               ? `${(status.totalVideos / 1000000).toFixed(1)}M` 
               : status.totalVideos >= 1000 

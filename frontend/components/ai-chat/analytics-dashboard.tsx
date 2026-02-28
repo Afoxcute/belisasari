@@ -126,7 +126,7 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
   if (!analytics) {
     return (
       <div className={`p-6 text-center ${className}`}>
-        <p className="text-muted-foreground">Unable to load analytics data</p>
+        <p className="text-text-secondary">Unable to load analytics data</p>
       </div>
     );
   }
@@ -137,7 +137,7 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold">Analytics Dashboard</h2>
-          <p className="text-muted-foreground">Track your AI trading assistant performance</p>
+          <p className="text-text-secondary">Track your AI trading assistant performance</p>
         </div>
         <div className="flex space-x-2">
           {(['7d', '30d', '90d', '1y'] as const).map((range) => (
@@ -158,7 +158,7 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
         <Card className="p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Total Sessions</p>
+              <p className="text-sm font-medium text-text-secondary">Total Sessions</p>
               <p className="text-2xl font-bold">{analytics.performance.totalSessions}</p>
             </div>
             <Activity className="h-8 w-8 text-blue-500" />
@@ -171,7 +171,7 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
         <Card className="p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Win Rate</p>
+              <p className="text-sm font-medium text-text-secondary">Win Rate</p>
               <p className="text-2xl font-bold">{analytics.performance.winRate}%</p>
             </div>
             <Target className="h-8 w-8 text-green-500" />
@@ -184,7 +184,7 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
         <Card className="p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Total Profit</p>
+              <p className="text-sm font-medium text-text-secondary">Total Profit</p>
               <p className="text-2xl font-bold">${analytics.performance.totalProfit.toLocaleString()}</p>
             </div>
             <DollarSign className="h-8 w-8 text-yellow-500" />
@@ -200,7 +200,7 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
         <Card className="p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Knowledge Score</p>
+              <p className="text-sm font-medium text-text-secondary">Knowledge Score</p>
               <p className="text-2xl font-bold">{analytics.learning.knowledgeScore}/100</p>
             </div>
             <Award className="h-8 w-8 text-purple-500" />
@@ -221,19 +221,19 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
           </div>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Average Session Time</span>
+              <span className="text-sm text-text-secondary">Average Session Time</span>
               <span className="font-medium">{analytics.performance.averageSessionTime} min</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Total Messages</span>
+              <span className="text-sm text-text-secondary">Total Messages</span>
               <span className="font-medium">{analytics.performance.totalMessages}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">AI Recommendations</span>
+              <span className="text-sm text-text-secondary">AI Recommendations</span>
               <span className="font-medium">{analytics.performance.aiRecommendations}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Successful Trades</span>
+              <span className="text-sm text-text-secondary">Successful Trades</span>
               <span className="font-medium">{analytics.performance.successfulTrades}</span>
             </div>
           </div>
@@ -248,14 +248,14 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
           <div className="space-y-4">
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-muted-foreground">Current Level</span>
+                <span className="text-sm text-text-secondary">Current Level</span>
                 <Badge variant="outline" className="capitalize">
                   {analytics.learning.currentLevel}
                 </Badge>
               </div>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground mb-2">Completed Topics</p>
+              <p className="text-sm text-text-secondary mb-2">Completed Topics</p>
               <div className="flex flex-wrap gap-1">
                 {analytics.learning.completedTopics.map((topic) => (
                   <Badge key={topic} variant="secondary" className="text-xs">
@@ -265,7 +265,7 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
               </div>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground mb-2">Areas for Improvement</p>
+              <p className="text-sm text-text-secondary mb-2">Areas for Improvement</p>
               <div className="flex flex-wrap gap-1">
                 {analytics.learning.improvementAreas.map((area) => (
                   <Badge key={area} variant="outline" className="text-xs">
@@ -285,19 +285,19 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
           </div>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Daily Active Minutes</span>
+              <span className="text-sm text-text-secondary">Daily Active Minutes</span>
               <span className="font-medium">{analytics.engagement.dailyActiveMinutes} min</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Weekly Active Days</span>
+              <span className="text-sm text-text-secondary">Weekly Active Days</span>
               <span className="font-medium">{analytics.engagement.weeklyActiveDays}/7</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Response Accuracy</span>
+              <span className="text-sm text-text-secondary">Response Accuracy</span>
               <span className="font-medium">{analytics.engagement.responseAccuracy}%</span>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground mb-2">Favorite Features</p>
+              <p className="text-sm text-text-secondary mb-2">Favorite Features</p>
               <div className="flex flex-wrap gap-1">
                 {analytics.engagement.favoriteFeatures.map((feature) => (
                   <Badge key={feature} variant="outline" className="text-xs">
@@ -317,23 +317,23 @@ export function AnalyticsDashboard({ userId = 'user_123', className = '' }: Anal
           </div>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Total Generated</span>
+              <span className="text-sm text-text-secondary">Total Generated</span>
               <span className="font-medium">{analytics.recommendations.totalGenerated}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Accepted</span>
+              <span className="text-sm text-text-secondary">Accepted</span>
               <span className="font-medium text-green-600">{analytics.recommendations.accepted}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Rejected</span>
+              <span className="text-sm text-text-secondary">Rejected</span>
               <span className="font-medium text-red-600">{analytics.recommendations.rejected}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Pending</span>
+              <span className="text-sm text-text-secondary">Pending</span>
               <span className="font-medium text-yellow-600">{analytics.recommendations.pending}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Success Rate</span>
+              <span className="text-sm text-text-secondary">Success Rate</span>
               <span className="font-medium">{analytics.recommendations.successRate}%</span>
             </div>
           </div>

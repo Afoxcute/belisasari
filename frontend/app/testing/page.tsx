@@ -159,7 +159,7 @@ export default function TestingPage() {
 
   return (
     <div className="w-full max-w-[1200px] mx-auto px-4">
-      <Card className="w-full bg-background text-foreground">
+      <Card className="w-full bg-background-main text-text-main">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>DOGE/USD Price Chart</CardTitle>
           <Tabs

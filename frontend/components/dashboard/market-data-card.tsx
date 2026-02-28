@@ -57,7 +57,7 @@ export default function MarketDataCard({ token }: MarketDataCardProps) {
   };
 
   const getMarketCapColor = (marketCap?: number): string => {
-    if (!marketCap) return 'text-muted-foreground';
+    if (!marketCap) return 'text-text-secondary';
     if (marketCap >= 1000000) return 'text-green-600';
     if (marketCap >= 100000) return 'text-yellow-600';
     return 'text-orange-600';
@@ -137,21 +137,21 @@ export default function MarketDataCard({ token }: MarketDataCardProps) {
         <div className="space-y-2 pt-2 border-t">
           {token.address && (
             <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Address:</span>
-              <span className="font-mono text-muted-foreground">
+              <span className="text-text-secondary">Address:</span>
+              <span className="font-mono text-text-secondary">
                 {token.address.slice(0, 8)}...{token.address.slice(-8)}
               </span>
             </div>
           )}
           {token.decimals && (
             <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Decimals:</span>
+              <span className="text-text-secondary">Decimals:</span>
               <span className="font-medium">{token.decimals}</span>
             </div>
           )}
           {token.last_updated && (
             <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Last Updated:</span>
+              <span className="text-text-secondary">Last Updated:</span>
               <span className="font-medium">{formatDate(token.last_updated)}</span>
             </div>
           )}
@@ -160,7 +160,7 @@ export default function MarketDataCard({ token }: MarketDataCardProps) {
         {/* Token URI */}
         <div className="pt-2 border-t">
           <div className="text-xs">
-            <span className="text-muted-foreground">URI: </span>
+            <span className="text-text-secondary">URI: </span>
             <span className="font-mono text-blue-600 break-all">
               {token.uri}
             </span>

@@ -97,7 +97,7 @@ export default function Tweets({
     <div className="py-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
         <div className="flex flex-col w-full md:w-auto text-center md:text-left">
-          <h2 className="text-2xl font-bold tracking-tight text-white flex items-center justify-center md:justify-start gap-2 mb-1">
+          <h2 className="text-2xl font-bold tracking-tight text-text-main flex items-center justify-center md:justify-start gap-2 mb-1">
             <span className="p-1.5 rounded-lg bg-[#00D4FF]/10 text-[#00D4FF]">
               <Twitter className="w-5 h-5 fill-current" />
             </span>
@@ -108,9 +108,9 @@ export default function Tweets({
           </p>
         </div>
         
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#111118] border border-white/10 rounded-xl justify-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-card-bg border border-border-light rounded-xl justify-center">
           <span className="w-2 h-2 rounded-full bg-[#00FF88] animate-pulse"></span>
-          <p className="font-semibold text-[13px] text-white tracking-wide uppercase">
+          <p className="font-semibold text-[13px] text-text-main tracking-wide uppercase">
             {growth != "0" ? (
               <>
                 <span className="text-[#00FF88] text-[15px]">{growth}x</span> growth since start
@@ -131,7 +131,7 @@ export default function Tweets({
             {tweets.map((tweet, index) => (
               <Card
                 key={index}
-                className="shrink-0 w-[320px] bg-[#111118] border border-white/10 hover:border-[#00D4FF]/40 rounded-2xl shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+                className="shrink-0 w-[320px] bg-card-bg border border-border-light hover:border-[#00D4FF]/40 rounded-2xl shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
                 onClick={() => {
                   window.open(
                     "https://x.com/belisasari/status/1867331863993627085",
@@ -151,11 +151,11 @@ export default function Tweets({
                           className="rounded-full border-2 border-[#1A1A24]"
                         />
                         <div className="absolute -bottom-1 -right-1 bg-[#1A1A24] rounded-full p-0.5">
-                          <div className="w-3.5 h-3.5 bg-blue-500 rounded-full flex items-center justify-center text-[8px] text-white">✓</div>
+                          <div className="w-3.5 h-3.5 bg-blue-500 rounded-full flex items-center justify-center text-[8px] text-text-main">✓</div>
                         </div>
                       </div>
                       <div className="flex flex-col">
-                        <p className="text-[15px] font-bold text-white leading-tight group-hover:text-[#00D4FF] transition-colors">
+                        <p className="text-[15px] font-bold text-text-main leading-tight group-hover:text-[#00D4FF] transition-colors">
                           Belisasari
                         </p>
                         <p className="text-[13px] text-[#6B7280]">
@@ -163,7 +163,7 @@ export default function Tweets({
                         </p>
                       </div>
                     </div>
-                    <div className="shrink-0 flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/5">
+                    <div className="shrink-0 flex items-center gap-1.5 px-2 py-1 rounded-full bg-foreground/5 border border-border-light">
                       <Twitter className="w-3 h-3 text-[rgba(29,161,242,1)] fill-current" />
                       <p className="text-[11px] font-medium text-[#6B7280]">
                         {timeAgo(tweet.created_at)}
@@ -171,7 +171,7 @@ export default function Tweets({
                     </div>
                   </div>
                   
-                  <p className="text-[15px] text-white/90 leading-relaxed font-medium">
+                  <p className="text-[15px] text-text-main/90 leading-relaxed font-medium">
                     {tweet.tweet}
                   </p>
                 </CardContent>
@@ -181,7 +181,7 @@ export default function Tweets({
           <ScrollBar orientation="horizontal" className="h-1.5" />
         </ScrollArea>
       ) : (
-        <div className="w-full py-16 flex flex-col justify-center items-center bg-[#111118] border border-white/10 border-dashed rounded-2xl">
+        <div className="w-full py-16 flex flex-col justify-center items-center bg-card-bg border border-border-light border-dashed rounded-2xl">
           <Twitter className="w-8 h-8 text-[#6B7280]/30 mb-3" />
           <p className="text-[14px] text-[#6B7280] font-medium">No recent updates found.</p>
         </div>

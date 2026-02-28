@@ -267,7 +267,7 @@ export default function TrendingCoinsSummary() {
 
   const getCorrelationColor = (score: number | undefined | null): string => {
     if (score === undefined || score === null || isNaN(score)) {
-      return 'text-gray-500';
+      return 'text-text-secondary';
     }
     if (score >= 0.8) return 'text-green-600';
     if (score >= 0.6) return 'text-yellow-600';
@@ -279,7 +279,7 @@ export default function TrendingCoinsSummary() {
     return (
       <Card>
         <CardContent className="p-6 text-center">
-          <p className="text-muted-foreground">Initializing...</p>
+          <p className="text-text-secondary">Initializing...</p>
             </CardContent>
           </Card>
     );
@@ -290,7 +290,7 @@ export default function TrendingCoinsSummary() {
       <Card>
         <CardContent className="p-6 text-center">
           <div className="space-y-2">
-            <p className="text-muted-foreground">Loading summary metrics...</p>
+            <p className="text-text-secondary">Loading summary metrics...</p>
             <div className="flex items-center justify-center space-x-2">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -308,13 +308,13 @@ export default function TrendingCoinsSummary() {
       <Card>
         <CardContent className="p-6 text-center">
           <div className="space-y-2">
-            <p className="text-muted-foreground">Preparing dashboard data...</p>
+            <p className="text-text-secondary">Preparing dashboard data...</p>
             <div className="flex items-center justify-center space-x-2">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-text-secondary">
               Loading trending coins and market data...
             </p>
           </div>
@@ -339,11 +339,11 @@ export default function TrendingCoinsSummary() {
               <span className="text-2xl">📊</span>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">No Trending Data Available</h3>
-              <p className="text-muted-foreground text-sm mb-4">
+              <h3 className="text-lg font-semibold text-text-main mb-2">No Trending Data Available</h3>
+              <p className="text-text-secondary text-sm mb-4">
                 No trending coins data is currently available. This could be because:
               </p>
-              <ul className="text-xs text-muted-foreground space-y-1 text-left max-w-md mx-auto">
+              <ul className="text-xs text-text-secondary space-y-1 text-left max-w-md mx-auto">
                 <li>• The database is not populated with token data</li>
                 <li>• Price data collection is not running</li>
                 <li>• TikTok scraper is not collecting data</li>
@@ -351,7 +351,7 @@ export default function TrendingCoinsSummary() {
               </ul>
             </div>
             <div className="pt-4">
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-text-secondary">
                 Check your scrapers and data collection services to start seeing trending coins data.
               </p>
             </div>
@@ -367,7 +367,7 @@ export default function TrendingCoinsSummary() {
       <Card>
         <CardContent className="p-6 text-center">
           <div className="space-y-2">
-            <p className="text-muted-foreground">Initializing real-time service...</p>
+            <p className="text-text-secondary">Initializing real-time service...</p>
             <div className="flex items-center justify-center space-x-2">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
@@ -382,46 +382,46 @@ export default function TrendingCoinsSummary() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
       {/* Coins Analyzed */}
-      <div className="bg-[#111118] border border-white/10 rounded-xl p-5 flex items-center justify-between col-span-1 md:col-span-1">
+      <div className="bg-card-bg border border-border-light rounded-xl p-5 flex items-center justify-between col-span-1 md:col-span-1">
         <div>
-          <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider flex items-center gap-1">
+          <p className="text-text-secondary text-xs font-semibold uppercase tracking-wider flex items-center gap-1">
             Coins Analyzed
             {connectionStatus && !connectionStatus.isConnected && (
               <span className="w-1.5 h-1.5 rounded-full bg-red-500 ml-1" title="Offline"></span>
             )}
           </p>
           <div className="flex items-baseline gap-2 mt-1">
-            <p className="text-3xl font-bold text-white">
+            <p className="text-3xl font-bold text-text-main">
               {metrics?.totalCoins || 0}
             </p>
             <span className="text-xs font-normal text-[#00D4FF]">+12%</span>
           </div>
-          {lastViewsUpdate && <p className="text-[10px] text-slate-600 mt-1">Updated: {lastViewsUpdate}</p>}
+          {lastViewsUpdate && <p className="text-[10px] text-text-secondary mt-1">Updated: {lastViewsUpdate}</p>}
         </div>
         <div className="relative w-14 h-14">
           <svg className="w-full h-full" viewBox="0 0 36 36">
             <path className="stroke-white/10 fill-none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" strokeWidth="3"></path>
             <path className="stroke-[#00D4FF] fill-none" strokeDasharray="75 25" strokeDashoffset="25" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" strokeLinecap="round" strokeWidth="3"></path>
           </svg>
-          <div className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white">75%</div>
+          <div className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-text-main">75%</div>
         </div>
       </div>
 
       {/* Grouped Stats Component */}
-      <div className="bg-[#111118] border border-white/10 rounded-xl p-5 flex-1 col-span-1 md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+      <div className="bg-card-bg border border-border-light rounded-xl p-5 flex-1 col-span-1 md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
         
         {/* Market Cap Leader / Global Volume Mock */}
         <div>
-          <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Top Market Cap</p>
+          <p className="text-text-secondary text-xs font-semibold uppercase tracking-wider">Top Market Cap</p>
           <div className="flex items-baseline gap-2 mt-1">
-            <p className="text-xl font-bold text-white">
+            <p className="text-xl font-bold text-text-main">
               {metrics?.marketCapLeader?.symbol !== 'N/A' 
                 ? formatCurrency(metrics?.marketCapLeader?.marketCap)
                 : '$4.2B'}
             </p>
             <span className="text-xs font-normal text-emerald-400">↑ 4.2%</span>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-text-secondary mt-1">
             {metrics?.marketCapLeader?.symbol !== 'N/A' 
               ? `Leader: ${metrics?.marketCapLeader?.symbol}` 
               : 'Global Volume'}
@@ -430,29 +430,29 @@ export default function TrendingCoinsSummary() {
 
         {/* Top Performer / Bullish Signals */}
         <div>
-          <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Top Performing Coin</p>
+          <p className="text-text-secondary text-xs font-semibold uppercase tracking-wider">Top Performing Coin</p>
           <div className="flex items-baseline gap-2 mt-1">
-            <p className="text-xl font-bold text-white">
+            <p className="text-xl font-bold text-text-main">
               {metrics?.topPerformer?.symbol !== 'N/A' ? metrics?.topPerformer?.symbol : '32'}
             </p>
-            <span className="text-xs font-normal text-slate-400">
+            <span className="text-xs font-normal text-text-secondary">
               {metrics?.topPerformer?.symbol !== 'N/A' ? '/ Strong Buy' : '/ 50'}
             </span>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-text-secondary mt-1">
             {metrics?.topPerformer?.correlation ? `Correlation: ${formatCorrelation(metrics.topPerformer.correlation)}` : 'Bullish Signals'}
           </p>
         </div>
 
         {/* Social Views Leader / Market Sentiment */}
         <div>
-          <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Social Views / Sentiment</p>
+          <p className="text-text-secondary text-xs font-semibold uppercase tracking-wider">Social Views / Sentiment</p>
           <p className="text-xl font-bold mt-1 text-[#00D4FF]">
             {metrics?.totalViews24h && metrics.totalViews24h > 0 
               ? `${formatViews(metrics.totalViews24h)} Views` 
               : 'Fear/Greed: 68'}
           </p>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-text-secondary mt-1">
             {metrics?.socialLeader?.symbol !== 'N/A' 
               ? `Most viral: ${metrics?.socialLeader?.symbol}` 
               : 'Market Sentiment'}

@@ -30,11 +30,11 @@ export default function Error({
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-sm text-text-secondary mb-4">
               Error: {error.message}
             </p>
             {error.digest && (
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-text-secondary">
                 Error ID: {error.digest}
               </p>
             )}

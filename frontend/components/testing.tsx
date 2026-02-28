@@ -122,7 +122,7 @@ const TikTokVideoGrid = ({ videos = [] }: Props) => {
 
   if (!videos?.length) {
     return (
-      <div className="container mx-auto p-4 text-center text-gray-500">
+      <div className="container mx-auto p-4 text-center text-text-secondary">
         No videos available
       </div>
     );
@@ -138,7 +138,7 @@ const TikTokVideoGrid = ({ videos = [] }: Props) => {
           </h1>
           <Sword className="w-8 h-8 text-green-500 animate-pulse" />
         </div>
-        <p className="text-lg text-muted-foreground mb-2">
+        <p className="text-lg text-text-secondary mb-2">
           TikTok Memecoin Hunter
         </p>
         <div className="flex justify-center gap-2">
@@ -178,7 +178,7 @@ const TikTokVideoGrid = ({ videos = [] }: Props) => {
                 <div className="absolute bottom-2 right-2 flex gap-2">
                   <button
                     onClick={() => setMuted(!muted)}
-                    className="bg-black bg-opacity-60 p-1 rounded text-white hover:bg-opacity-80"
+                    className="bg-black bg-opacity-60 p-1 rounded text-text-main hover:bg-opacity-80"
                   >
                     {muted ? (
                       <VolumeX className="w-4 h-4" />
@@ -186,7 +186,7 @@ const TikTokVideoGrid = ({ videos = [] }: Props) => {
                       <Volume2 className="w-4 h-4" />
                     )}
                   </button>
-                  <div className="bg-black bg-opacity-60 px-2 py-1 rounded text-white text-sm">
+                  <div className="bg-black bg-opacity-60 px-2 py-1 rounded text-text-main text-sm">
                     {formatDuration(video.duration)}
                   </div>
                 </div>
@@ -197,19 +197,19 @@ const TikTokVideoGrid = ({ videos = [] }: Props) => {
               <div className="flex items-center space-x-2 mb-3">
                 <Badge
                   variant="secondary"
-                  className="bg-gradient-to-r from-green-500 to-blue-600 text-white"
+                  className="bg-gradient-to-r from-green-500 to-blue-600 text-text-main"
                 >
                   {video.region}
                 </Badge>
                 {video.music_info && (
-                  <div className="flex items-center text-sm text-muted-foreground">
+                  <div className="flex items-center text-sm text-text-secondary">
                     <Music2 className="w-4 h-4 mr-1" />
                     <span className="truncate">{video.music_info.title}</span>
                   </div>
                 )}
               </div>
 
-              <p className="text-sm text-muted-foreground line-clamp-2">
+              <p className="text-sm text-text-secondary line-clamp-2">
                 {video.title || "No caption"}
               </p>
             </CardContent>

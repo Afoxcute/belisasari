@@ -79,13 +79,13 @@ export default function NftsPage() {
 
   if (!walletIsConnected) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] pt-12">
+      <div className="min-h-screen bg-background-main pt-12">
         <div className="container mx-auto p-6 max-w-2xl text-center">
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-8 shadow-lg">
+          <div className="bg-card-bg border border-border-light rounded-xl p-8 shadow-lg">
             <div className="w-12 h-12 bg-[#00D4FF]/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <Layers className="h-6 w-6 text-[#00D4FF]" />
             </div>
-            <h1 className="text-[24px] font-bold text-white mb-2">NFT Portfolio (Helius)</h1>
+            <h1 className="text-[24px] font-bold text-text-main mb-2">NFT Portfolio (Helius)</h1>
             <p className="text-[#6B7280] text-[15px] mb-8">
               Connect your wallet to view your NFT portfolio, collection analytics, metadata, and transaction history.
             </p>
@@ -103,14 +103,14 @@ export default function NftsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] py-8 text-white">
+    <div className="min-h-screen bg-background-main py-8 text-text-main">
       <div className="container mx-auto px-6 space-y-8 max-w-[1200px]">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border-light pb-6">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <div className="w-[2px] h-6 bg-[#00D4FF]"></div>
-              <h1 className="text-[24px] font-bold text-white tracking-tight flex items-center gap-2">
+              <h1 className="text-[24px] font-bold text-text-main tracking-tight flex items-center gap-2">
                 NFT Portfolio
               </h1>
             </div>
@@ -122,7 +122,7 @@ export default function NftsPage() {
             <Button
               variant="outline"
               size="sm"
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 h-9"
+              className="bg-transparent border-border-light text-text-main hover:bg-foreground/5 h-9"
               onClick={() =>
                 postTweet(
                   "Viewing my NFT collection on Belisasari (Helius). #Belisasari #Solana #NFTs"
@@ -136,7 +136,7 @@ export default function NftsPage() {
             <Button 
               variant="outline" 
               size="sm" 
-              className="bg-transparent border-white/10 text-[#00D4FF] hover:bg-[#00D4FF]/10 hover:text-[#00D4FF] h-9"
+              className="bg-transparent border-border-light text-[#00D4FF] hover:bg-[#00D4FF]/10 hover:text-[#00D4FF] h-9"
               onClick={() => refetch()} 
               disabled={loading}
             >
@@ -161,14 +161,14 @@ export default function NftsPage() {
           {/* Main Content Column (Portfolio) */}
           <div className="lg:col-span-2 space-y-6">
             {/* NFT portfolio viewer */}
-            <div className="bg-[#111118] border border-white/10 rounded-xl overflow-hidden">
-              <div className="border-b border-white/10 p-5">
+            <div className="bg-card-bg border border-border-light rounded-xl overflow-hidden">
+              <div className="border-b border-border-light p-5">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-[18px] font-semibold text-white flex items-center gap-2">
+                  <h2 className="text-[18px] font-semibold text-text-main flex items-center gap-2">
                     <Wallet className="h-5 w-5 text-[#00D4FF]" />
                     Your NFTs
                   </h2>
-                  <Badge className="bg-white/10 text-white hover:bg-white/20 border-none">
+                  <Badge className="bg-foreground/10 text-text-main hover:bg-foreground/20 border-none">
                     {total != null ? `${total} Assets` : "Loading..."}
                   </Badge>
                 </div>
@@ -180,7 +180,7 @@ export default function NftsPage() {
                   </div>
                 ) : nfts.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-16 text-center">
-                    <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-4">
+                    <div className="w-16 h-16 bg-foreground/5 rounded-full flex items-center justify-center mb-4">
                       <ImageIcon className="h-8 w-8 text-[#6B7280]" />
                     </div>
                     <p className="text-[#6B7280] text-[15px]">No NFTs found in this wallet.</p>
@@ -193,10 +193,10 @@ export default function NftsPage() {
                         <button
                           key={asset.id}
                           type="button"
-                          className="group rounded-xl border border-white/10 overflow-hidden bg-[#1A1A24] text-left transition-all hover:border-[#00D4FF]/50 focus:outline-none focus:ring-2 focus:ring-[#00D4FF]"
+                          className="group rounded-xl border border-border-light overflow-hidden bg-[#1A1A24] text-left transition-all hover:border-[#00D4FF]/50 focus:outline-none focus:ring-2 focus:ring-[#00D4FF]"
                           onClick={() => setSelectedNft(asset)}
                         >
-                          <div className="aspect-square relative bg-white/5 overflow-hidden">
+                          <div className="aspect-square relative bg-foreground/5 overflow-hidden">
                             {img ? (
                               <img
                                 src={img}
@@ -211,7 +211,7 @@ export default function NftsPage() {
                           </div>
                           <div className="p-3">
                             <p className="text-[11px] font-mono truncate text-[#6B7280] mb-1">{asset.id.slice(0, 8)}…</p>
-                            <p className="text-[14px] font-medium text-white truncate">
+                            <p className="text-[14px] font-medium text-text-main truncate">
                               {(asset.content?.metadata as { name?: string })?.name ?? "Unnamed"}
                             </p>
                           </div>
@@ -224,9 +224,9 @@ export default function NftsPage() {
             </div>
             
             {/* Collection analytics */}
-            <div className="bg-[#111118] border border-white/10 rounded-xl overflow-hidden">
-              <div className="border-b border-white/10 p-5">
-                <h2 className="text-[18px] font-semibold text-white flex items-center gap-2">
+            <div className="bg-card-bg border border-border-light rounded-xl overflow-hidden">
+              <div className="border-b border-border-light p-5">
+                <h2 className="text-[18px] font-semibold text-text-main flex items-center gap-2">
                   <Layers className="h-5 w-5 text-[#00D4FF]" />
                   Collection Analytics
                 </h2>
@@ -243,9 +243,9 @@ export default function NftsPage() {
                     {collectionAnalytics.slice(0, 12).map(({ collectionId, count, sample }) => (
                       <div
                         key={collectionId}
-                        className="rounded-lg border border-white/10 bg-white/[0.02] p-3 flex items-center gap-3 hover:bg-white/[0.04] transition-colors"
+                        className="rounded-lg border border-border-light bg-white/[0.02] p-3 flex items-center gap-3 hover:bg-white/[0.04] transition-colors"
                       >
-                        <div className="h-10 w-10 rounded overflow-hidden bg-white/5 shrink-0 border border-white/10">
+                        <div className="h-10 w-10 rounded overflow-hidden bg-foreground/5 shrink-0 border border-border-light">
                           {sample && imageUrl(sample) ? (
                             <img
                               src={imageUrl(sample)!}
@@ -262,7 +262,7 @@ export default function NftsPage() {
                           <p className="text-[11px] text-[#00D4FF] font-mono truncate mb-0.5" title={collectionId}>
                             {collectionId.slice(0, 8)}…
                           </p>
-                          <p className="font-semibold text-white text-[13px]">{count} Asset{count !== 1 ? "s" : ""}</p>
+                          <p className="font-semibold text-text-main text-[13px]">{count} Asset{count !== 1 ? "s" : ""}</p>
                         </div>
                       </div>
                     ))}
@@ -275,10 +275,10 @@ export default function NftsPage() {
           {/* Sidebar Column */}
           <div className="space-y-6">
             {/* AI insight (OpenAI) */}
-            <div className="bg-[#111118] border border-[#A855F7]/30 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(168,85,247,0.05)] relative">
+            <div className="bg-card-bg border border-[#A855F7]/30 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(168,85,247,0.05)] relative">
               <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#A855F7]/50 to-transparent"></div>
-              <div className="p-5 border-b border-white/10 bg-gradient-to-b from-[#A855F7]/5 to-transparent">
-                <h2 className="text-[16px] font-semibold text-white flex items-center gap-2">
+              <div className="p-5 border-b border-border-light bg-gradient-to-b from-[#A855F7]/5 to-transparent">
+                <h2 className="text-[16px] font-semibold text-text-main flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-[#A855F7]" />
                   AI Insight
                 </h2>
@@ -307,18 +307,18 @@ export default function NftsPage() {
                 )}
                 
                 {aiInsight && (
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10 relative">
+                  <div className="p-4 rounded-lg bg-foreground/5 border border-border-light relative">
                     <div className="absolute -left-px top-4 bottom-4 w-[2px] bg-[#A855F7]"></div>
-                    <p className="text-[14px] text-white/90 leading-relaxed font-medium">{aiInsight}</p>
+                    <p className="text-[14px] text-text-main/90 leading-relaxed font-medium">{aiInsight}</p>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Transaction history */}
-            <div className="bg-[#111118] border border-white/10 rounded-xl overflow-hidden">
-              <div className="p-5 border-b border-white/10">
-                <h2 className="text-[16px] font-semibold text-white flex items-center gap-2">
+            <div className="bg-card-bg border border-border-light rounded-xl overflow-hidden">
+              <div className="p-5 border-b border-border-light">
+                <h2 className="text-[16px] font-semibold text-text-main flex items-center gap-2">
                   <History className="h-4 w-4 text-[#00D4FF]" />
                   Recent Activity
                 </h2>
@@ -338,7 +338,7 @@ export default function NftsPage() {
                         className="py-3 px-5 hover:bg-white/[0.02] transition-colors group flex items-start justify-between gap-3"
                       >
                         <div className="min-w-0">
-                          <p className="text-[14px] font-semibold text-white capitalize mb-0.5">
+                          <p className="text-[14px] font-semibold text-text-main capitalize mb-0.5">
                             {tx.type ? String(tx.type).replace(/_/g, " ") : "Transaction"}
                           </p>
                           {tx.description && (
@@ -353,7 +353,7 @@ export default function NftsPage() {
                           href={`https://solscan.io/tx/${tx.signature}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-[#6B7280] hover:bg-white/10 hover:text-white shrink-0 transition-all opacity-50 group-hover:opacity-100"
+                          className="w-8 h-8 rounded-full bg-foreground/5 flex items-center justify-center text-[#6B7280] hover:bg-foreground/10 hover:text-text-main shrink-0 transition-all opacity-50 group-hover:opacity-100"
                           title="View on Solscan"
                         >
                           <ExternalLink className="h-3.5 w-3.5" />
@@ -369,14 +369,14 @@ export default function NftsPage() {
 
         {/* Metadata display modal */}
         <Dialog open={!!selectedNft} onOpenChange={() => setSelectedNft(null)}>
-          <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto bg-[#111118] border-white/10 text-white p-6 shadow-2xl">
+          <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto bg-card-bg border-border-light text-text-main p-6 shadow-2xl">
             {selectedNft && (
               <>
                 <DialogHeader className="mb-4">
-                  <DialogTitle className="text-[20px] font-bold text-white">Asset Details</DialogTitle>
+                  <DialogTitle className="text-[20px] font-bold text-text-main">Asset Details</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-6">
-                  <div className="aspect-square rounded-xl overflow-hidden bg-white/5 border border-white/10 relative">
+                  <div className="aspect-square rounded-xl overflow-hidden bg-foreground/5 border border-border-light relative">
                     {imageUrl(selectedNft) ? (
                       <img
                         src={imageUrl(selectedNft)!}
@@ -393,7 +393,7 @@ export default function NftsPage() {
                   <div className="space-y-4">
                     <div>
                       <p className="text-[12px] uppercase tracking-wider text-[#6B7280] font-semibold mb-1">Name</p>
-                      <p className="text-[16px] font-bold text-white">
+                      <p className="text-[16px] font-bold text-text-main">
                         {(selectedNft.content?.metadata as { name?: string })?.name ?? "Unnamed Asset"}
                       </p>
                     </div>
@@ -401,7 +401,7 @@ export default function NftsPage() {
                     {((selectedNft.content?.metadata as { description?: string })?.description) && (
                       <div>
                         <p className="text-[12px] uppercase tracking-wider text-[#6B7280] font-semibold mb-1">Description</p>
-                        <p className="text-[14px] text-white/80 leading-relaxed bg-white/5 p-3 rounded-lg border border-white/5">
+                        <p className="text-[14px] text-text-main/80 leading-relaxed bg-foreground/5 p-3 rounded-lg border border-border-light">
                           {(selectedNft.content?.metadata as { description?: string })?.description}
                         </p>
                       </div>
@@ -418,7 +418,7 @@ export default function NftsPage() {
                             href={`https://solscan.io/token/${selectedNft.id}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#6B7280] hover:text-white"
+                            className="text-[#6B7280] hover:text-text-main"
                           >
                             <ExternalLink className="h-3.5 w-3.5" />
                           </a>
@@ -428,7 +428,7 @@ export default function NftsPage() {
                       {selectedNft.grouping?.some((g) => g.group_key === "collection") && (
                         <div>
                           <p className="text-[12px] uppercase tracking-wider text-[#6B7280] font-semibold mb-1">Collection</p>
-                          <p className="font-mono text-[13px] text-white truncate" title={selectedNft.grouping.find((g) => g.group_key === "collection")?.group_value}>
+                          <p className="font-mono text-[13px] text-text-main truncate" title={selectedNft.grouping.find((g) => g.group_key === "collection")?.group_value}>
                             {selectedNft.grouping.find((g) => g.group_key === "collection")?.group_value?.slice(0, 12)}…
                           </p>
                         </div>
@@ -440,8 +440,8 @@ export default function NftsPage() {
                         <p className="text-[12px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">Creators</p>
                         <ul className="space-y-2">
                           {selectedNft.creators.map((c, i) => (
-                            <li key={i} className="flex items-center justify-between bg-white/[0.02] border border-white/5 p-2 rounded px-3">
-                              <span className="font-mono text-[13px] text-white/80 truncate mr-3">{c.address.slice(0, 16)}…</span>
+                            <li key={i} className="flex items-center justify-between bg-white/[0.02] border border-border-light p-2 rounded px-3">
+                              <span className="font-mono text-[13px] text-text-main/80 truncate mr-3">{c.address.slice(0, 16)}…</span>
                               {c.verified && (
                                 <Badge className="bg-[#00FF88]/10 text-[#00FF88] hover:bg-[#00FF88]/20 border-none text-[10px] px-1.5 py-0">Verified</Badge>
                               )}
@@ -456,9 +456,9 @@ export default function NftsPage() {
                         <p className="text-[12px] uppercase tracking-wider text-[#6B7280] font-semibold mb-2">Attributes</p>
                         <div className="flex flex-wrap gap-2">
                           {((selectedNft.content?.metadata as { attributes?: Array<{ trait_type: string; value: string }> }).attributes ?? []).map((a, i) => (
-                            <div key={i} className="bg-[#1A1A24] border border-white/10 rounded-lg px-3 py-1.5 flex flex-col">
+                            <div key={i} className="bg-[#1A1A24] border border-border-light rounded-lg px-3 py-1.5 flex flex-col">
                               <span className="text-[10px] text-[#6B7280] uppercase mix-blend-screen">{a.trait_type}</span>
-                              <span className="text-[13px] font-semibold text-white">{a.value}</span>
+                              <span className="text-[13px] font-semibold text-text-main">{a.value}</span>
                             </div>
                           ))}
                         </div>

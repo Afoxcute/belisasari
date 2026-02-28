@@ -18,12 +18,12 @@ export default function TradingPageClient() {
 
   if (!walletIsConnected) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] pt-20 px-4">
-        <div className="container max-w-md mx-auto text-center bg-[#111118] border border-white/10 rounded-2xl p-8 shadow-xl">
+      <div className="min-h-screen bg-background-main pt-20 px-4">
+        <div className="container max-w-md mx-auto text-center bg-card-bg border border-border-light rounded-2xl p-8 shadow-xl">
           <div className="w-16 h-16 rounded-full bg-[#00D4FF]/10 flex items-center justify-center mx-auto mb-6">
             <Wallet className="h-8 w-8 text-[#00D4FF]" />
           </div>
-          <h1 className="text-2xl font-bold mb-3 text-white">Trading (Jupiter)</h1>
+          <h1 className="text-2xl font-bold mb-3 text-text-main">Trading (Jupiter)</h1>
           <p className="text-[#6B7280] mb-8 leading-relaxed">
             Token swap with DEX aggregation and slippage protection. Connect your wallet to start trading.
           </p>
@@ -42,8 +42,8 @@ export default function TradingPageClient() {
           >
             Connect Wallet
           </Button>
-          <div className="mt-8 pt-6 border-t border-white/10">
-            <Link href="/" className="text-[#6B7280] hover:text-white flex items-center justify-center gap-2 text-sm transition-colors">
+          <div className="mt-8 pt-6 border-t border-border-light">
+            <Link href="/" className="text-[#6B7280] hover:text-text-main flex items-center justify-center gap-2 text-sm transition-colors">
               <ArrowLeft className="w-4 h-4" />
               Back to home
             </Link>
@@ -54,17 +54,17 @@ export default function TradingPageClient() {
   }
 
   return (
-    <div className="min-h-[100dvh] bg-[#0A0A0F] py-12 px-4 relative overflow-hidden">
+    <div className="min-h-[100dvh] bg-background-main py-12 px-4 relative overflow-hidden">
       {/* Decorative background gradients */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#00D4FF]/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
       <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-[#A855F7]/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
       
       <div className="container max-w-[520px] mx-auto">
         <div className="mb-8 text-center flex flex-col items-center">
-          <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-4">
+          <div className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-foreground/5 border border-border-light mb-4">
             <span className="text-[11px] uppercase tracking-wider font-semibold text-[#00D4FF]">Jupiter Aggregator</span>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-white mb-2">Swap Tokens</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-text-main mb-2">Swap Tokens</h1>
           <p className="text-[15px] text-[#6B7280]">
             Best prices across all Solana DEXes instantly.
           </p>
@@ -73,12 +73,12 @@ export default function TradingPageClient() {
         <SwapCard />
         
         <div className="mt-8 flex items-center justify-between text-[13px] text-[#6B7280] px-4">
-          <Link href="/" className="hover:text-white flex items-center gap-1.5 transition-colors">
+          <Link href="/" className="hover:text-text-main flex items-center gap-1.5 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> Home
           </Link>
           <div className="flex items-center gap-2">
             <span>Powered by</span>
-            <span className="font-semibold text-white">Jupiter</span>
+            <span className="font-semibold text-text-main">Jupiter</span>
           </div>
         </div>
       </div>

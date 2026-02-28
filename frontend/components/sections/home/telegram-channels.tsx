@@ -223,7 +223,7 @@ export default function TelegramChannelsHome() {
       <div className="w-full max-w-7xl mx-auto px-4 py-8">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-iris-primary/20 border-t-iris-primary rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading Telegram channels...</p>
+          <p className="text-text-secondary">Loading Telegram channels...</p>
         </div>
       </div>
     );
@@ -236,7 +236,7 @@ export default function TelegramChannelsHome() {
         <div className="flex items-center gap-3">
           <div className="w-[2px] h-6 bg-[#00D4FF]"></div>
           <div>
-            <h2 className="text-[18px] font-semibold text-white flex items-center gap-3">
+            <h2 className="text-[18px] font-semibold text-text-main flex items-center gap-3">
               Telegram Channels
               <span className={`text-[12px] px-2 py-0.5 rounded border font-medium flex items-center gap-1.5 ${
                 connectionStatus.isConnected ? 'bg-[#00FF88]/10 text-[#00FF88] border-[#00FF88]/20' : 
@@ -261,7 +261,7 @@ export default function TelegramChannelsHome() {
             onClick={fetchTelegramData}
             disabled={refreshing}
             variant="outline"
-            className="border-white/10 text-white hover:bg-white/5 h-9 rounded-[6px] text-[13px] px-4 w-full sm:w-auto"
+            className="border-border-light text-text-main hover:bg-foreground/5 h-9 rounded-[6px] text-[13px] px-4 w-full sm:w-auto"
           >
             <RefreshCw className={`h-4 w-4 mr-2 text-[#00D4FF] ${refreshing ? 'animate-spin' : ''}`} />
             {refreshing ? 'Refreshing...' : 'Refresh'}
@@ -272,21 +272,21 @@ export default function TelegramChannelsHome() {
       {/* Summary Stats */}
       {data && (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-4 flex flex-col justify-center">
+          <div className="bg-card-bg border border-border-light rounded-xl p-4 flex flex-col justify-center">
             <span className="text-[13px] text-[#6B7280] font-medium mb-1 uppercase tracking-[0.08em]">Total Channels</span>
-            <span className="text-[24px] lg:text-[28px] font-bold text-white">{data.summary.totalChannels}</span>
+            <span className="text-[24px] lg:text-[28px] font-bold text-text-main">{data.summary.totalChannels}</span>
           </div>
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-4 flex flex-col justify-center">
+          <div className="bg-card-bg border border-border-light rounded-xl p-4 flex flex-col justify-center">
             <span className="text-[13px] text-[#6B7280] font-medium mb-1 uppercase tracking-[0.08em]">Active</span>
             <span className="text-[24px] lg:text-[28px] font-bold text-[#00FF88]">{data.summary.enabledChannels}</span>
           </div>
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-4 flex flex-col justify-center">
+          <div className="bg-card-bg border border-border-light rounded-xl p-4 flex flex-col justify-center">
             <span className="text-[13px] text-[#6B7280] font-medium mb-1 uppercase tracking-[0.08em]">Total Messages</span>
             <span className="text-[24px] lg:text-[28px] font-bold text-[#00D4FF]">{formatMessages(data.summary.totalMessages)}</span>
           </div>
-          <div className="bg-[#111118] border border-white/10 rounded-xl p-4 flex flex-col justify-center">
+          <div className="bg-card-bg border border-border-light rounded-xl p-4 flex flex-col justify-center">
             <span className="text-[13px] text-[#6B7280] font-medium mb-1 uppercase tracking-[0.08em]">Recent (24h)</span>
-            <span className="text-[24px] lg:text-[28px] font-bold text-white">{formatMessages(data.summary.recentMessages)}</span>
+            <span className="text-[24px] lg:text-[28px] font-bold text-text-main">{formatMessages(data.summary.recentMessages)}</span>
           </div>
         </div>
       )}
@@ -299,14 +299,14 @@ export default function TelegramChannelsHome() {
             placeholder="Search channels..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full h-[44px] pl-12 pr-4 bg-[#111118] border border-white/10 rounded-full text-[14px] text-white placeholder:text-[#6B7280] focus-visible:ring-1 focus-visible:ring-[#00D4FF]/50"
+            className="w-full h-[44px] pl-12 pr-4 bg-card-bg border border-border-light rounded-full text-[14px] text-text-main placeholder:text-[#6B7280] focus-visible:ring-1 focus-visible:ring-[#00D4FF]/50"
           />
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-full sm:w-[180px] h-[44px] bg-[#111118] border border-white/10 rounded-full text-white text-[14px] px-5 focus:ring-1 focus:ring-[#00D4FF]/50">
+          <SelectTrigger className="w-full sm:w-[180px] h-[44px] bg-card-bg border border-border-light rounded-full text-text-main text-[14px] px-5 focus:ring-1 focus:ring-[#00D4FF]/50">
             <SelectValue placeholder="Filter by status" />
           </SelectTrigger>
-          <SelectContent className="bg-[#111118] border-white/10 text-white">
+          <SelectContent className="bg-card-bg border-border-light text-text-main">
             <SelectItem value="all">All Channels</SelectItem>
             <SelectItem value="enabled">Enabled Only</SelectItem>
             <SelectItem value="disabled">Disabled Only</SelectItem>
@@ -337,7 +337,7 @@ export default function TelegramChannelsHome() {
       {loading && (
         <div className="text-center py-12">
           <div className="w-16 h-16 border-4 border-iris-primary/20 border-t-iris-primary rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading Telegram channels...</p>
+          <p className="text-text-secondary">Loading Telegram channels...</p>
         </div>
       )}
 
@@ -345,11 +345,11 @@ export default function TelegramChannelsHome() {
       {!loading && filteredChannels.length > 0 && (
         <>
           {/* Desktop Table View */}
-          <div className="hidden md:block w-full bg-[#111118] border border-white/10 rounded-xl overflow-x-auto relative">
+          <div className="hidden md:block w-full bg-card-bg border border-border-light rounded-xl overflow-x-auto relative">
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#00D4FF]/40 to-transparent"></div>
             <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-border-light">
                   <th className="px-6 py-4 text-[11px] font-semibold text-[#6B7280] uppercase tracking-[0.08em] whitespace-nowrap">Channel</th>
                   <th className="px-6 py-4 text-[11px] font-semibold text-[#6B7280] uppercase tracking-[0.08em] whitespace-nowrap">Messages</th>
                   <th className="px-6 py-4 text-[11px] font-semibold text-[#6B7280] uppercase tracking-[0.08em] whitespace-nowrap">Status</th>
@@ -362,11 +362,11 @@ export default function TelegramChannelsHome() {
                   <tr key={channel.id} className="hover:bg-white/[0.02] transition-colors group">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#0052FF] flex items-center justify-center text-white font-bold text-xs shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#0052FF] flex items-center justify-center text-text-main font-bold text-xs shrink-0">
                           {channel.username.charAt(0).toUpperCase()}
                         </div>
                         <div className="flex flex-col min-w-0">
-                          <span className="text-[14px] font-semibold text-white whitespace-nowrap transition-colors group-hover:text-[#00D4FF]">@{channel.username}</span>
+                          <span className="text-[14px] font-semibold text-text-main whitespace-nowrap transition-colors group-hover:text-[#00D4FF]">@{channel.username}</span>
                           {channel.display_name && (
                             <span className="text-[12px] text-[#6B7280] truncate max-w-[150px]">{channel.display_name}</span>
                           )}
@@ -376,7 +376,7 @@ export default function TelegramChannelsHome() {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-1.5">
                         <MessageSquare className="w-3.5 h-3.5 text-[#6B7280]" />
-                        <span className="text-[13px] font-medium text-white">{formatMessages(channel.stats.totalMessages)}</span>
+                        <span className="text-[13px] font-medium text-text-main">{formatMessages(channel.stats.totalMessages)}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -409,7 +409,7 @@ export default function TelegramChannelsHome() {
                           href={`https://t.me/${channel.username}`} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors"
+                          className="w-8 h-8 flex items-center justify-center rounded-full bg-foreground/5 hover:bg-foreground/10 text-text-main transition-colors"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
@@ -426,15 +426,15 @@ export default function TelegramChannelsHome() {
             {filteredChannels.slice(0, visibleChannels).map((channel) => (
               <div
                 key={channel.id}
-                className="bg-[#111118] border border-white/10 rounded-xl overflow-hidden flex flex-col p-4 w-full"
+                className="bg-card-bg border border-border-light rounded-xl overflow-hidden flex flex-col p-4 w-full"
               >
                 <div className="flex items-center justify-between gap-2 mb-4">
                   <div className="flex items-center gap-3 min-w-0 flex-1">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#00D4FF] to-[#0052FF] rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#00D4FF] to-[#0052FF] rounded-full flex items-center justify-center text-text-main font-bold text-sm shrink-0">
                       {channel.username.charAt(0).toUpperCase()}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="font-semibold text-white truncate text-[14px]">@{channel.username}</p>
+                      <p className="font-semibold text-text-main truncate text-[14px]">@{channel.username}</p>
                       {channel.display_name && (
                         <p className="text-[12px] text-[#6B7280] truncate">
                           {channel.display_name}
@@ -459,20 +459,20 @@ export default function TelegramChannelsHome() {
                   <div className="flex items-center gap-2 min-w-0">
                     <MessageSquare className="h-4 w-4 text-[#6B7280] shrink-0" />
                     <div className="min-w-0">
-                      <p className="text-[13px] text-white font-medium truncate">{formatMessages(channel.stats.totalMessages)}</p>
+                      <p className="text-[13px] text-text-main font-medium truncate">{formatMessages(channel.stats.totalMessages)}</p>
                       <p className="text-[11px] text-[#6B7280]">messages</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 min-w-0">
                     <Clock className="h-4 w-4 text-[#6B7280] shrink-0" />
                     <div className="min-w-0">
-                      <p className="text-[13px] text-white font-medium truncate">{formatLastMessage(channel.stats.lastMessageAt)}</p>
+                      <p className="text-[13px] text-text-main font-medium truncate">{formatLastMessage(channel.stats.lastMessageAt)}</p>
                       <p className="text-[11px] text-[#6B7280]">last activity</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-white/5">
+                <div className="flex items-center justify-between pt-3 border-t border-border-light">
                   <Switch
                     checked={channel.enabled}
                     onCheckedChange={() => handleToggleChannel(channel)}
@@ -482,7 +482,7 @@ export default function TelegramChannelsHome() {
                     href={`https://t.me/${channel.username}`} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-3 py-1.5 flex items-center justify-center gap-1.5 rounded bg-white/5 hover:bg-white/10 text-white transition-colors text-[12px] font-medium"
+                    className="px-3 py-1.5 flex items-center justify-center gap-1.5 rounded bg-foreground/5 hover:bg-foreground/10 text-text-main transition-colors text-[12px] font-medium"
                   >
                     <ExternalLink className="h-3 w-3 shrink-0" />
                     <span>View Channel</span>
@@ -500,7 +500,7 @@ export default function TelegramChannelsHome() {
           <Button 
             onClick={handleLoadMore}
             variant="outline" 
-            className="border-iris-primary/30 text-iris-primary hover:bg-iris-primary/10"
+            className="border-iris-primary/30 text-text-main hover:bg-primary/10"
           >
             Load More Channels ({filteredChannels.length - visibleChannels} remaining)
           </Button>
@@ -510,15 +510,15 @@ export default function TelegramChannelsHome() {
       {/* Empty State */}
       {!loading && filteredChannels.length === 0 && !error && (
         <div className="text-center py-12">
-          <div className="w-16 h-16 bg-iris-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-            <MessageSquare className="h-8 w-8 text-iris-primary" />
+          <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <MessageSquare className="h-8 w-8 text-text-main" />
           </div>
-          <h3 className="text-lg font-semibold text-white mb-2 meme-comic">No Active Telegram Channels Found</h3>
-          <p className="text-muted-foreground mb-4 meme-body">
+          <h3 className="text-lg font-semibold text-text-main mb-2 meme-comic">No Active Telegram Channels Found</h3>
+          <p className="text-text-secondary mb-4 meme-body">
             {searchTerm ? 'Try adjusting your search terms' : 'Only channels with messages are shown. Add channels and wait for data collection!'}
           </p>
           {!searchTerm && (
-            <div className="space-y-2 text-sm text-muted-foreground">
+            <div className="space-y-2 text-sm text-text-secondary">
               <p>• Add channels to your scraper configuration</p>
               <p>• Check if your scraper is running</p>
               <p>• Verify database connection</p>
@@ -526,7 +526,7 @@ export default function TelegramChannelsHome() {
           )}
           <Button
             onClick={fetchTelegramData}
-            className="mt-4 bg-iris-primary hover:bg-iris-primary/80 text-black"
+            className="mt-4 bg-primary hover:bg-primary/80 text-black"
           >
             Try Again
           </Button>

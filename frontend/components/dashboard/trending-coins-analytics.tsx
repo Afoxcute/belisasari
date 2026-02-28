@@ -215,10 +215,10 @@ export default function TrendingCoinsAnalytics() {
         <div className="space-y-4">
           {[1, 2, 3].map((i) => (
             <div key={i} className="flex items-center space-x-4">
-              <div className="h-10 w-10 rounded-full animate-pulse" style={{ background: 'rgba(255,255,255,0.06)' }} />
+              <div className="h-10 w-10 rounded-full animate-pulse" style={{ background: 'rgba(0,0,0,0.06)' }} />
               <div className="space-y-2 flex-1">
-                <div className="h-4 rounded animate-pulse" style={{ background: 'rgba(255,255,255,0.06)' }} />
-                <div className="h-3 rounded animate-pulse w-3/4" style={{ background: 'rgba(255,255,255,0.04)' }} />
+                <div className="h-4 rounded animate-pulse" style={{ background: 'rgba(0,0,0,0.06)' }} />
+                <div className="h-3 rounded animate-pulse w-3/4" style={{ background: 'rgba(0,0,0,0.04)' }} />
               </div>
             </div>
           ))}
@@ -277,29 +277,29 @@ export default function TrendingCoinsAnalytics() {
     const mockPrice = `$${(Math.random() * 100).toFixed(2)}`;
 
     return (
-      <tr key={index + (coin.symbol || '')} className={`border-b border-white/5 hover:bg-white/[0.02] transition-colors ${index === 2 ? 'bg-[#00D4FF]/[0.02] relative' : ''}`}>
+      <tr key={index + (coin.symbol || '')} className={`border-b border-border-light hover:bg-white/[0.02] transition-colors ${index === 2 ? 'bg-[#00D4FF]/[0.02] relative' : ''}`}>
         {index === 2 && (
           <td className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#00D4FF]"></td>
         )}
         <td className="px-6 py-4">
-          <span className="text-slate-500 font-mono text-xs">{String(index + 1).padStart(2, '0')}</span>
+          <span className="text-text-secondary font-mono text-xs">{String(index + 1).padStart(2, '0')}</span>
         </td>
         <td className="px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10 overflow-hidden relative">
+            <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-border-light overflow-hidden relative">
                <span className="text-xs font-bold text-[#00D4FF]">{(coin.symbol || '??').slice(0, 2)}</span>
             </div>
             <div>
-              <p className="font-bold text-white flex items-center gap-2">
+              <p className="font-bold text-text-main flex items-center gap-2">
                 {coin.name || coin.symbol || 'Unknown'}
                 {isTrending && <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 text-[10px] uppercase font-bold tracking-wider">Hot</span>}
               </p>
-              <p className="text-xs text-slate-500 font-medium">{coin.symbol}</p>
+              <p className="text-xs text-text-secondary font-medium">{coin.symbol}</p>
             </div>
           </div>
         </td>
         <td className="px-6 py-4 text-right">
-          <p className="font-mono text-sm text-white">{coin.price ? formatCurrency(coin.price) : mockPrice}</p>
+          <p className="font-mono text-sm text-text-main">{coin.price ? formatCurrency(coin.price) : mockPrice}</p>
         </td>
         <td className="px-6 py-4 text-right">
           <p className={`font-mono text-sm ${parseFloat(mock24hPercent) >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
@@ -307,12 +307,12 @@ export default function TrendingCoinsAnalytics() {
           </p>
         </td>
         <td className="px-6 py-4 text-right">
-          <p className="font-mono text-sm text-slate-300">
+          <p className="font-mono text-sm text-text-secondary">
             {coin.market_cap && coin.market_cap > 0 ? formatCurrency(coin.market_cap) : '—'}
           </p>
         </td>
         <td className="px-6 py-4 text-right">
-          <p className="font-mono text-sm text-white">
+          <p className="font-mono text-sm text-text-main">
             {coin.trading_volume_24h && coin.trading_volume_24h > 0 ? formatCurrency(coin.trading_volume_24h) : '—'}
           </p>
         </td>
@@ -328,27 +328,27 @@ export default function TrendingCoinsAnalytics() {
   };
 
   return (
-    <div className="bg-[#111118] border border-white/10 rounded-xl overflow-hidden flex flex-col">
+    <div className="bg-card-bg border border-border-light rounded-xl overflow-hidden flex flex-col">
       {/* Header Area */}
-      <div className="p-5 border-b border-white/10">
+      <div className="p-5 border-b border-border-light">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
            <div>
               <div className="flex items-center gap-3 mb-1">
-                 <h2 className="text-xl font-bold text-white">Trending Coins Analytics</h2>
-                 <span className="px-2 py-0.5 bg-white/10 text-white text-xs font-bold rounded-full">
+                 <h2 className="text-xl font-bold text-text-main">Trending Coins Analytics</h2>
+                 <span className="px-2 py-0.5 bg-foreground/10 text-text-main text-xs font-bold rounded-full">
                     {data.total || filteredCoins.length} Coins
                  </span>
               </div>
-              <p className="text-sm text-slate-500">Real-time terminal for high-momentum crypto assets and institutional flow.</p>
+              <p className="text-sm text-text-secondary">Real-time terminal for high-momentum crypto assets and institutional flow.</p>
            </div>
            
            <div className="flex items-center gap-3">
-              <div className="bg-[#0A0A0F] border border-white/10 rounded-lg p-1 flex items-center">
-                 <button className="px-3 py-1.5 bg-white/10 text-white text-xs font-bold rounded shadow-sm">Hot</button>
-                 <button className="px-3 py-1.5 text-slate-400 hover:text-white text-xs font-medium rounded transition-colors">Vol</button>
-                 <button className="px-3 py-1.5 text-slate-400 hover:text-white text-xs font-medium rounded transition-colors">Corr</button>
+              <div className="bg-background-main border border-border-light rounded-lg p-1 flex items-center">
+                 <button className="px-3 py-1.5 bg-foreground/10 text-text-main text-xs font-bold rounded shadow-sm">Hot</button>
+                 <button className="px-3 py-1.5 text-text-secondary hover:text-text-main text-xs font-medium rounded transition-colors">Vol</button>
+                 <button className="px-3 py-1.5 text-text-secondary hover:text-text-main text-xs font-medium rounded transition-colors">Corr</button>
               </div>
-              <button onClick={clearFilters} className="p-2 border border-white/10 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+              <button onClick={clearFilters} className="p-2 border border-border-light rounded-lg text-text-secondary hover:text-text-main hover:bg-foreground/5 transition-colors">
                  <RefreshCw className="w-4 h-4" />
               </button>
            </div>
@@ -356,13 +356,13 @@ export default function TrendingCoinsAnalytics() {
       </div>
 
       {/* Tabs Row */}
-      <div className="px-5 border-b border-white/10 overflow-x-auto">
+      <div className="px-5 border-b border-border-light overflow-x-auto">
          <div className="flex items-center gap-6">
             {tabsList.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`py-4 text-sm font-bold whitespace-nowrap transition-colors relative ${activeTab === tab.key ? 'text-[#00D4FF]' : 'text-slate-500 hover:text-slate-300'}`}
+                className={`py-4 text-sm font-bold whitespace-nowrap transition-colors relative ${activeTab === tab.key ? 'text-[#00D4FF]' : 'text-text-secondary hover:text-text-secondary'}`}
               >
                 {tab.label}
                 {activeTab === tab.key && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00D4FF]"></div>}
@@ -372,30 +372,30 @@ export default function TrendingCoinsAnalytics() {
       </div>
 
       {/* Utilities Row - Filters */}
-      <div className="p-4 border-b border-white/10 bg-white/[0.02] flex flex-col md:flex-row gap-4 justify-between items-center">
+      <div className="p-4 border-b border-border-light bg-white/[0.02] flex flex-col md:flex-row gap-4 justify-between items-center">
         
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           <div className="relative flex-1 md:flex-none">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
             <input 
               type="text" 
               placeholder="Search by coin symbol..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full md:w-64 bg-[#0A0A0F] border border-white/10 rounded-full py-2 pl-9 pr-4 text-xs text-white focus:outline-none focus:border-[#00D4FF]/50"
+              className="w-full md:w-64 bg-background-main border border-border-light rounded-full py-2 pl-9 pr-4 text-xs text-text-main focus:outline-none focus:border-[#00D4FF]/50"
             />
           </div>
-          <button className="flex items-center gap-2 px-3 py-2 bg-[#0A0A0F] border border-white/10 rounded-full text-xs font-medium text-slate-300 hover:text-white transition-colors">
+          <button className="flex items-center gap-2 px-3 py-2 bg-background-main border border-border-light rounded-full text-xs font-medium text-text-secondary hover:text-text-main transition-colors">
              <Filter className="w-3.5 h-3.5" />
              More Filters
           </button>
         </div>
 
         <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-          <span className="text-xs text-slate-500">View:</span>
-          <div className="flex items-center bg-[#0A0A0F] border border-white/10 rounded-lg p-1">
-            <button className="p-1 bg-white/10 rounded text-white shadow-sm"><span className="material-symbols-outlined text-[16px]">view_list</span></button>
-            <button className="p-1 text-slate-500 hover:text-white rounded transition-colors"><span className="material-symbols-outlined text-[16px]">grid_view</span></button>
+          <span className="text-xs text-text-secondary">View:</span>
+          <div className="flex items-center bg-background-main border border-border-light rounded-lg p-1">
+            <button className="p-1 bg-foreground/10 rounded text-text-main shadow-sm"><span className="material-symbols-outlined text-[16px]">view_list</span></button>
+            <button className="p-1 text-text-secondary hover:text-text-main rounded transition-colors"><span className="material-symbols-outlined text-[16px]">grid_view</span></button>
           </div>
         </div>
 
@@ -405,20 +405,20 @@ export default function TrendingCoinsAnalytics() {
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="text-[11px] uppercase tracking-wider text-slate-500 bg-white/[0.02]">
-              <th className="px-6 py-4 font-semibold border-b border-white/10"># Rank</th>
-              <th className="px-6 py-4 font-semibold border-b border-white/10">Coin</th>
-              <th className="px-6 py-4 font-semibold border-b border-white/10 text-right">Price</th>
-              <th className="px-6 py-4 font-semibold border-b border-white/10 text-right">24h %</th>
-              <th className="px-6 py-4 font-semibold border-b border-white/10 text-right">Market Cap</th>
-              <th className="px-6 py-4 font-semibold border-b border-white/10 text-right">24h Volume</th>
-              <th className="px-6 py-4 font-semibold border-b border-white/10 text-center">Last 7 Days</th>
+            <tr className="text-[11px] uppercase tracking-wider text-text-secondary bg-white/[0.02]">
+              <th className="px-6 py-4 font-semibold border-b border-border-light"># Rank</th>
+              <th className="px-6 py-4 font-semibold border-b border-border-light">Coin</th>
+              <th className="px-6 py-4 font-semibold border-b border-border-light text-right">Price</th>
+              <th className="px-6 py-4 font-semibold border-b border-border-light text-right">24h %</th>
+              <th className="px-6 py-4 font-semibold border-b border-border-light text-right">Market Cap</th>
+              <th className="px-6 py-4 font-semibold border-b border-border-light text-right">24h Volume</th>
+              <th className="px-6 py-4 font-semibold border-b border-border-light text-center">Last 7 Days</th>
             </tr>
           </thead>
           <tbody className="text-sm">
             {filteredCoins.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-6 py-8 text-center text-slate-500 text-sm border-b border-white/5">
+                <td colSpan={7} className="px-6 py-8 text-center text-text-secondary text-sm border-b border-border-light">
                   {searchQuery ? `No coins found matching "${searchQuery}"` : 'No coins match the current filters'}
                 </td>
               </tr>
@@ -432,11 +432,11 @@ export default function TrendingCoinsAnalytics() {
         </table>
       </div>
       
-      <div className="p-4 bg-white/[0.02] border-t border-white/10 flex items-center justify-between text-xs text-slate-500">
+      <div className="p-4 bg-white/[0.02] border-t border-border-light flex items-center justify-between text-xs text-text-secondary">
          <span>Showing {Math.min(filteredCoins.length, limit)} of {data.total || filteredCoins.length} assets tracking social momentum</span>
          <div className="flex items-center gap-2">
-            <button className="px-3 py-1.5 border border-white/10 rounded hover:bg-white/5 transition-colors disabled:opacity-50" disabled>Previous</button>
-            <button className="px-3 py-1.5 border border-white/10 rounded hover:bg-white/5 transition-colors">Next</button>
+            <button className="px-3 py-1.5 border border-border-light rounded hover:bg-foreground/5 transition-colors disabled:opacity-50" disabled>Previous</button>
+            <button className="px-3 py-1.5 border border-border-light rounded hover:bg-foreground/5 transition-colors">Next</button>
          </div>
       </div>
     </div>

@@ -186,7 +186,7 @@ export function PatternRecognitionCard({ className }: PatternRecognitionCardProp
             {patternSummary.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {patternSummary.map((summary) => (
-                  <div key={summary.pattern_type} className="p-3 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--dash-border)' }}>
+                  <div key={summary.pattern_type} className="p-3 rounded-lg" style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid var(--dash-border)' }}>
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2" style={{ color: 'var(--dash-white)' }}>
                         {getPatternTypeIcon(summary.pattern_type)}
@@ -203,14 +203,14 @@ export function PatternRecognitionCard({ className }: PatternRecognitionCardProp
                         <span style={{ color: 'var(--dash-muted)' }}>Avg Strength</span>
                         <span style={{ color: 'var(--dash-white)' }}>{(summary.avg_strength * 100).toFixed(1)}%</span>
                       </div>
-                      <div style={{ height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.06)' }}>
+                      <div style={{ height: 4, borderRadius: 2, background: 'rgba(0,0,0,0.06)' }}>
                         <div style={{ height: '100%', borderRadius: 2, background: 'var(--dash-cyan)', width: `${summary.avg_strength * 100}%` }} />
                       </div>
                       <div className="flex justify-between" style={{ fontSize: 12 }}>
                         <span style={{ color: 'var(--dash-muted)' }}>Avg Confidence</span>
                         <span style={{ color: 'var(--dash-white)' }}>{(summary.avg_confidence * 100).toFixed(1)}%</span>
                       </div>
-                      <div style={{ height: 4, borderRadius: 2, background: 'rgba(255,255,255,0.06)' }}>
+                      <div style={{ height: 4, borderRadius: 2, background: 'rgba(0,0,0,0.06)' }}>
                         <div style={{ height: '100%', borderRadius: 2, background: 'var(--dash-green)', width: `${summary.avg_confidence * 100}%` }} />
                       </div>
                     </div>
@@ -231,7 +231,7 @@ export function PatternRecognitionCard({ className }: PatternRecognitionCardProp
           <div className="space-y-3">
             {patternDetections.length > 0 ? (
               patternDetections.map((detection) => (
-                <div key={detection.id} className="p-3 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--dash-border)' }}>
+                <div key={detection.id} className="p-3 rounded-lg" style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid var(--dash-border)' }}>
                   <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
                     <div className="flex items-center gap-2" style={{ color: 'var(--dash-white)' }}>
                       {getPatternTypeIcon(detection.pattern_type)}
@@ -271,7 +271,7 @@ export function PatternRecognitionCard({ className }: PatternRecognitionCardProp
           <div className="space-y-3">
             {patternInsights.length > 0 ? (
               patternInsights.map((insight) => (
-                <div key={insight.id} className="p-3 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--dash-border)' }}>
+                <div key={insight.id} className="p-3 rounded-lg" style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid var(--dash-border)' }}>
                   <div className="flex items-start justify-between mb-2 flex-wrap gap-2">
                     <div className="flex items-start gap-2">
                       {getInsightTypeIcon(insight.insight_type)}

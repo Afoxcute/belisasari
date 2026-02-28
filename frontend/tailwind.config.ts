@@ -83,6 +83,15 @@ const config: Config = {
           light: "hsl(var(--iris-light))",
           dark: "hsl(var(--iris-dark))",
         },
+        // HTML Template Colors
+        "primary-hover": "#0284C7",
+        "background-main": "#F8FAFC",
+        "card-bg": "#FFFFFF",
+        "border-light": "#E2E8F0",
+        "text-main": "#0F172A",
+        "text-secondary": "#64748B",
+        "success": "#10B981",
+        "danger": "#EF4444",
       },
       borderRadius: {
         lg: "var(--radius)",

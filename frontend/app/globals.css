@@ -130,25 +130,25 @@ body {
     --iris-light: 0 0% 95%; /* Very Light Gray - Backgrounds */
     --iris-dark: 0 0% 10%; /* Very Dark Gray - Text/contrast */
 
-    /* System Colors */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    /* System Colors matched to Template Hex Codes */
+    --background: 210 40% 98%; /* #F8FAFC */
+    --foreground: 222 47% 11%; /* #0F172A */
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
-    --primary: 0 0% 0%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 199 89% 48%; /* #0EA5E9 */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 95%;
-    --secondary-foreground: 0 0% 10%;
-    --muted: 0 0% 95%;
-    --muted-foreground: 0 0% 50%;
-    --accent: 0 0% 20%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 85%;
-    --input: 0 0% 90%;
+    --secondary: 210 40% 98%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 47%; /* #64748B */
+    --accent: 214 32% 91%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%; /* #EF4444 */
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%; /* #E2E8F0 */
+    --input: 214 32% 91%;
     --ring: 0 0% 0%;
     --chart-1: 0 0% 0%;
     --chart-2: 0 0% 50%;
@@ -201,24 +201,34 @@ body {
     overflow-x: hidden;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background-main text-text-main;
     overflow-x: hidden;
   }
 }
 
+/* Custom Table Row Hover Effect from Template */
+.table-row-hover {
+  transition: background-color 0.2s, border-color 0.2s;
+  border-left: 2px solid transparent;
+}
+.table-row-hover:hover {
+  background-color: #F1F5F9;
+  border-left-color: #0EA5E9;
+}
+
 /* ─── Dashboard Stitch Design System ─── */
 .dashboard-theme {
-  --dash-bg: #0a0a0f;
-  --dash-card: #111118;
-  --dash-card-hover: #1a1a24;
-  --dash-border: rgba(255, 255, 255, 0.08);
-  --dash-border-light: rgba(255, 255, 255, 0.06);
+  --dash-bg: #f4f4f5;
+  --dash-card: #ffffff;
+  --dash-card-hover: #f9fafb;
+  --dash-border: rgba(0, 0, 0, 0.08);
+  --dash-border-light: rgba(0, 0, 0, 0.04);
   --dash-cyan: #00d4ff;
-  --dash-green: #00ff88;
-  --dash-red: #ff3b3b;
+  --dash-green: #10b981;
+  --dash-red: #ef4444;
   --dash-purple: #a855f7;
   --dash-muted: #6b7280;
-  --dash-white: #f9fafb;
+  --dash-white: #111827; /* Now acts as the primary dark text color */
 
   background-color: var(--dash-bg);
   color: var(--dash-white);
@@ -288,11 +298,11 @@ body {
   font-weight: 500;
 }
 .dash-badge--active {
-  background: rgba(0, 255, 136, 0.12);
+  background: rgba(16, 185, 129, 0.12);
   color: var(--dash-green);
 }
 .dash-badge--inactive {
-  background: rgba(255, 59, 59, 0.12);
+  background: rgba(239, 68, 68, 0.12);
   color: var(--dash-red);
 }
 
@@ -307,11 +317,11 @@ body {
 }
 .dash-service-card--active {
   border-left: 3px solid var(--dash-green);
-  box-shadow: inset 3px 0 12px -6px rgba(0, 255, 136, 0.15);
+  box-shadow: inset 3px 0 12px -6px rgba(16, 185, 129, 0.15);
 }
 .dash-service-card--inactive {
   border-left: 3px solid var(--dash-red);
-  box-shadow: inset 3px 0 12px -6px rgba(255, 59, 59, 0.15);
+  box-shadow: inset 3px 0 12px -6px rgba(239, 68, 68, 0.15);
 }
 
 /* Table row styles */
@@ -331,7 +341,7 @@ body {
   border-left-color: var(--dash-cyan);
 }
 .dash-table-row:nth-child(even) {
-  background: rgba(255, 255, 255, 0.012);
+  background: rgba(0, 0, 0, 0.012);
 }
 .dash-table-row:nth-child(even):hover {
   background: var(--dash-card-hover);
@@ -340,10 +350,10 @@ body {
 /* System status card glow */
 .dash-status-card {
   background: var(--dash-card);
-  border: 1px solid rgba(0, 255, 136, 0.08);
+  border: 1px solid var(--dash-border);
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 0 20px -8px rgba(0, 255, 136, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Soft shadow for light theme */
 }
 
 /* Section header */
@@ -373,23 +383,25 @@ body {
   border-bottom-color: var(--dash-cyan);
 }
 
-/* Cyan outline button */
+/* Cyan outline button / Light theme filled */
 .dash-btn-cyan {
-  background: transparent;
-  color: var(--dash-cyan);
-  border: 1px solid var(--dash-cyan);
+  background: #ffffff;
+  color: var(--dash-white);
+  border: 1px solid var(--dash-border);
   border-radius: 8px;
   padding: 6px 16px;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, border-color 0.2s;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 .dash-btn-cyan:hover {
-  background: rgba(0, 212, 255, 0.08);
+  background: #f9fafb;
+  border-color: rgba(0,0,0,0.15);
 }
 .dash-btn-cyan:disabled {
   opacity: 0.5;
@@ -401,7 +413,7 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.04);
   border: 1px solid var(--dash-border);
   display: flex;
   align-items: center;
@@ -411,7 +423,7 @@ body {
   color: var(--dash-white);
 }
 .dash-play-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.08);
 }
 .dash-play-btn:disabled {
   opacity: 0.5;
@@ -429,8 +441,8 @@ body {
 
 /* Cyan count badge */
 .dash-count-badge {
-  background: var(--dash-cyan);
-  color: #0a0a0f;
+  background: rgba(0, 212, 255, 0.2);
+  color: #007799;
   font-size: 12px;
   font-weight: 600;
   padding: 2px 8px;

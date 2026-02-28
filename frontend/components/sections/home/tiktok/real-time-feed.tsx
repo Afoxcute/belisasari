@@ -152,7 +152,7 @@ export default function RealTimeTikTokFeed() {
       <div className="w-full max-w-7xl mx-auto px-4 py-8">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-iris-primary/20 border-t-iris-primary rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading TikTok feed...</p>
+          <p className="text-text-secondary">Loading TikTok feed...</p>
         </div>
       </div>
     );
@@ -164,7 +164,7 @@ export default function RealTimeTikTokFeed() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 relative">
         <div className="flex items-center gap-3">
           <div className="w-[2px] h-6 bg-[#00D4FF]"></div>
-          <h2 className="text-[18px] font-semibold text-white">Live TikTok Feed</h2>
+          <h2 className="text-[18px] font-semibold text-text-main">Live TikTok Feed</h2>
         </div>
         
         <div className="flex items-center gap-4">
@@ -178,9 +178,9 @@ export default function RealTimeTikTokFeed() {
             onClick={fetchTikTokData}
             disabled={refreshing}
             variant="outline"
-            className="border-white/10 text-white hover:bg-white/5 h-9 rounded-[6px] text-[13px] px-4"
+            className="bg-white border border-border-light-light text-text-secondary hover:bg-slate-50 hover:text-text-main hover:border-slate-300 transition-all shadow-sm h-9 rounded-[6px] text-[13px] px-4"
           >
-            <RefreshCw className={`h-4 w-4 mr-2 text-[#00D4FF] ${refreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`h-4 w-4 mr-2 text-primary ${refreshing ? 'animate-spin' : ''}`} />
             {refreshing ? 'Refreshing...' : 'Refresh'}
           </Button>
         </div>
@@ -198,7 +198,7 @@ export default function RealTimeTikTokFeed() {
             onClick={fetchTikTokData}
             variant="outline"
             size="sm"
-            className="mt-2 border-red-500/30 text-red-400 hover:bg-red-500/10"
+            className="mt-2 bg-white border border-red-500 text-red-500 hover:bg-red-50 hover:text-red-700 transition-all shadow-sm"
           >
             Try Again
           </Button>
@@ -209,7 +209,7 @@ export default function RealTimeTikTokFeed() {
       {loading && (
         <div className="text-center py-12">
           <div className="w-16 h-16 border-4 border-iris-primary/20 border-t-iris-primary rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading TikTok data...</p>
+          <p className="text-text-secondary">Loading TikTok data...</p>
       </div>
       )}
 
@@ -222,7 +222,7 @@ export default function RealTimeTikTokFeed() {
             return (
               <div
                 key={tiktok.id}
-                className="bg-[#111118] rounded-[10px] border border-white/10 overflow-hidden transition-all duration-300 hover:border-[#00D4FF]/50 hover:shadow-[0_4px_20px_rgba(0,212,255,0.1)] flex flex-col"
+                className="bg-card-bg rounded-[10px] border border-border-light overflow-hidden transition-all duration-300 hover:border-[#00D4FF]/50 hover:shadow-[0_4px_20px_rgba(0,212,255,0.1)] flex flex-col"
               >
                 {/* Thumbnail Area */}
                 <a href={tiktok.url} target="_blank" rel="noopener noreferrer" className="relative w-full aspect-[9/16] max-h-[280px] bg-[#1A1A24] overflow-hidden group block">
@@ -237,12 +237,12 @@ export default function RealTimeTikTokFeed() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-8 h-8 rounded-sm bg-white/10 animate-pulse"></div>
+                      <div className="w-8 h-8 rounded-sm bg-foreground/10 animate-pulse"></div>
                     </div>
                   )}
 
                   {/* Top-right Time Badge */}
-                  <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[11px] font-medium text-white flex items-center gap-1">
+                  <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[11px] font-medium text-text-main flex items-center gap-1">
                     {formatTimeAgo(tiktok.created_at)}
                   </div>
                   
@@ -264,11 +264,11 @@ export default function RealTimeTikTokFeed() {
                     
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-1 text-white">
+                        <div className="flex items-center gap-1 text-text-main">
                           <Eye className="w-4 h-4" />
                           <span className="text-[13px] font-bold">{formatViews(tiktok.views)}</span>
                         </div>
-                        <div className="flex items-center gap-1 text-white">
+                        <div className="flex items-center gap-1 text-text-main">
                           <MessageCircle className="w-4 h-4" />
                           <span className="text-[13px] font-bold">{tiktok.comments}</span>
                         </div>
@@ -282,11 +282,11 @@ export default function RealTimeTikTokFeed() {
 
                 {/* Creator bottom row */}
                 <div className="p-4 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00D4FF] to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-inner shrink-0 object-cover overflow-hidden">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00D4FF] to-purple-600 flex items-center justify-center text-text-main font-bold text-sm shadow-inner shrink-0 object-cover overflow-hidden">
                     {tiktok.username.charAt(0).toUpperCase()}
                   </div>
                   <div className="flex flex-col min-w-0">
-                    <span className="text-[14px] font-semibold text-white truncate">@{tiktok.username}</span>
+                    <span className="text-[14px] font-semibold text-text-main truncate">@{tiktok.username}</span>
                     <span className="text-[12px] text-[#6B7280] truncate">TikTok Creator</span>
                   </div>
                 </div>
@@ -302,7 +302,7 @@ export default function RealTimeTikTokFeed() {
           <Button 
             onClick={handleLoadMore}
             variant="outline" 
-            className="border-iris-primary/30 text-iris-primary hover:bg-iris-primary/10"
+            className="bg-white border border-primary text-primary hover:bg-slate-50 hover:text-primary-hover transition-all shadow-sm"
           >
             Load More Videos ({filteredTiktoks.length - visibleVideos} remaining)
           </Button>
@@ -312,21 +312,21 @@ export default function RealTimeTikTokFeed() {
       {/* Empty State */}
       {!loading && filteredTiktoks.length === 0 && !error && (
         <div className="text-center py-12">
-          <div className="w-16 h-16 bg-iris-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-            <TrendingUp className="h-8 w-8 text-iris-primary" />
+          <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <TrendingUp className="h-8 w-8 text-text-main" />
           </div>
-          <h3 className="text-lg font-semibold text-white mb-2 meme-comic">No Active TikTok Videos Found</h3>
-          <p className="text-muted-foreground mb-4 meme-body">
+          <h3 className="text-lg font-semibold text-text-main mb-2 meme-comic">No Active TikTok Videos Found</h3>
+          <p className="text-text-secondary mb-4 meme-body">
             Only videos with views or comments are shown. Start scraping to collect engagement data!
           </p>
-          <div className="space-y-2 text-sm text-muted-foreground">
+          <div className="space-y-2 text-sm text-text-secondary">
             <p>• Check if your scraper is running</p>
             <p>• Verify database connection</p>
             <p>• Run the setup scripts if needed</p>
           </div>
           <Button
             onClick={fetchTikTokData}
-            className="mt-4 bg-iris-primary hover:bg-iris-primary/80 text-black"
+            className="mt-4 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary-hover shadow-sm shadow-primary/30 transition-all"
           >
             Try Again
           </Button>
@@ -335,7 +335,7 @@ export default function RealTimeTikTokFeed() {
 
       {/* Debug Info (Development Only) */}
       {/* {process.env.NODE_ENV === 'development' && (
-        <div className="mt-8 p-4 bg-muted/20 rounded-lg text-xs text-muted-foreground">
+        <div className="mt-8 p-4 bg-muted/20 rounded-lg text-xs text-text-secondary">
           <p><strong>Debug Info:</strong></p>
           <p>TikTok count: {tiktoks.length}</p>
           <p>Mentions count: {mentions.length}</p>

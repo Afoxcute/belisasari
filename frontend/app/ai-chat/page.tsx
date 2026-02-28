@@ -116,7 +116,7 @@ export default function AIChatPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center">
+      <div className="min-h-screen bg-background-main flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-10 h-10 text-[#00D4FF] animate-spin mx-auto mb-4" />
           <p className="text-[#6B7280]">Initializing Elfa AI Agent...</p>
@@ -126,18 +126,18 @@ export default function AIChatPage() {
   }
 
   return (
-    <div className="min-h-[100dvh] bg-[#0A0A0F] text-white">
+    <div className="min-h-[100dvh] bg-background-main text-text-main">
       <div className="container max-w-[1400px] mx-auto py-6 px-4">
         
         {/* Header */}
         <div className="flex items-center gap-3 mb-6 px-2">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#00D4FF] to-[#00D4FF]/40 p-0.5 shadow-lg shadow-[#00D4FF]/20">
-            <div className="w-full h-full bg-[#111118] rounded-xl flex items-center justify-center">
+            <div className="w-full h-full bg-card-bg rounded-xl flex items-center justify-center">
               <Bot className="w-6 h-6 text-[#00D4FF]" />
             </div>
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <h1 className="text-2xl font-bold tracking-tight text-text-main flex items-center gap-2">
               Elfa AI Agent
               <Badge className="bg-[#00D4FF]/10 text-[#00D4FF] border border-[#00D4FF]/20 hover:bg-[#00D4FF]/20 ml-2">Beta</Badge>
             </h1>
@@ -148,7 +148,7 @@ export default function AIChatPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-[calc(100vh-140px)] min-h-[600px]">
           {/* Main Chat Interface */}
           <div className="lg:col-span-3">
-            <Card className="h-full bg-[#111118] border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+            <Card className="h-full bg-card-bg border-border-light rounded-2xl overflow-hidden shadow-2xl">
               <AIChatInterface
                 onMessage={handleChatMessage}
                 onVoiceCommand={handleVoiceCommand}
@@ -161,27 +161,27 @@ export default function AIChatPage() {
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-4 overflow-y-auto pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {/* System Status */}
-            <Card className="p-5 bg-[#111118] border-white/10 rounded-2xl shadow-xl">
+            <Card className="p-5 bg-card-bg border-border-light rounded-2xl shadow-xl">
               <div className="flex items-center space-x-2 mb-4">
                 <Bot className="h-5 w-5 text-[#00D4FF]" />
-                <h3 className="font-bold text-white tracking-tight">System Status</h3>
+                <h3 className="font-bold text-text-main tracking-tight">System Status</h3>
               </div>
               <div className="space-y-3 text-[13px] font-medium">
-                <div className="flex justify-between items-center bg-white/[0.02] p-2.5 rounded-lg border border-white/5">
+                <div className="flex justify-between items-center bg-white/[0.02] p-2.5 rounded-lg border border-border-light">
                   <span className="text-[#6B7280]">Agent Core</span>
                   <div className="flex items-center gap-2">
                     <span className={`w-2 h-2 rounded-full ${isInitialized ? "bg-[#00FF88] animate-pulse" : "bg-red-500"}`}></span>
-                    <span className="text-white">{isInitialized ? "Online" : "Offline"}</span>
+                    <span className="text-text-main">{isInitialized ? "Online" : "Offline"}</span>
                   </div>
                 </div>
-                <div className="flex justify-between items-center bg-white/[0.02] p-2.5 rounded-lg border border-white/5">
+                <div className="flex justify-between items-center bg-white/[0.02] p-2.5 rounded-lg border border-border-light">
                   <span className="text-[#6B7280]">Data Stream</span>
                   <div className="flex items-center gap-2">
                     <span className={`w-2 h-2 rounded-full ${realtimeService.isWebSocketConnected() ? "bg-[#00FF88]" : "bg-yellow-500"}`}></span>
-                    <span className="text-white">{realtimeService.isWebSocketConnected() ? "Live" : "Simulated"}</span>
+                    <span className="text-text-main">{realtimeService.isWebSocketConnected() ? "Live" : "Simulated"}</span>
                   </div>
                 </div>
-                <div className="flex justify-between items-center bg-white/[0.02] p-2.5 rounded-lg border border-white/5">
+                <div className="flex justify-between items-center bg-white/[0.02] p-2.5 rounded-lg border border-border-light">
                   <span className="text-[#6B7280]">Processed Events</span>
                   <span className="text-[#00D4FF] font-bold">{realtimeUpdates.length}</span>
                 </div>
@@ -189,16 +189,16 @@ export default function AIChatPage() {
             </Card>
 
             {/* Quick Actions */}
-            <Card className="p-5 bg-[#111118] border-white/10 rounded-2xl shadow-xl">
+            <Card className="p-5 bg-card-bg border-border-light rounded-2xl shadow-xl">
               <div className="flex items-center space-x-2 mb-4">
                 <Settings className="h-5 w-5 text-[#A855F7]" />
-                <h3 className="font-bold text-white tracking-tight">Quick Actions</h3>
+                <h3 className="font-bold text-text-main tracking-tight">Quick Actions</h3>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="h-20 flex-col gap-2 bg-white/[0.02] border-white/5 hover:bg-white/[0.05] hover:border-white/10 text-[#6B7280] hover:text-white rounded-xl"
+                  className="h-20 flex-col gap-2 bg-white/[0.02] border-border-light hover:bg-white/[0.05] hover:border-border-light text-[#6B7280] hover:text-text-main rounded-xl"
                   onClick={() => aiAgentService.sendMessage('Show me trending memecoins')}
                 >
                   <TrendingUp className="h-5 w-5 text-[#00FF88]" />
@@ -207,7 +207,7 @@ export default function AIChatPage() {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="h-20 flex-col gap-2 bg-white/[0.02] border-white/5 hover:bg-white/[0.05] hover:border-white/10 text-[#6B7280] hover:text-white rounded-xl"
+                  className="h-20 flex-col gap-2 bg-white/[0.02] border-border-light hover:bg-white/[0.05] hover:border-border-light text-[#6B7280] hover:text-text-main rounded-xl"
                   onClick={() => aiAgentService.sendMessage('Analyze the current market')}
                 >
                   <BarChart3 className="h-5 w-5 text-[#00D4FF]" />
@@ -216,7 +216,7 @@ export default function AIChatPage() {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="h-20 flex-col gap-2 bg-white/[0.02] border-white/5 hover:bg-white/[0.05] hover:border-white/10 text-[#6B7280] hover:text-white rounded-xl"
+                  className="h-20 flex-col gap-2 bg-white/[0.02] border-border-light hover:bg-white/[0.05] hover:border-border-light text-[#6B7280] hover:text-text-main rounded-xl"
                   onClick={() => aiAgentService.sendMessage('Show my portfolio')}
                 >
                   <Users className="h-5 w-5 text-[#A855F7]" />
@@ -225,7 +225,7 @@ export default function AIChatPage() {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="h-20 flex-col gap-2 bg-white/[0.02] border-white/5 hover:bg-white/[0.05] hover:border-white/10 text-[#6B7280] hover:text-white rounded-xl"
+                  className="h-20 flex-col gap-2 bg-white/[0.02] border-border-light hover:bg-white/[0.05] hover:border-border-light text-[#6B7280] hover:text-text-main rounded-xl"
                   onClick={() => aiAgentService.sendMessage('Help me learn about trading')}
                 >
                   <Bell className="h-5 w-5 text-amber-500" />
@@ -235,21 +235,21 @@ export default function AIChatPage() {
             </Card>
 
             {/* Personalized Recommendations */}
-            <Card className="p-5 bg-[#111118] border-white/10 rounded-2xl shadow-xl flex-1">
+            <Card className="p-5 bg-card-bg border-border-light rounded-2xl shadow-xl flex-1">
               <div className="flex items-center space-x-2 mb-4">
                 <TrendingUp className="h-5 w-5 text-[#00FF88]" />
-                <h3 className="font-bold text-white tracking-tight">Insights</h3>
+                <h3 className="font-bold text-text-main tracking-tight">Insights</h3>
               </div>
               <div className="space-y-3">
                 {recommendations.slice(0, 3).map((rec) => (
                   <div
                     key={rec.id}
-                    className="p-3 bg-white/[0.02] border border-white/5 rounded-xl cursor-pointer hover:bg-white/[0.05] hover:border-white/10 transition-colors group"
+                    className="p-3 bg-white/[0.02] border border-border-light rounded-xl cursor-pointer hover:bg-white/[0.05] hover:border-border-light transition-colors group"
                     onClick={() => markRecommendationAsRead(rec.id)}
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1">
-                        <p className="text-[13px] font-bold text-white group-hover:text-[#00D4FF] transition-colors">{rec.title}</p>
+                        <p className="text-[13px] font-bold text-text-main group-hover:text-[#00D4FF] transition-colors">{rec.title}</p>
                         <p className="text-[11px] text-[#6B7280] mt-1 line-clamp-2 leading-relaxed">
                           {rec.content}
                         </p>
@@ -262,7 +262,7 @@ export default function AIChatPage() {
                   </div>
                 ))}
                 {recommendations.length === 0 && (
-                  <div className="flex flex-col items-center justify-center py-6 text-center border border-dashed border-white/10 rounded-xl bg-white/[0.01]">
+                  <div className="flex flex-col items-center justify-center py-6 text-center border border-dashed border-border-light rounded-xl bg-white/[0.01]">
                     <TrendingUp className="h-6 w-6 text-[#6B7280]/40 mb-2" />
                     <p className="text-[12px] text-[#6B7280] font-medium">No new insights right now.</p>
                   </div>
@@ -272,21 +272,21 @@ export default function AIChatPage() {
 
             {/* Real-time Updates */}
             {realtimeUpdates.length > 0 && (
-              <Card className="p-5 bg-[#111118] border-white/10 rounded-2xl shadow-xl">
+              <Card className="p-5 bg-card-bg border-border-light rounded-2xl shadow-xl">
                 <div className="flex items-center space-x-2 mb-4">
                   <Zap className="h-5 w-5 text-amber-500" />
-                  <h3 className="font-bold text-white tracking-tight">Live Network Feeds</h3>
+                  <h3 className="font-bold text-text-main tracking-tight">Live Network Feeds</h3>
                 </div>
                 <div className="space-y-3 max-h-48 overflow-y-auto pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                   {realtimeUpdates.slice(0, 4).map((update) => (
-                    <div key={update.id} className="p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+                    <div key={update.id} className="p-3 bg-white/[0.02] border border-border-light rounded-xl">
                       <div className="flex items-center justify-between mb-1.5">
                         <Badge 
                           variant="outline"
                           className={`text-[9px] uppercase tracking-wider font-bold border-0 px-2 py-0.5 ${
                             update.priority === 'urgent' ? 'bg-red-500/10 text-red-500' : 
                             update.priority === 'high' ? 'bg-[#00D4FF]/10 text-[#00D4FF]' : 
-                            'bg-white/5 text-[#6B7280]'
+                            'bg-foreground/5 text-[#6B7280]'
                           }`}
                         >
                           {update.type}
@@ -295,7 +295,7 @@ export default function AIChatPage() {
                           {update.timestamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                         </span>
                       </div>
-                      <p className="text-[12px] text-white/90 leading-tight">
+                      <p className="text-[12px] text-text-main/90 leading-tight">
                         {update.data?.message || update.data?.content || 'Network update received'}
                       </p>
                     </div>

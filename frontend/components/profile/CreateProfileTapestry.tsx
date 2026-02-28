@@ -73,7 +73,7 @@ export function CreateProfileTapestry({ onClose, onSuccess }: CreateProfileTapes
           value={username}
           onChange={handleInputChange}
           placeholder="username"
-          className="lowercase bg-white/5 border-white/10 text-white focus-visible:ring-1 focus-visible:ring-[#00D4FF] focus-visible:border-[#00D4FF] placeholder:text-[#6B7280]"
+          className="lowercase bg-foreground/5 border-border-light text-text-main focus-visible:ring-1 focus-visible:ring-[#00D4FF] focus-visible:border-[#00D4FF] placeholder:text-[#6B7280]"
         />
         <Button 
           type="submit" 
@@ -86,7 +86,7 @@ export function CreateProfileTapestry({ onClose, onSuccess }: CreateProfileTapes
 
       {error && <p className="text-[13px] text-red-500 font-medium">{error}</p>}
 
-      <div className="border-t border-white/5 pt-5">
+      <div className="border-t border-border-light pt-5">
         <p className="text-[#6B7280] text-[13px] font-medium mb-3">Or import from Tapestry</p>
         {identities?.identities?.length ? (
           <div className="max-h-[220px] space-y-2 overflow-auto pr-1">
@@ -99,8 +99,8 @@ export function CreateProfileTapestry({ onClose, onSuccess }: CreateProfileTapes
                       disabled={profilesLoading}
                       onClick={() => setSelectProfile(entry)}
                       className={cn(
-                        'w-full justify-start border h-auto py-3 hover:bg-white/5 transition-colors',
-                        selectProfile === entry ? 'border-[#00D4FF] bg-[#00D4FF]/5' : 'border-white/5 bg-white/[0.02]'
+                        'w-full justify-start border h-auto py-3 hover:bg-foreground/5 transition-colors',
+                        selectProfile === entry ? 'border-[#00D4FF] bg-[#00D4FF]/5' : 'border-border-light bg-white/[0.02]'
                       )}
                     >
                       <div className="flex items-center gap-3">
@@ -109,17 +109,17 @@ export function CreateProfileTapestry({ onClose, onSuccess }: CreateProfileTapes
                             width={36}
                             height={36}
                             alt={entry.profile.username}
-                            className="rounded-full object-cover border border-white/10"
+                            className="rounded-full object-cover border border-border-light"
                             src={entry.profile.image}
                             unoptimized
                           />
                         ) : (
-                          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1A1A24] border border-white/10">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1A1A24] border border-border-light">
                             <User className="h-4 w-4 text-[#6B7280]" />
                           </div>
                         )}
                         <div className="min-w-0 text-left flex-1">
-                          <p className={`truncate text-[14px] font-bold ${selectProfile === entry ? 'text-white' : 'text-white/90'}`}>
+                          <p className={`truncate text-[14px] font-bold ${selectProfile === entry ? 'text-text-main' : 'text-text-main/90'}`}>
                             {entry.profile.username}
                           </p>
                           {entry.profile.bio && (
@@ -135,13 +135,13 @@ export function CreateProfileTapestry({ onClose, onSuccess }: CreateProfileTapes
             )}
           </div>
         ) : (
-          <p className="text-[13px] text-[#6B7280] bg-white/[0.02] border border-white/5 rounded-lg p-4 text-center">
+          <p className="text-[13px] text-[#6B7280] bg-white/[0.02] border border-border-light rounded-lg p-4 text-center">
             {profilesLoading ? 'Loading Tapestry profiles...' : 'No Tapestry profiles found. Create one above.'}
           </p>
         )}
 
         <Button
-          className="mt-3 w-full bg-white/5 text-white hover:bg-white/10 border border-white/10"
+          className="mt-3 w-full bg-foreground/5 text-text-main hover:bg-foreground/10 border border-border-light"
           variant="secondary"
           disabled={profilesLoading || !selectProfile}
           onClick={() => selectProfile && handleImport(selectProfile)}
@@ -153,7 +153,7 @@ export function CreateProfileTapestry({ onClose, onSuccess }: CreateProfileTapes
       <div className="pt-2">
         <Button 
           variant="ghost" 
-          className="w-full text-[#6B7280] hover:text-white hover:bg-white/5 text-[13px]" 
+          className="w-full text-[#6B7280] hover:text-text-main hover:bg-foreground/5 text-[13px]" 
           onClick={() => { logout(); onClose(); }}
         >
           Disconnect wallet

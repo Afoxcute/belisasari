@@ -191,18 +191,18 @@ export function AIChatInterface({
     if (message.data?.type === 'trending') {
       return (
         <div className="space-y-4">
-          <p className="text-white/90 leading-relaxed font-medium">{message.content}</p>
+          <p className="text-text-main/90 leading-relaxed font-medium">{message.content}</p>
           <div className="space-y-2">
             {message.data.tokens.map((token: any, index: number) => (
-              <div key={index} className="p-3 bg-white/5 border border-white/5 rounded-xl hover:border-white/10 transition-colors">
+              <div key={index} className="p-3 bg-foreground/5 border border-border-light rounded-xl hover:border-border-light transition-colors">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-full bg-[#1A1A24] flex items-center justify-center text-[10px] font-bold text-white border border-white/10">
+                    <div className="w-8 h-8 rounded-full bg-[#1A1A24] flex items-center justify-center text-[10px] font-bold text-text-main border border-border-light">
                       {token.symbol.slice(0,2)}
                     </div>
                     <div>
-                      <span className="font-bold text-white text-[14px] tracking-tight">{token.symbol}</span>
-                      <div className="text-[12px] font-medium text-white/90">${token.price.toFixed(6)}</div>
+                      <span className="font-bold text-text-main text-[14px] tracking-tight">{token.symbol}</span>
+                      <div className="text-[12px] font-medium text-text-main/90">${token.price.toFixed(6)}</div>
                     </div>
                   </div>
                   <div className="text-right">
@@ -222,13 +222,13 @@ export function AIChatInterface({
     if (message.data?.type === 'analysis') {
       return (
         <div className="space-y-4">
-          <p className="text-white/90 leading-relaxed font-medium">{message.content}</p>
-          <div className="p-4 bg-white/5 border border-white/5 rounded-xl space-y-3">
-            <div className="flex items-center space-x-2 pb-2 border-b border-white/10">
+          <p className="text-text-main/90 leading-relaxed font-medium">{message.content}</p>
+          <div className="p-4 bg-foreground/5 border border-border-light rounded-xl space-y-3">
+            <div className="flex items-center space-x-2 pb-2 border-b border-border-light">
               <BarChart3 className="h-4 w-4 text-[#A855F7]" />
-              <span className="font-bold text-[13px] text-white tracking-wide uppercase">Analysis Summary</span>
+              <span className="font-bold text-[13px] text-text-main tracking-wide uppercase">Analysis Summary</span>
             </div>
-            <p className="text-[13px] text-white/80 leading-relaxed">{message.data.summary}</p>
+            <p className="text-[13px] text-text-main/80 leading-relaxed">{message.data.summary}</p>
             <div className="flex items-start justify-between gap-4 pt-2">
               <span className="text-[12px] text-[#6B7280] font-medium shrink-0">Recommendation:</span>
               <span className="text-[12px] font-bold text-[#00D4FF] text-right">{message.data.recommendation}</span>
@@ -236,13 +236,13 @@ export function AIChatInterface({
             <div className="flex justify-between items-center">
               <span className="text-[12px] text-[#6B7280] font-medium shrink-0">Confidence:</span>
               <div className="flex items-center gap-2">
-                <div className="w-20 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                <div className="w-20 h-1.5 bg-foreground/10 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-gradient-to-r from-[#00D4FF] to-[#00FF88]" 
                     style={{ width: `${message.data.confidence * 100}%` }}
                   />
                 </div>
-                <span className="text-[12px] font-bold text-white">{Math.round(message.data.confidence * 100)}%</span>
+                <span className="text-[12px] font-bold text-text-main">{Math.round(message.data.confidence * 100)}%</span>
               </div>
             </div>
           </div>
@@ -250,23 +250,23 @@ export function AIChatInterface({
       );
     }
 
-    return <p className="whitespace-pre-wrap text-white/90 leading-relaxed font-medium">{message.content}</p>;
+    return <p className="whitespace-pre-wrap text-text-main/90 leading-relaxed font-medium">{message.content}</p>;
   };
 
   return (
     <div className={`flex flex-col h-full bg-transparent ${className}`}>
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-white/10 bg-white/[0.02]">
+      <div className="flex items-center justify-between p-4 border-b border-border-light bg-white/[0.02]">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/10 flex items-center justify-center">
             <Bot className="h-5 w-5 text-[#00D4FF]" />
           </div>
-          <h2 className="text-[15px] font-bold text-white tracking-tight">Elfa Assistant</h2>
+          <h2 className="text-[15px] font-bold text-text-main tracking-tight">Elfa Assistant</h2>
         </div>
         <Button
           variant="ghost"
           size="sm"
-          className="text-[#6B7280] hover:text-white hover:bg-white/5 rounded-lg"
+          className="text-[#6B7280] hover:text-text-main hover:bg-foreground/5 rounded-lg"
           onClick={() => setIsMuted(!isMuted)}
         >
           {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
@@ -291,7 +291,7 @@ export function AIChatInterface({
                     message.type === 'user'
                       ? 'bg-white text-[#111118]'
                       : message.type === 'ai'
-                      ? 'bg-[#111118] border border-[#00D4FF]/30 text-[#00D4FF]'
+                      ? 'bg-card-bg border border-[#00D4FF]/30 text-[#00D4FF]'
                       : 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/30'
                   }`}
                 >
@@ -313,7 +313,7 @@ export function AIChatInterface({
                       message.type === 'user'
                         ? 'bg-[#00D4FF] text-[#111118] rounded-br-sm'
                         : message.type === 'ai'
-                        ? 'bg-[#1A1A24] text-white border border-white/10 rounded-bl-sm'
+                        ? 'bg-[#1A1A24] text-text-main border border-border-light rounded-bl-sm'
                         : 'bg-yellow-500/10 text-yellow-500 border border-yellow-500/20'
                     }`}
                   >
@@ -330,12 +330,12 @@ export function AIChatInterface({
           {isLoading && (
             <div className="flex justify-start">
               <div className="flex items-end space-x-3 max-w-[80%]">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#111118] border border-[#00D4FF]/30 text-[#00D4FF] flex items-center justify-center">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-card-bg border border-[#00D4FF]/30 text-[#00D4FF] flex items-center justify-center">
                   <Bot className="h-4 w-4" />
                 </div>
                 <div className="flex flex-col items-start">
                    <span className="text-[11px] font-medium text-[#6B7280] mb-1 ml-1">Elfa</span>
-                  <div className="rounded-2xl px-5 py-3.5 bg-[#1A1A24] border border-white/10 rounded-bl-sm flex items-center gap-1.5">
+                  <div className="rounded-2xl px-5 py-3.5 bg-[#1A1A24] border border-border-light rounded-bl-sm flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 bg-[#00D4FF] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                     <span className="w-1.5 h-1.5 bg-[#00D4FF] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                     <span className="w-1.5 h-1.5 bg-[#00D4FF] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -358,7 +358,7 @@ export function AIChatInterface({
             onKeyPress={handleKeyPress}
             placeholder="Ask Elfa about tokens, trends, or analysis..."
             disabled={isLoading}
-            className="w-full h-14 bg-[#111118] border-white/10 rounded-xl pl-4 pr-24 text-[15px] text-white focus-visible:ring-1 focus-visible:ring-[#00D4FF] focus-visible:border-[#00D4FF] placeholder:text-[#6B7280]"
+            className="w-full h-14 bg-card-bg border-border-light rounded-xl pl-4 pr-24 text-[15px] text-text-main focus-visible:ring-1 focus-visible:ring-[#00D4FF] focus-visible:border-[#00D4FF] placeholder:text-[#6B7280]"
           />
           <div className="absolute right-1.5 flex items-center gap-1">
             <Button
@@ -366,7 +366,7 @@ export function AIChatInterface({
               size="icon"
               onClick={handleVoiceInput}
               disabled={isLoading}
-              className={`h-11 w-11 rounded-lg transition-colors ${isListening ? 'bg-red-500/20 text-red-500 hover:bg-red-500/30 hover:text-red-500' : 'text-[#6B7280] hover:text-white hover:bg-white/5'}`}
+              className={`h-11 w-11 rounded-lg transition-colors ${isListening ? 'bg-red-500/20 text-red-500 hover:bg-red-500/30 hover:text-red-500' : 'text-[#6B7280] hover:text-text-main hover:bg-foreground/5'}`}
             >
               {isListening ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
             </Button>

@@ -69,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased select-none`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased select-none dashboard-theme`}
         suppressHydrationWarning
       >
         {/* Single root div so portals (Privy/Radix) never target document and trigger "Only one element on document" */}

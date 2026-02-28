@@ -16,7 +16,7 @@ export default function Tiktoks({
     <div className="py-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
         <div className="flex flex-col w-full text-center md:text-left">
-          <h2 className="text-2xl font-bold tracking-tight text-white flex items-center justify-center md:justify-start gap-2 mb-1">
+          <h2 className="text-2xl font-bold tracking-tight text-text-main flex items-center justify-center md:justify-start gap-2 mb-1">
             <span className="p-1.5 rounded-lg bg-[#FF0050]/10 text-[#FF0050]">
               <Video className="w-5 h-5" />
             </span>
@@ -46,7 +46,7 @@ export default function Tiktoks({
             return (
               <div
                 onClick={() => window.open(v.url, "_blank")}
-                className="cursor-pointer relative w-full max-w-[300px] aspect-[9/16] rounded-2xl border border-white/10 hover:border-[#FF0050]/50 shadow-xl overflow-hidden group transition-all duration-300 hover:scale-[1.02]"
+                className="cursor-pointer relative w-full max-w-[300px] aspect-[9/16] rounded-2xl border border-border-light hover:border-[#FF0050]/50 shadow-xl overflow-hidden group transition-all duration-300 hover:scale-[1.02]"
                 key={i}
               >
                 {/* Fallback bg color while loading */}
@@ -70,17 +70,17 @@ export default function Tiktoks({
                     <img
                       src={"https://picsum.photos/300/50" + i}
                       alt={v.username}
-                      className="w-10 h-10 rounded-full border-2 border-white/20 shadow-md"
+                      className="w-10 h-10 rounded-full border-2 border-border-light shadow-md"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = "/placeholder-token.png";
                       }}
                     />
                   </div>
                   <div className="flex flex-col drop-shadow-md">
-                    <p className="font-bold text-[14px] text-white tracking-tight drop-shadow-lg">
+                    <p className="font-bold text-[14px] text-text-main tracking-tight drop-shadow-lg">
                       {v.username == "" ? "the.chill.guy" : v.username}
                     </p>
-                    <p className="text-[11px] text-white/80 font-medium drop-shadow-lg">
+                    <p className="text-[11px] text-text-main/80 font-medium drop-shadow-lg">
                       {getTimeAgo(v.created_at)}
                     </p>
                   </div>
@@ -89,9 +89,9 @@ export default function Tiktoks({
                 {/* Bottom View Count */}
                 <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
                   <div className="flex-1" />
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/10 rounded-full">
-                    <Play className="w-3.5 h-3.5 text-white fill-current" />
-                    <p className="text-[13px] font-bold text-white tracking-wide">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-foreground/10 backdrop-blur-md border border-border-light rounded-full">
+                    <Play className="w-3.5 h-3.5 text-text-main fill-current" />
+                    <p className="text-[13px] font-bold text-text-main tracking-wide">
                       {formatMarketcap(v.views)}
                     </p>
                   </div>
@@ -99,8 +99,8 @@ export default function Tiktoks({
                 
                 {/* Play button overlay */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
-                    <Play className="w-6 h-6 text-white ml-1 fill-current" />
+                  <div className="w-14 h-14 bg-foreground/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
+                    <Play className="w-6 h-6 text-text-main ml-1 fill-current" />
                   </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@ export default function Tiktoks({
             <div className="absolute top-0 w-full h-full bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/80 to-transparent z-10 pointer-events-none rounded-2xl" />
             
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-              <div className="bg-[#111118] border border-white/10 p-6 rounded-2xl shadow-2xl shrink-0">
+              <div className="bg-card-bg border border-border-light p-6 rounded-2xl shadow-2xl shrink-0">
                 <UnlockNow text="View all curated TikToks" />
               </div>
             </div>

@@ -20,7 +20,7 @@ export default function TableWrapper({
   }
 
   return (
-    <div className="relative max-h-[400px] overflow-hidden text-white sen">
+    <div className="relative max-h-[400px] overflow-hidden text-text-main sen">
       {children}
       <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-background via-background/50 to-transparent pointer-events-none" />
     </div>

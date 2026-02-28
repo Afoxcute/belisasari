@@ -56,15 +56,15 @@ export function TokenSearchDialog(props: {
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-w-md bg-[#111118] border border-white/10 rounded-2xl p-0 overflow-hidden text-white gap-0 shadow-2xl [&>button]:hidden">
+      <DialogContent className="max-w-md bg-card-bg border border-border-light rounded-2xl p-0 overflow-hidden text-text-main gap-0 shadow-2xl [&>button]:hidden">
         <DialogHeader className="sr-only">
           <DialogTitle>Search Tokens</DialogTitle>
           <DialogDescription>Search for a token to select it.</DialogDescription>
         </DialogHeader>
-        <div className="p-4 border-b border-white/5 space-y-4">
+        <div className="p-4 border-b border-border-light space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-bold">Select Token</h2>
-            <button onClick={onClose} className="p-2 -mr-2 rounded-full hover:bg-white/5 text-[#6B7280] hover:text-white transition-colors">
+            <button onClick={onClose} className="p-2 -mr-2 rounded-full hover:bg-foreground/5 text-[#6B7280] hover:text-text-main transition-colors">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -75,7 +75,7 @@ export function TokenSearchDialog(props: {
               placeholder="Search by name, symbol, or address"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 h-11 text-[15px] focus-visible:ring-1 focus-visible:ring-[#00D4FF] focus-visible:border-[#00D4FF] placeholder:text-[#6B7280] text-white"
+              className="w-full bg-foreground/5 border border-border-light rounded-xl pl-10 pr-4 h-11 text-[15px] focus-visible:ring-1 focus-visible:ring-[#00D4FF] focus-visible:border-[#00D4FF] placeholder:text-[#6B7280] text-text-main"
             />
           </div>
           
@@ -92,7 +92,7 @@ export function TokenSearchDialog(props: {
                   className={`px-3 py-1.5 rounded-full text-[13px] font-medium whitespace-nowrap transition-all ${
                     category === c.value
                       ? "bg-[#00D4FF]/20 text-[#00D4FF] border border-[#00D4FF]/30"
-                      : "bg-white/5 text-[#6B7280] border border-transparent hover:bg-white/10 hover:text-white"
+                      : "bg-foreground/5 text-[#6B7280] border border-transparent hover:bg-foreground/10 hover:text-text-main"
                   }`}
                 >
                   {c.label}
@@ -105,7 +105,7 @@ export function TokenSearchDialog(props: {
         <div className="max-h-[400px] min-h-[300px] overflow-y-auto p-2">
           {isLoading && (
             <div className="flex flex-col items-center justify-center h-[200px] text-[#6B7280]">
-              <div className="w-8 h-8 border-2 border-white/10 border-t-[#00D4FF] rounded-full animate-spin mb-3"></div>
+              <div className="w-8 h-8 border-2 border-border-light border-t-[#00D4FF] rounded-full animate-spin mb-3"></div>
               <p className="text-[13px]">Searching tokens...</p>
             </div>
           )}
@@ -125,15 +125,15 @@ export function TokenSearchDialog(props: {
             >
               <div className="flex items-center gap-3 min-w-0 pr-4">
                 {t.logoURI ? (
-                  <img src={(t.logoURI)} alt={t.symbol} width={36} height={36} className="rounded-full shrink-0 border border-white/5" />
+                  <img src={(t.logoURI)} alt={t.symbol} width={36} height={36} className="rounded-full shrink-0 border border-border-light" />
                 ) : (
-                  <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-[10px] text-[#6B7280] border border-white/5 shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-foreground/5 flex items-center justify-center text-[10px] text-[#6B7280] border border-border-light shrink-0">
                     {t.symbol.slice(0,2)}
                   </div>
                 )}
                 <div className="min-w-0 flex flex-col justify-center">
                   <div className="flex items-center gap-1.5">
-                    <span className="font-bold text-[15px] text-white truncate group-hover:text-[#00D4FF] transition-colors">{t.symbol}</span>
+                    <span className="font-bold text-[15px] text-text-main truncate group-hover:text-[#00D4FF] transition-colors">{t.symbol}</span>
                     {t.verified && (
                       <span className="flex items-center justify-center w-[14px] h-[14px] rounded-full bg-[#00FF88]/20 text-[#00FF88] text-[9px]">
                         ✓
@@ -148,7 +148,7 @@ export function TokenSearchDialog(props: {
                 <Link
                   href={`/trading/token/${t.address}`}
                   onClick={(e) => e.stopPropagation()}
-                  className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-[#6B7280] hover:bg-white/10 hover:text-white transition-colors"
+                  className="w-8 h-8 rounded-full bg-foreground/5 flex items-center justify-center text-[#6B7280] hover:bg-foreground/10 hover:text-text-main transition-colors"
                   title="View chart"
                 >
                   <LineChart className="h-4 w-4" />

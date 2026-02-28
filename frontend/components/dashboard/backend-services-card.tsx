@@ -261,7 +261,7 @@ export function BackendServicesCard({ className }: BackendServicesCardProps) {
             {services.map((service) => {
               const isActive = serviceStatus[service.key];
               return (
-                <div key={service.key} className="p-3 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--dash-border)' }}>
+                <div key={service.key} className="p-3 rounded-lg" style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid var(--dash-border)' }}>
                   <div className="flex items-center gap-2 mb-2">
                     <span style={{ color: 'var(--dash-white)' }}>{service.icon}</span>
                     <h3 style={{ fontSize: 13, fontWeight: 500, color: 'var(--dash-white)' }}>{service.name}</h3>

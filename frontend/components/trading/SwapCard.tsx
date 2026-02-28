@@ -123,31 +123,31 @@ export function SwapCard() {
   const canSwap = !!(wallet && walletAddress && inAmount && Number(inAmount) > 0 && expectedOutput);
 
   return (
-    <div className="w-full bg-[#111118] border border-white/10 rounded-3xl p-2 relative shadow-2xl">
+    <div className="w-full bg-card-bg border border-border-light rounded-3xl p-2 relative shadow-2xl">
       <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[#00D4FF]/30 to-transparent"></div>
       
       <div className="px-4 py-3 flex items-center justify-between mb-1">
         <div className="flex gap-4">
-          <button className="text-white font-semibold text-[15px] relative">
+          <button className="text-text-main font-semibold text-[15px] relative">
             Swap
             <div className="absolute -bottom-3 left-0 right-0 h-0.5 bg-[#00D4FF] rounded-t-full"></div>
           </button>
-          <button className="text-[#6B7280] font-medium text-[15px] hover:text-white transition-colors">
+          <button className="text-[#6B7280] font-medium text-[15px] hover:text-text-main transition-colors">
             Limit
           </button>
-          <button className="text-[#6B7280] font-medium text-[15px] hover:text-white transition-colors">
+          <button className="text-[#6B7280] font-medium text-[15px] hover:text-text-main transition-colors">
             DCA
           </button>
         </div>
         <div className="relative">
           <button 
-            className={`p-2 rounded-full hover:bg-white/5 transition-colors ${showSettings ? 'text-white bg-white/5' : 'text-[#6B7280]'}`}
+            className={`p-2 rounded-full hover:bg-foreground/5 transition-colors ${showSettings ? 'text-text-main bg-foreground/5' : 'text-[#6B7280]'}`}
             onClick={() => setShowSettings(!showSettings)}
           >
             <Settings2 className="w-4 h-4" />
           </button>
           {showSettings && (
-            <div className="absolute right-0 top-full mt-2 z-20 bg-[#111118] border border-white/10 rounded-xl p-4 shadow-xl min-w-[240px]">
+            <div className="absolute right-0 top-full mt-2 z-20 bg-card-bg border border-border-light rounded-xl p-4 shadow-xl min-w-[240px]">
               <SlippageSettings slippageBps={slippageBps} onSlippageChange={(val) => {
                 setSlippageBps(val);
                 setShowSettings(false);
@@ -171,10 +171,10 @@ export function SwapCard() {
         />
 
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center group">
-          <div className="bg-[#111118] p-1 rounded-full">
+          <div className="bg-card-bg p-1 rounded-full">
             <button
               type="button"
-              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-[#00D4FF]/30 transition-all group-hover:rotate-180 duration-300"
+              className="w-10 h-10 rounded-full bg-foreground/5 border border-border-light flex items-center justify-center text-text-main hover:bg-foreground/10 hover:border-[#00D4FF]/30 transition-all group-hover:rotate-180 duration-300"
               onClick={handleSwapDirection}
               aria-label="Swap direction"
             >

@@ -48,7 +48,7 @@ export function FollowButton({
   // Custom styling for Stitch Aesthetic
   const getButtonStyles = () => {
     if (isFollowing) {
-      return "bg-white/5 hover:bg-[#FF3B3B]/10 hover:border-[#FF3B3B]/30 border-white/10 text-white hover:text-[#FF3B3B] group";
+      return "bg-foreground/5 hover:bg-[#FF3B3B]/10 hover:border-[#FF3B3B]/30 border-border-light text-text-main hover:text-[#FF3B3B] group";
     }
     return "bg-[#00FF88]/10 hover:bg-[#00FF88]/20 border border-[#00FF88]/30 text-[#00FF88]";
   };

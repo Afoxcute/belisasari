@@ -136,7 +136,7 @@ export default function Ticker({ params }: { params: { id: string } }) {
 
   if (coinData === null) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center">
+      <div className="min-h-screen bg-background-main flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-10 h-10 text-[#00D4FF] animate-spin mx-auto mb-4" />
           <p className="text-[#6B7280]">Loading token data...</p>
@@ -154,10 +154,10 @@ export default function Ticker({ params }: { params: { id: string } }) {
     : "";
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] text-white">
+    <div className="min-h-screen bg-background-main text-text-main">
       <div className="w-full xl:max-w-[1250px] mx-auto pt-8 pb-16 px-4 space-y-8">
         <div className="flex items-center gap-4 text-sm">
-          <Link href="/" className="text-[#6B7280] hover:text-white flex items-center gap-1.5 transition-colors">
+          <Link href="/" className="text-[#6B7280] hover:text-text-main flex items-center gap-1.5 transition-colors">
             <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Link>
@@ -168,10 +168,10 @@ export default function Ticker({ params }: { params: { id: string } }) {
         </div>
 
         {showBirdeye && (
-          <div className="rounded-2xl border border-white/10 bg-[#111118] overflow-hidden shadow-2xl">
-            <div className="px-5 py-3 border-b border-white/5 bg-white/[0.02] flex items-center justify-between">
+          <div className="rounded-2xl border border-border-light bg-card-bg overflow-hidden shadow-2xl">
+            <div className="px-5 py-3 border-b border-border-light bg-white/[0.02] flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="text-[14px] font-bold text-white tracking-tight">${coinData.symbol} / SOL</span>
+                <span className="text-[14px] font-bold text-text-main tracking-tight">${coinData.symbol} / SOL</span>
               </div>
               <span className="text-[12px] text-[#6B7280] font-medium tracking-wide uppercase">Chart by Birdeye</span>
             </div>

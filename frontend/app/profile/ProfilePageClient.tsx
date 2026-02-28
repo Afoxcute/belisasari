@@ -28,7 +28,7 @@ export default function ProfilePageClient() {
 
   if (!ready) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center">
+      <div className="min-h-screen bg-background-main flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-10 h-10 text-[#00D4FF] animate-spin mx-auto mb-4" />
           <p className="text-[#6B7280]">Loading...</p>
@@ -39,12 +39,12 @@ export default function ProfilePageClient() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center px-4">
-        <div className="text-center max-w-md bg-[#111118] border border-white/10 rounded-2xl p-8 shadow-xl">
+      <div className="min-h-screen bg-background-main flex items-center justify-center px-4">
+        <div className="text-center max-w-md bg-card-bg border border-border-light rounded-2xl p-8 shadow-xl">
           <div className="w-16 h-16 rounded-full bg-[#00D4FF]/10 flex items-center justify-center mx-auto mb-6">
             <User className="h-8 w-8 text-[#00D4FF]" />
           </div>
-          <h1 className="text-2xl font-bold text-white mb-3">Your Profile</h1>
+          <h1 className="text-2xl font-bold text-text-main mb-3">Your Profile</h1>
           <p className="text-[#6B7280] mb-8 leading-relaxed">
             Log in with your wallet to view and manage your profile securely on the network.
           </p>
@@ -54,8 +54,8 @@ export default function ProfilePageClient() {
           >
             Connect Wallet
           </Button>
-          <div className="mt-6 pt-6 border-t border-white/10">
-            <Link href="/" className="text-[#6B7280] hover:text-white text-sm flex items-center justify-center gap-2 transition-colors">
+          <div className="mt-6 pt-6 border-t border-border-light">
+            <Link href="/" className="text-[#6B7280] hover:text-text-main text-sm flex items-center justify-center gap-2 transition-colors">
               <ArrowLeft className="w-4 h-4" />
               Back to home
             </Link>
@@ -94,33 +94,33 @@ export default function ProfilePageClient() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] py-8 px-4 text-white">
+    <div className="min-h-screen bg-background-main py-8 px-4 text-text-main">
       <div className="container max-w-[800px] mx-auto space-y-6">
         
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-[2px] h-6 bg-[#00D4FF]"></div>
-            <h1 className="text-2xl font-bold tracking-tight text-white">
+            <h1 className="text-2xl font-bold tracking-tight text-text-main">
               My Profile
             </h1>
           </div>
           {hasProfile && (
-            <Button asChild variant="outline" size="sm" className="bg-white/5 border-white/10 text-white hover:bg-white/10 h-9">
+            <Button asChild variant="outline" size="sm" className="bg-foreground/5 border-border-light text-text-main hover:bg-foreground/10 h-9">
               <Link href="/feed">View Feed</Link>
             </Button>
           )}
         </div>
 
         {loadingProfile ? (
-          <div className="flex items-center justify-center py-20 bg-[#111118] border border-white/10 rounded-2xl">
+          <div className="flex items-center justify-center py-20 bg-card-bg border border-border-light rounded-2xl">
             <Loader2 className="w-8 h-8 text-[#00D4FF] animate-spin" />
           </div>
         ) : hasProfile ? (
           <div className="space-y-6">
             
             {/* Identity Card */}
-            <div className="rounded-2xl border border-white/10 bg-[#111118] overflow-hidden relative">
+            <div className="rounded-2xl border border-border-light bg-card-bg overflow-hidden relative">
               <div className="h-32 bg-gradient-to-r from-[#00D4FF]/20 via-[#A855F7]/20 to-transparent"></div>
               
               <div className="px-6 sm:px-8 pb-8">
@@ -133,7 +133,7 @@ export default function ProfilePageClient() {
                         alt={primaryProfile.profile.username}
                         width={112}
                         height={112}
-                        className="rounded-full object-cover border-4 border-[#111118] relative z-10 bg-[#111118]"
+                        className="rounded-full object-cover border-4 border-[#111118] relative z-10 bg-card-bg"
                       />
                     ) : (
                       <div className="w-28 h-28 rounded-full bg-[#1A1A24] flex items-center justify-center border-4 border-[#111118] relative z-10">
@@ -144,7 +144,7 @@ export default function ProfilePageClient() {
                   
                   <div className="flex-1 text-center sm:text-left pt-2 sm:pt-0 pb-2 flex flex-col sm:flex-row justify-between w-full sm:items-end gap-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-white tracking-tight mb-1">
+                      <h2 className="text-2xl font-bold text-text-main tracking-tight mb-1">
                         @{primaryProfile.profile.username}
                       </h2>
                       {walletAddress && (
@@ -154,12 +154,12 @@ export default function ProfilePageClient() {
                       )}
                       <div className="flex items-center justify-center sm:justify-start gap-4 text-[14px]">
                         <div className="flex gap-1.5 items-center">
-                          <span className="font-bold text-white">{followersCount}</span>
+                          <span className="font-bold text-text-main">{followersCount}</span>
                           <span className="text-[#6B7280]">Followers</span>
                         </div>
-                        <div className="w-1 h-1 rounded-full bg-white/20"></div>
+                        <div className="w-1 h-1 rounded-full bg-foreground/20"></div>
                         <div className="flex gap-1.5 items-center">
-                          <span className="font-bold text-white">{followingCount}</span>
+                          <span className="font-bold text-text-main">{followingCount}</span>
                           <span className="text-[#6B7280]">Following</span>
                         </div>
                       </div>
@@ -176,10 +176,10 @@ export default function ProfilePageClient() {
                   </div>
                 </div>
 
-                <div className="bg-white/[0.02] border border-white/5 rounded-xl p-5">
+                <div className="bg-white/[0.02] border border-border-light rounded-xl p-5">
                   <h3 className="text-[12px] uppercase tracking-wider font-semibold text-[#6B7280] mb-2">Bio</h3>
-                  <p className="text-white/90 text-[15px] leading-relaxed whitespace-pre-wrap">
-                    {primaryProfile.profile.bio?.trim() || <span className="text-white/40 italic">No bio provided.</span>}
+                  <p className="text-text-main/90 text-[15px] leading-relaxed whitespace-pre-wrap">
+                    {primaryProfile.profile.bio?.trim() || <span className="text-text-main/40 italic">No bio provided.</span>}
                   </p>
                 </div>
               </div>
@@ -189,8 +189,8 @@ export default function ProfilePageClient() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               
               {/* Network Suggestions */}
-              <div className="rounded-2xl border border-white/10 bg-[#111118] p-6">
-                <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+              <div className="rounded-2xl border border-border-light bg-card-bg p-6">
+                <h3 className="text-lg font-semibold text-text-main mb-6 flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#00FF88]"></span>
                   Network Discovery
                 </h3>
@@ -204,17 +204,17 @@ export default function ProfilePageClient() {
                           <Link 
                             key={item.profile?.id}
                             href={`/discover?q=${item.profile?.username ?? ''}`} 
-                            className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-transparent hover:border-white/10 transition-all group"
+                            className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-transparent hover:border-border-light transition-all group"
                           >
-                            <span className="font-medium text-white group-hover:text-[#00D4FF] transition-colors">
+                            <span className="font-medium text-text-main group-hover:text-[#00D4FF] transition-colors">
                               @{item.profile?.username ?? '—'}
                             </span>
-                            <span className="text-[12px] text-[#6B7280] group-hover:text-white/60">View</span>
+                            <span className="text-[12px] text-[#6B7280] group-hover:text-text-main/60">View</span>
                           </Link>
                         ))}
                       </div>
                     ) : (
-                      <div className="p-4 rounded-xl bg-white/[0.02] border border-dashed border-white/10 text-center">
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-dashed border-border-light text-center">
                         <p className="text-[#6B7280] text-[13px]">No friends suggested yet.</p>
                       </div>
                     )}
@@ -228,17 +228,17 @@ export default function ProfilePageClient() {
                           <Link 
                             key={p.profile?.id}
                             href={`/discover?q=${p.profile?.username ?? ''}`} 
-                            className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-transparent hover:border-white/10 transition-all group"
+                            className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-transparent hover:border-border-light transition-all group"
                           >
-                            <span className="font-medium text-white group-hover:text-[#00D4FF] transition-colors">
+                            <span className="font-medium text-text-main group-hover:text-[#00D4FF] transition-colors">
                               @{p.profile?.username ?? '—'}
                             </span>
-                            <span className="text-[12px] text-[#6B7280] group-hover:text-white/60">View</span>
+                            <span className="text-[12px] text-[#6B7280] group-hover:text-text-main/60">View</span>
                           </Link>
                         ))}
                       </div>
                     ) : (
-                      <div className="p-4 rounded-xl bg-white/[0.02] border border-dashed border-white/10 text-center">
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-dashed border-border-light text-center">
                         <p className="text-[#6B7280] text-[13px]">No global suggestions available.</p>
                       </div>
                     )}
@@ -247,8 +247,8 @@ export default function ProfilePageClient() {
               </div>
 
               {/* Compose Section */}
-              <div className="rounded-2xl border border-white/10 bg-[#111118] p-6 flex flex-col">
-                <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+              <div className="rounded-2xl border border-border-light bg-card-bg p-6 flex flex-col">
+                <h3 className="text-lg font-semibold text-text-main mb-6 flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#00D4FF]"></span>
                   Leave a Note
                 </h3>
@@ -258,7 +258,7 @@ export default function ProfilePageClient() {
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
                     placeholder="Write a comment or status update..."
-                    className="flex-1 w-full min-h-[140px] rounded-xl border border-white/10 bg-white/[0.02] p-4 text-[15px] placeholder:text-[#6B7280] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00D4FF] focus-visible:border-[#00D4FF] resize-none transition-all disabled:opacity-50"
+                    className="flex-1 w-full min-h-[140px] rounded-xl border border-border-light bg-white/[0.02] p-4 text-[15px] placeholder:text-[#6B7280] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00D4FF] focus-visible:border-[#00D4FF] resize-none transition-all disabled:opacity-50"
                     disabled={creatingComment}
                   />
                   <div className="mt-4 flex justify-end">
@@ -285,19 +285,19 @@ export default function ProfilePageClient() {
             </div>
 
             {walletAddress && (
-              <div className="rounded-2xl border border-white/10 bg-[#111118] overflow-hidden">
+              <div className="rounded-2xl border border-border-light bg-card-bg overflow-hidden">
                 <ImportConnectionsSection walletAddress={walletAddress} />
               </div>
             )}
             
           </div>
         ) : (
-          <div className="rounded-2xl border border-white/10 bg-[#111118] p-12 text-center shadow-xl">
+          <div className="rounded-2xl border border-border-light bg-card-bg p-12 text-center shadow-xl">
             <div className="w-20 h-20 rounded-full bg-[#00D4FF]/10 flex items-center justify-center mx-auto mb-6 relative">
               <div className="absolute inset-0 bg-[#00D4FF] blur-md opacity-20 rounded-full"></div>
               <User className="h-10 w-10 text-[#00D4FF] relative z-10" />
             </div>
-            <h2 className="text-2xl font-bold text-white mb-3">No Profile Yet</h2>
+            <h2 className="text-2xl font-bold text-text-main mb-3">No Profile Yet</h2>
             <p className="text-[#6B7280] mb-8 max-w-md mx-auto leading-relaxed">
               Create your identity on the network to set up your username, bio, and start connecting with others.
             </p>
@@ -308,7 +308,7 @@ export default function ProfilePageClient() {
         )}
 
         <div className="flex items-center justify-center gap-4 pt-8 text-[14px]">
-          <Link href="/" className="text-[#6B7280] hover:text-white flex items-center gap-2 transition-colors">
+          <Link href="/" className="text-[#6B7280] hover:text-text-main flex items-center gap-2 transition-colors">
             <ArrowLeft className="w-4 h-4" />
             Back to home
           </Link>
